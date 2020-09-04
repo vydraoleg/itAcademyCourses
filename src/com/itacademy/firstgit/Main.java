@@ -54,6 +54,7 @@ public class Main {
     for(Animal an:animals){
     	an.saySmth();
 	}
+
 	Animal[] animals1 = {vaska,sharik,borka};
 	for(Animal an:animals1){
 		an.saySmth();
