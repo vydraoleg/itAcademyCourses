@@ -5,6 +5,10 @@ public abstract class Animal{
     private String name;
     private int age;
 
+    public void saySmth(){
+        System.out.println("some abstract animal voice");
+    }
+
     public String getName(int i){
         return "Hello";
     }

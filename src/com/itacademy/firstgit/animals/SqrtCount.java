@@ -24,3 +24,13 @@ public class SqrtCount {
         return "11111";
     }
 }
+
+/*
+        System.out.println(SqrtCount.countSqrt(intNumber));
+                System.out.println(SqrtCount.countSqrt(longNumber));
+                System.out.println(SqrtCount.countSqrt(floatNumber));
+                System.out.println(SqrtCount.countSqrt(doubleNumber));
+
+                String a = SqrtCount.count("23423423", "ewfwefwefew");
+*/
+
