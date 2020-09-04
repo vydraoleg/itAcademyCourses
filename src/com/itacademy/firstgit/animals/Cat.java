@@ -1,4 +1,4 @@
 package com.itacademy.firstgit.animals;
 
-public class Cat {
+public class Cat extends Animal{
 }
