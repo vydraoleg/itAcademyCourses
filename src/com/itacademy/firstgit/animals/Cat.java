@@ -3,8 +3,15 @@ package com.itacademy.firstgit.animals;
 public class Cat {
 
 	private String name;
-
 	private int age;
+
+	public Cat(){
+	}
+
+    public Cat(String pname, int page){
+    	setName(pname);
+    	setAge(page);
+	}
 
 	public String getName() {
 		return name;

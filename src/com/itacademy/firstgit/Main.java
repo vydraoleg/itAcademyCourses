@@ -13,6 +13,8 @@ public class Main {
 		vaska.setAge(5);
 		vaska.setName("Vaska");
 
+		Cat murzik = new Cat("Murzik",2);
+
 		Dog sharik = new Dog();
 		sharik.setAge(4);
 		sharik.setName("Sharik");
@@ -22,6 +24,7 @@ public class Main {
 		borka.setName("Borka");
 
 		System.out.println("Cat's name is " + vaska.getName());
+		System.out.println("Cat's name is " + murzik.getName());
 		System.out.println("Dog's name is " + sharik.getName());
 		System.out.println("Pig's name is " + borka.getName());
 	}
