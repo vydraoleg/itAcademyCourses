@@ -29,6 +29,6 @@ public class Animal {
         }
 
         public void saySmth(){
-            
+            System.out.println("say smth");
         }
 }
