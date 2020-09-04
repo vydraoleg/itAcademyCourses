@@ -1,5 +1,9 @@
 package oleg;
-
+/**
+ * 
+ * @author Vydra oleg
+ *
+ */
 public class less_for {
     public static void main(String[] args) {
 // Task 12
@@ -27,8 +31,10 @@ public class less_for {
             System.out.println(i + i);
         }
 
-// Task 16
-        for(int i = 1; i<=100 ; i++) {
+/** Task 16
+ * 
+ */
+        for(int i = 1; i<=80 ; i++) {
             if(i%7==0) System.out.println(i + " Hope");
         }
 

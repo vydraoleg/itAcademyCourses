@@ -1,32 +1,22 @@
 package com.itacademy.firstgit.animals;
 
 public class Pig {
-    String name;
-    int Age;
+	private String name;
+	private int age;
 
-    public Pig(String name) {
-        this.name = name;
-    }
-    public Pig(String name, int age) {
-        this.name = name;
-        Age = age;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public int getAge() {
+		return age;
+	}
 
-    public int getAge() {
-        return Age;
-    }
-
-    public void setAge(int age) {
-        Age = age;
-    }
-
-
+	public void setAge(int age) {
+		this.age = age;
+	}
 }

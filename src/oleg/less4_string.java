@@ -1,8 +1,5 @@
 package oleg;
 
-//import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-//import org.w3c.dom.ls.LSOutput;
-
 import java.util.Arrays;
 
 public class less4_string {
@@ -10,8 +7,8 @@ public class less4_string {
     public static String someString= HELLO;
 
     private static void doSome(String str){
-
-    }
+        System.out.println(str );
+   }
     public static void main(String[] args) {
         String hello = "Hello"; // stringpool
 //        someString = "Hello"; // stringpool
