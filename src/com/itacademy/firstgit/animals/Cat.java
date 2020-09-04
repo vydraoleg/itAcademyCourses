@@ -5,5 +5,7 @@ public class Cat extends Animal{
     public void saySmth(){
         System.out.println("say smth");
     }
-
+    public void  catchMouse(){
+        System.out.println("Got the mouse!");
+    }
 }

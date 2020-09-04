@@ -4,14 +4,6 @@ public class Animal {
         String name;
         int Age;
 
-        public Pig(String name) {
-            this.name = name;
-        }
-        public Pig(String name, int age) {
-            this.name = name;
-            Age = age;
-        }
-
         public String getName() {
             return name;
         }
