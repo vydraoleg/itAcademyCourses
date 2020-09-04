@@ -1,9 +1,6 @@
 package com.itacademy.firstgit.animals;
 
-public class Cat {
-
-	private String name;
-	private int age;
+public class Cat extends Animal{
 
 	public Cat(){
 	}
@@ -13,19 +10,4 @@ public class Cat {
     	setAge(page);
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return this.age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
 }

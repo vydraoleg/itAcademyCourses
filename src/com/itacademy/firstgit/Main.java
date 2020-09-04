@@ -1,13 +1,14 @@
 package com.itacademy.firstgit;
 
-import com.itacademy.firstgit.animals.Cat;
-import com.itacademy.firstgit.animals.Dog;
-import com.itacademy.firstgit.animals.Pig;
+import com.itacademy.firstgit.animals.*;
 
 public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("Hello, world!");
+
+//        Animal an = new Animal();  WRONG
+        Animal an = new Cat();
 
 		Cat vaska = new Cat();
 		vaska.setAge(5);
@@ -22,10 +23,23 @@ public class Main {
 		Pig borka = new Pig();
 		borka.setAge(4);
 		borka.setName("Borka");
+		int intNumber = -25;
+        long longNumber = 258965940869405L;
+        float floatNumber = 55.7834535F;
+		double doubleNumber = 55.78;
 
+        System.out.println(SqrtCount.countSqrt(intNumber));
+        System.out.println(SqrtCount.countSqrt(longNumber));
+        System.out.println(SqrtCount.countSqrt(floatNumber));
+        System.out.println(SqrtCount.countSqrt(doubleNumber));
+
+        String a = SqrtCount.count("23423423", "ewfwefwefew");
+
+/*
 		System.out.println("Cat's name is " + vaska.getName());
 		System.out.println("Cat's name is " + murzik.getName());
 		System.out.println("Dog's name is " + sharik.getName());
 		System.out.println("Pig's name is " + borka.getName());
+*/
 	}
 }
