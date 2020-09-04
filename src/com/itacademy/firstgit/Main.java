@@ -36,22 +36,30 @@ public class Main {
 		System.out.println("Dog's name is " + sharik.getName());
 		System.out.println("Pig's name is " + borka.getName());
 */
-    vaska.saySmth();
+//    vaska.saySmth();
 //    vaska.catchMouse();
-
-    sharik.saySmth();
+//    sharik.saySmth();
 //    sharik.catchCat(vaska);
-
-    borka.saySmth();
+//    borka.saySmth();
 //    borka.sleep();
 
+/*
     murzik.saySmth();
 	bobik.saySmth();
 	funtik.saySmth();
+*/
 
     Animal[] animals = {murzik,bobik,funtik};
+
     for(Animal an:animals){
     	an.saySmth();
+	}
+	Animal[] animals1 = {vaska,sharik,borka};
+	for(Animal an:animals1){
+		an.saySmth();
+		if(an instanceof Cat)  ((Cat) an).catchMouse();
+		if(an instanceof Dog)  ((Dog) an).catchCat(vaska);
+		if(an instanceof Pig)  ((Pig) an).sleep();
 	}
   }
 }
