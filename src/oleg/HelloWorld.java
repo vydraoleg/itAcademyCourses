@@ -8,7 +8,6 @@ public class HelloWorld {
         int[] ar1 = new int[5];
 
         System.out.println("Hello \t Belarus "+i);
-
         System.out.println("I \"like\" Java! "+ j);
 
         boolean rt = true;
