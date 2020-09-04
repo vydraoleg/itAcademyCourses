@@ -8,7 +8,9 @@ public class Main {
 //		System.out.println("Hello, world!");
 
 //        Animal an = new Animal();  WRONG
-        Animal an = new Cat();
+        Animal murzik = new Cat();
+		Animal bobik = new Dog();
+		Animal funtik = new Pig();
 
 		Cat vaska = new Cat();
 		vaska.setAge(5);
@@ -35,13 +37,21 @@ public class Main {
 		System.out.println("Pig's name is " + borka.getName());
 */
     vaska.saySmth();
-    vaska.catchMouse();
+//    vaska.catchMouse();
 
     sharik.saySmth();
-    sharik.catchCat(vaska);
+//    sharik.catchCat(vaska);
 
     borka.saySmth();
-    borka.sleep();
+//    borka.sleep();
 
+    murzik.saySmth();
+	bobik.saySmth();
+	funtik.saySmth();
+
+    Animal[] animals = {murzik,bobik,funtik};
+    for(Animal an:animals){
+    	an.saySmth();
 	}
+  }
 }
