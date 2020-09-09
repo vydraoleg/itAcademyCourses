@@ -11,7 +11,7 @@ import  java.util.Collections;
 
 public class CatFight implements ICatFight {
     public static void main(String[] args) {
-        String empty = StringUtils.EMPTY;
+//        String empty = StringUtils.EMPTY;
         System.out.println(HI);
     }
 }

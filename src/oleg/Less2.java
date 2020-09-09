@@ -34,7 +34,7 @@ public class Less2 {
         int k1 = 20, k2 = 3;
         int k3 = Less2.MyCalc(k1,k2);
 
-        System.out.println("k3 = "+ k3);
+        System.out.println("k3 = "+ Integer.compare(19,9));
 
         long rr=2231234;
         Less2.MyTimeShift(rr);
