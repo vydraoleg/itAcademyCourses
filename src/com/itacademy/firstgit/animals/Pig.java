@@ -1,6 +1,6 @@
 package com.itacademy.firstgit.animals;
 
-public class Pig extends Animal{
+public class Pig extends Animal<Integer>{
 
 //    public Pig(String name) {
 //        this.name = name;

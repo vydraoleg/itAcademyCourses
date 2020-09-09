@@ -1,8 +1,8 @@
 package com.itacademy.firstgit.animals;
-
-public class Animal {
-        String name;
-        int Age;
+//<T> Generic
+public abstract class Animal<T extends Number> {
+        private String name;
+        private T age;
 
         public String getName() {
             return name;
@@ -12,12 +12,12 @@ public class Animal {
             this.name = name;
         }
 
-        public int getAge() {
-            return Age;
+        public T getAge() {
+            return age;
         }
 
-        public void setAge(int age) {
-            Age = age;
+        public void setAge(T age) {
+            age = age;
         }
 
         public void saySmth(){
