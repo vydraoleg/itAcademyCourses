@@ -12,10 +12,19 @@ public class Book {
         this.title = title;
     }
 
+    /**
+     * methods
+     * @return author
+     * @param Null
+     * @see #setAuthor(String)
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * This method set the name to the object
+     */
     public void setAuthor(String author) {
         this.author = author;
     }

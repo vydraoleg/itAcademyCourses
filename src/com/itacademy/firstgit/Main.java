@@ -2,65 +2,67 @@ package com.itacademy.firstgit;
 
 import com.itacademy.firstgit.animals.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 //		System.out.println("Hello, world!");
 
 //        Animal an = new Animal();  WRONG
-        Animal murzik = new Cat();
-		Animal bobik = new Dog();
-		Animal funtik = new Pig();
 
-		Cat vaska = new Cat();
-		vaska.setAge(5);
-		vaska.setName("Vaska");
+//		List<Animal> animals2 = new ArrayList<>();// смотрит что слево
+//		List animals = new ArrayList<>();// смотрит что слево
 
-//		Cat murzik = new Cat("Murzik",2);
+        @SuppressWarnings("unused") // не будет предупреждения
+                Animal murzik = new Cat();
+        Animal bobik = new Dog();
+        Animal funtik = new Pig();
 
-		Dog sharik = new Dog();
-		sharik.setAge(4);
-		sharik.setName("Sharik");
+//		Animal[] animals = {murzik,bobik,funtik};
 
-		Pig borka = new Pig();
-		borka.setAge(4);
-		borka.setName("Borka");
-		int intNumber = -25;
-        long longNumber = 258965940869405L;
-        float floatNumber = 55.7834535F;
-		double doubleNumber = 55.78;
+        Cat vaska = new Cat();
+        vaska.setAge(5);
+        vaska.setName("Vaska");
 
-/*
-		System.out.println("Cat's name is " + vaska.getName());
-		System.out.println("Cat's name is " + murzik.getName());
-		System.out.println("Dog's name is " + sharik.getName());
-		System.out.println("Pig's name is " + borka.getName());
-*/
-//    vaska.saySmth();
-//    vaska.catchMouse();
-//    sharik.saySmth();
-//    sharik.catchCat(vaska);
-//    borka.saySmth();
-//    borka.sleep();
+        Dog sharik = new Dog();
+        sharik.setAge(4);
+        sharik.setName("Sharik");
 
-/*
-    murzik.saySmth();
-	bobik.saySmth();
-	funtik.saySmth();
-*/
+        Pig borka = new Pig();
+        borka.setAge(4);
+        borka.setName("Borka");
 
-    Animal[] animals = {murzik,bobik,funtik};
+        List<Animal> cats = new ArrayList<>();// смотрит что слево
+        cats.add(murzik);
+        cats.add(vaska);
 
-    for(Animal an:animals){
-    	an.saySmth();
-	}
+        List<Animal> dogs = new ArrayList<>();// смотрит что слево
+        dogs.add(sharik);
+        dogs.add(bobik);
+        dogs.add(sharik);
+        dogs.add(bobik);
 
-	Animal[] animals1 = {vaska,sharik,borka};
-	for(Animal an:animals1){
-		an.saySmth();
-		if(an instanceof Cat)  ((Cat) an).catchMouse();
-		if(an instanceof Dog)  ((Dog) an).catchCat(vaska);
-		if(an instanceof Pig)  ((Pig) an).sleep();
-	}
-  }
+        List<Animal> animals = new ArrayList<>();// смотрит что слево
+        animals.addAll(cats);
+        animals.addAll(dogs);
+        cats.remove(vaska);
+        animals.remove(vaska); // не работает
+//        animals.removeAll(dogs);
+//        animals.set(0, bobik);
+        dogs.subList(0, 1);
+        List<String> strings = new ArrayList<>();
+        strings.add("murzik");
+        strings.add("vaska");
+        strings.add("barsik");
+        strings.add("murzik");
+        strings.add("vaska");
+        strings.add("barsik");
+		System.out.println(!strings.isEmpty());
+		System.out.println("bobik "+animals.contains(vaska));
+
+        String str = "stop";
+    }
 }
