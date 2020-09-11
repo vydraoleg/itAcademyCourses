@@ -1,6 +1,8 @@
 package com.itacademy.firstgit.animals;
 
-public class Cat extends Animal<Long> implements ISaySomething{
+import com.itacademy.firstgit.utils.api.ISaySomething;
+
+public class Cat extends Animal<Integer> implements ISaySomething {
 
     @Override
     public void saySmth(){

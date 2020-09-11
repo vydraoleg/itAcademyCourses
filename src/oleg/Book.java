@@ -30,5 +30,9 @@ public class Book {
         }
 
         private String text;
+
+        public String getAuthor() {
+            return Book.this.author;
+        }
     }
 }

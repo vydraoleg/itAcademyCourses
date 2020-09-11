@@ -17,7 +17,7 @@ public abstract class Animal<T extends Number> {
         }
 
         public void setAge(T age) {
-            age = age;
+            this.age = age;
         }
 
         public void saySmth(){
