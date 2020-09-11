@@ -1,7 +1,5 @@
 package oleg;
 
-import com.sun.deploy.util.StringUtils;
-
 public class Book {
     private String title;
     private String author;
