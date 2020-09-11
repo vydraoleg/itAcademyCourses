@@ -8,9 +8,11 @@ public class BookLess {
 //        String auth = ((Book)page).getAuthor();  !!!!!!!!!!!!!!!!!
         book.setAuthor("Nabokov");
         String auth =   page.getAuthor();
+        System.out.println(auth);
 
         page.setText("Something.");
         String text =   page.getText();
+        System.out.println(text);
 
     }
 }
