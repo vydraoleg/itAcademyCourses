@@ -5,8 +5,10 @@ import java.util.List;
 
 public class HelloWorld {
     private static int i =050;
+    public enum SmtnConst { i}
+
     public static void main(String[] args) {
-        String j="kk";
+        StringBuilder j= new StringBuilder("kk");
         i++;
         int[] ar1 = new int[5];
         String str = "Hello  Belarus ";
