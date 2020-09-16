@@ -27,6 +27,8 @@ public class MainLes4 {
         borka.setAge(4);
         borka.setName("Borka");
 
+        System.out.println(vaska);
+        System.out.println(borka);
 /*
 builder
         Animal2 an =Animal2.builder()
@@ -39,12 +41,41 @@ Map = Set <Map Entry>
         map.put("Hello1",1);
         map.put("Hello2",2);
         map.put("Hello3",3);
-        map.put("Hello4",5);
-        map.put("Hello5",4);
+        map.put("Hello4",4);
+        map.put("Hello5",5);
         for (Map.Entry<String, Integer> entry: map.entrySet()  ) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
-//        System.out.println(map);
+/*
+        for (String key: map.keySet()  ) {
+            System.out.println(key);
+        }
+        for (Integer val1: map.values() ) {
+            System.out.println(val1);
+        }
+*/
+        Collection<Integer> values =  map.values();
+//        List<Integer> values = (List<Integer>) map.values();
+
+        System.out.println(map.containsKey("Hello1"));
 //        System.out.println(map.get(null));
+        Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
+//        entrySet.remove(Map.Entry<                >); // will delete in main map
+        for (Map.Entry<String, Integer> entry: entrySet  ) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
+
+/*
+        System.out.println(map);
+        System.out.println(entrySet);
+        map.put("Hello6",6);
+        System.out.println(map);
+        System.out.println(entrySet);
+*/
+//        map.forEach();
+        Integer i = map.get("Hello8");
+        System.out.println( i );
+        System.out.println( map.getOrDefault("Hello4",0) );
     }
 }

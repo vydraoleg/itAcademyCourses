@@ -1,6 +1,7 @@
 package com.itacademy.firstgit.animals;
 
 import com.itacademy.firstgit.utils.api.ISaySomething;
+import jdk.nashorn.internal.objects.annotations.Setter;
 
 public class Cat extends Animal<Integer> implements ISaySomething {
 
@@ -15,5 +16,14 @@ public class Cat extends Animal<Integer> implements ISaySomething {
     @Override
     public void play(){
         System.out.println("Cat is playing");
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Cat with name ")
+                .append(this.getName())
+                .append(" age of ")
+                .append(this.getAge()).toString();
     }
 }
