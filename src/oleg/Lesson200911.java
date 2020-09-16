@@ -11,7 +11,7 @@ public class Lesson200911 {
          LinkedList list1 = new LinkedList(); // каждый элемент + хранит ссылку на next and previous element
          ArrayList list2 = new ArrayList(); // динамический массив ЧАЩЕ
         // SingleToneList - хранит одно значение
-         List<Number> list = new ArrayList<>(){
+         List<Integer> list = new ArrayList<Integer>(){
              {
                  add(100);
                  add(150);
@@ -24,7 +24,7 @@ public class Lesson200911 {
          for(Number ind : list){
              System.out.println(ind);
          }
-        Iterator<Number> it = list.iterator();
+        Iterator<Integer> it = list.iterator();
         Integer res;
         while ( it.hasNext()){
             res = (int)it.next() ;
