@@ -38,7 +38,6 @@ accessors
 Map = Set <Map Entry>
 */
         Animal2 an = new Animal2();
-        an.setName("TTTTT");
 
    Map<String, Integer> map = new HashMap<>();
         map.put("Hello1",1);

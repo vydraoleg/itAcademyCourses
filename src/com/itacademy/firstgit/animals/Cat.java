@@ -1,7 +1,6 @@
 package com.itacademy.firstgit.animals;
 
 import com.itacademy.firstgit.utils.api.ISaySomething;
-import jdk.nashorn.internal.objects.annotations.Setter;
 
 public class Cat extends Animal<Integer> implements ISaySomething {
 

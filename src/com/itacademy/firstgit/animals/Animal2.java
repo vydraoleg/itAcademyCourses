@@ -1,6 +1,6 @@
 package com.itacademy.firstgit.animals;
 
-import lombok.Data;
+//import lombok.Data;
 
 // java -jar lombok.jar
 
@@ -12,7 +12,7 @@ import lombok.Data;
 //@Builder
 // @Accessors(chain=true)
 
-@Data
+//@Data
 public class Animal2 {
     private String name;
     private int age;
