@@ -1,16 +1,18 @@
 package com.itacademy.firstgit.animals;
 
+import lombok.Data;
+
 // java -jar lombok.jar
 
-//@Getter
+// @Getter
 // @Setter
 // @NoArgsCunstructor
 // @AllArgsCunstructor
 // @SuperBuilder
 //@Builder
 // @Accessors(chain=true)
-//@Data
 
+@Data
 public class Animal2 {
     private String name;
     private int age;
