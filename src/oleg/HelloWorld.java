@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloWorld {
-    private static int i = 050;
+    private final static int i = 050;
 
     public enum SmtnConst {i}
 

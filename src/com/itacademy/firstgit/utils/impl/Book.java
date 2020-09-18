@@ -1,4 +1,4 @@
-package oleg;
+package com.itacademy.firstgit.utils.impl;
 
 public class Book {
     private String title;

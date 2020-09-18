@@ -1,7 +1,6 @@
 package oleg;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LessMap {
@@ -10,9 +9,9 @@ public class LessMap {
         Map<String, Integer> map = new HashMap<>();
         String delimiter = "[,. ]";
         String[] subStr = str.split(delimiter);
-        for (int i = 0; i < subStr.length; i++) {
-            if (!subStr[i].isEmpty()) {
-                map.put(subStr[i], map.containsKey(subStr[i]) ? map.get(subStr[i]) + 1  : 1);
+        for (String s : subStr) {
+            if (!s.isEmpty()) {
+                map.put(s, map.containsKey(s) ? map.get(s) + 1 : 1);
             }
         }
         System.out.println(map);
@@ -35,14 +34,14 @@ public class LessMap {
             add("b223");
             add("b145");
             add("b134");
-        }};;
+        }};
         Set setC = new TreeSet(){{
             add("c123er");
             add("c223");
             add("c145");
             add("c134");
-        }};;
-        Set<String> set = new HashSet<>(){{
+        }};
+        Set<String> set = new HashSet(){{
             add("123er");
             add("223");
             add("145");
@@ -51,10 +50,10 @@ public class LessMap {
         for (String res: set)   System.out.println(res);
 //        Stream<String> stream = set.stream();
 //        stream.forEach((element) -> System.out.println(element));
-        set.stream().filter(x->x.toString().length()==3).forEach((x) -> System.out.println(x));
-        setB.stream().forEach(xx-> System.out.println(xx));
+        set.stream().filter(x-> x.length()==3).forEach(System.out::println);
+        setB.forEach(System.out::println);
 
-        String[] array = {"Java", "Vydraaaaaaaaaaaaa"};
+        String[] array = {"Java", "Family Hydra Oleg"};
         Stream<String> streamOfArray = Arrays.stream(array);
 //        streamOfArray.map(s->s.split("")) //Преобразование слова в массив букв
 //                .map(Arrays::stream).distinct() //Сделать массив в отдельный поток

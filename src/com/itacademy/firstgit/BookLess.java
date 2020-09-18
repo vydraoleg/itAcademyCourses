@@ -1,4 +1,6 @@
-package oleg;
+package com.itacademy.firstgit;
+
+import com.itacademy.firstgit.utils.impl.Book;
 
 public class BookLess {
     public static void main(String[] args) {
