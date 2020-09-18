@@ -13,7 +13,7 @@ public class Book {
     }
 
     /**
-     * methods
+     * methods для возврата имени автора по книге
      * @return author
      * @param Null
      * @see #setAuthor(String)
