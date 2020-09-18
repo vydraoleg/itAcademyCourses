@@ -3,6 +3,7 @@ package com.itacademy.firstgit;
 import com.itacademy.firstgit.animals.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainLes4 {
 
@@ -58,6 +59,7 @@ Map = Set <Map Entry>
 */
         Collection<Integer> values =  map.values();
 //        List<Integer> values = (List<Integer>) map.values();
+        List<Integer> str = map.values().stream().collect(Collectors.toList());
 
         System.out.println(map.containsKey("Hello1"));
 //        System.out.println(map.get(null));

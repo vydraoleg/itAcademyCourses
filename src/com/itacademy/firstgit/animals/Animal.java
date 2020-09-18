@@ -7,7 +7,7 @@ import java.util.Objects;
 
 //<T> Generic
 
-public abstract class Animal<T extends Number> {
+public abstract class Animal<T extends Integer> {
     private String name;
     private T age;
     private List<String> params;
