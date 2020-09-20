@@ -2,6 +2,9 @@ package oleg;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class HelloWorld {
     private final static int i = 050;
@@ -25,5 +28,42 @@ public class HelloWorld {
         list.add(i);
         list.add(34);
 
+
+        String str11 = "str";
+        str11.chars().forEach(System.out::println);
+
+        IntStream.of(120, 410, 85, 32, 314, 12)
+                .filter(x -> x < 300)
+                .map(x -> x + 11)
+                .limit(3)
+                .forEach(System.out::println);
+
+        String str = Math.random() > 0.3 ? "I'm feeling lucky" : null;
+        Stream.ofNullable(str)
+                .forEach(System.out::println);
+
+        Stream.generate(() -> 6)
+                .limit(6)
+                .forEach(System.out::print);
+
+        Stream.iterate(2, x -> x + 6)
+              .limit(6)
+              .forEach(System.out::println);
+
+        Stream.Builder<Integer> streamBuider = Stream.<Integer>builder()
+            .add(0)
+            .add(1);
+            for(int i1 = 2;i1 <=6;i1 +=2){
+                streamBuider.accept(i1);
+            }
+            streamBuider.add(9)
+            .add(10)
+            .build()
+            .forEach(System.out::println);
+
+        IntStream.range(0, 5)
+                .forEach(System.out::println);
+        LongStream.range(-10L, -5L)
+                .forEach(System.out::println);
     }
 }

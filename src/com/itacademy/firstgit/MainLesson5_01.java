@@ -45,25 +45,23 @@ public class MainLesson5_01 {
         animals.addAll(dogs);
         animals.addAll(cats);
 
-        List<String> dogNames =  animals.stream()
+        List<String> dogNames = animals.stream()
                 .filter(x -> x instanceof Dog)
-                .map(x->{
-                    if(x.getName() == null) {
+                .map(x -> {
+                    if (x.getName() == null) {
                         x.setName("DefaultName");
                     }
                     return x.getName();
                 })
                 .collect(Collectors.toList());
 //                .forEach(System.out::println)
-                ;
+        ;
 
 //        Map<String, Integer> animalMap =animals.stream()
 //                .collect(Collectors.toMap(Animal::getName, Animal::getAge));
-String str = "str";
-//    bobik.getName().chars();
-    str.chars().forEach(System.out::println);
+        bobik.getName().chars();
 
-        Map<String, Animal> animalMap1 =animals.stream()
+        Map<String, Animal> animalMap1 = animals.stream()
                 .collect(Collectors.toMap(Animal::getName, Function.identity()));
         System.out.println(animalMap1);
     }
