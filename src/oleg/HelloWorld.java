@@ -1,6 +1,7 @@
 package oleg;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -61,9 +62,6 @@ public class HelloWorld {
             .build()
             .forEach(System.out::println);
 
-        IntStream.range(0, 5)
-                .forEach(System.out::println);
-        LongStream.range(-10L, -5L)
-                .forEach(System.out::println);
+
     }
 }
