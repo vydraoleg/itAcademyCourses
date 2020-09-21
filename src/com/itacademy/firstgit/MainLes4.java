@@ -17,15 +17,15 @@ public class MainLes4 {
 //		Animal[] animals = {murzik,bobik,funtik};
 
         Cat vaska = new Cat();
-        vaska.setAge(5);
+        vaska.setAge((Integer) 5);
         vaska.setName("Vaska");
 
         Dog sharik = new Dog();
-        sharik.setAge(4);
+        sharik.setAge((Integer)4);
         sharik.setName("Sharik");
 
         Pig borka = new Pig();
-        borka.setAge(4);
+        borka.setAge((Integer)4);
         borka.setName("Borka");
 
         System.out.println(vaska);

@@ -1,10 +1,8 @@
 package oleg;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class HelloWorld {
@@ -40,8 +38,7 @@ public class HelloWorld {
                 .forEach(System.out::println);
 
         String str = Math.random() > 0.3 ? "I'm feeling lucky" : null;
-        Stream.ofNullable(str)
-                .forEach(System.out::println);
+//        Stream.ofNullable(str).forEach(System.out::println);
 
         Stream.generate(() -> 6)
                 .limit(6)
