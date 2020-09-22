@@ -1,6 +1,7 @@
 package oleg;
 
-import java.util.Map;
+import java.math.BigInteger;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -70,13 +71,39 @@ public class StreamWorld {
                 .reduce((acc, x) -> acc * x)
                 .getAsInt();
                 ;
+        Map<Integer, String> map5 = Stream.of(50, 55, 69, 20, 19, 52)
+                .collect(Collectors.toMap(
+                        i -> i % 5,
+                        i -> String.format("<%d>", i),
+                        (a, b) -> String.join(", ", a, b),
+                        LinkedHashMap::new
+                ));
+        System.out.println(map5);
+        Map<Integer, List<String>> map1 = Stream.of(
+                "ab", "c", "def", "gh", "ijk", "l", "mnop")
+                .collect(Collectors.groupingBy(String::length));
+        map1.entrySet().forEach(System.out::println);
+        IntStream.rangeClosed(2, 9)
+                .boxed()
+                .flatMap(i -> IntStream.rangeClosed(2, 9)
+                        .mapToObj(j -> String.format("%d * %d = %d", i, j, i * j))
+                )
+                .forEach(System.out::println);
         */
 
-        Map<Character, String> map3 = Stream.of(50, 54, 55)
-                .collect(Collectors.toMap(
-                        i -> (char) i.intValue(),
-                        i -> String.format("<%d>", i)
-                ));
-        System.out.println(map3);
+
+        int x = IntStream.range(-2, 2)
+                .map(i -> i * 5 )
+                .reduce(10, Integer::sum);
+        System.out.println(x);
+        IntStream.range(0, 10)
+                .boxed()
+                .collect(Collectors.partitioningBy(i -> i%2==0))
+                .entrySet().forEach(System.out::println);
+        IntStream.range(-5, 0)
+                .flatMap(i -> IntStream.of(i,-i ))
+                .boxed()
+                .sorted(Comparator.comparing(Math::abs))
+                .forEach(System.out::println);
     }
 }
