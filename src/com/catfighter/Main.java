@@ -22,6 +22,9 @@ public class Main {
 		vaska.setName("Vaska");
 
 		Cat murzik = new Cat("Murzik",2);
+		Cat cat = catService.getByName("Hi");
+		String name1 = cat.getName();
+
 
 		int intNumber = -25;
         long longNumber = 258965940869405L;
