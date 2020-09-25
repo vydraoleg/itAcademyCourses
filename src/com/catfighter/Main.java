@@ -1,11 +1,18 @@
-package com.itacademy.firstgit;
+package com.catfighter;
 
-import com.itacademy.firstgit.animals.*;
+import com.catfighter.api.service.ICatService;
+import com.catfighter.entities.Animal;
+import com.catfighter.entities.Cat;
+import com.catfighter.service.CatService;
+
 
 public class Main {
 
 	public static void main(String[] args) {
-//		System.out.println("Hello, world!");
+
+		ICatService catService = new CatService();
+
+		//		System.out.println("Hello, world!");
 
 //        Animal an = new Animal();  WRONG
         Animal an = new Cat();
@@ -16,13 +23,6 @@ public class Main {
 
 		Cat murzik = new Cat("Murzik",2);
 
-		Dog sharik = new Dog();
-		sharik.setAge(4);
-		sharik.setName("Sharik");
-
-		Pig borka = new Pig();
-		borka.setAge(4);
-		borka.setName("Borka");
 		int intNumber = -25;
         long longNumber = 258965940869405L;
         float floatNumber = 55.7834535F;
@@ -35,8 +35,6 @@ public class Main {
 		System.out.println("Pig's name is " + borka.getName());
 */
     vaska.saySmth();
-    sharik.saySmth();
-    borka.saySmth();
 
 	}
 }

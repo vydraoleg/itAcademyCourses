@@ -1,9 +1,10 @@
-package com.itacademy.firstgit.animals;
+package com.catfighter.entities;
 
 public abstract class Animal{
 
     private String name;
     private int age;
+    private int strength;
 
     public void saySmth(){
         System.out.println("some abstract animal voice");
@@ -23,6 +24,9 @@ public abstract class Animal{
     }
     public void setAge(int age) {
         this.age = age;
+    }
+    public void setStrength (int strength) {
+        this.strength = strength;
     }
 
 }
