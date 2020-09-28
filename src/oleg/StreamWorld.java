@@ -2,14 +2,18 @@ package oleg;
 
 import java.math.BigInteger;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class StreamWorld {
     public static void main(String[] args) {
 
-/*
+
         IntStream.of(120, 410, 85, 32, 314, 12)
                 .filter(x -> x < 300)
                 .map(x -> x + 11)
@@ -89,7 +93,7 @@ public class StreamWorld {
                         .mapToObj(j -> String.format("%d * %d = %d", i, j, i * j))
                 )
                 .forEach(System.out::println);
-        */
+
 
 
         int x = IntStream.range(-2, 2)
