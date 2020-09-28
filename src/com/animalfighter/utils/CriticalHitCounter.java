@@ -1,4 +1,4 @@
-package com.catfighter.utils;
+package com.animalfighter.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
