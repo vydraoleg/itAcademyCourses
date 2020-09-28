@@ -1,9 +1,18 @@
 package com.catfighter.api.service;
 
+import com.catfighter.api.exception.CatNotFoundException;
 import com.catfighter.entities.Cat;
 
-public interface ICatService  {
+import java.util.List;
 
-    Cat getByName(String hi);
+public interface ICatService {
+
+    List<Cat> getCats();
+
+    void addCat(Cat cat);
+
+    Cat getByName(String name);
+
+    void updateCatStrength(String name, int strength) throws CatNotFoundException;
 
 }

@@ -1,6 +1,7 @@
 package com.catfighter.service;
 
 import com.catfighter.api.dao.ICatDao;
+import com.catfighter.api.exception.CatNotFoundException;
 import com.catfighter.api.service.ICatService;
 import com.catfighter.dao.CatDao;
 import com.catfighter.entities.Cat;
@@ -18,6 +19,11 @@ public class CatService implements ICatService {
         return null;
     }
 
+    @Override
+    public void addCat(Cat cat) {
+        this.addCat(cat);
+    }
+
     public Cat getByName(String name) {
         try {
             return catDao.getByName(name);
@@ -31,7 +37,15 @@ public class CatService implements ICatService {
             System.out.println("...");
         }
     }
-    //updateCatStrength
+    @Override
+    public void updateCatStrength(String name, int strength) throws CatNotFoundException {
+        try {
+            catDao.updateCatStrength(name, strength);
+        }catch (CatNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
     public void doSmth(){
         try {
             CriticalHitCounter.doSmth();
@@ -39,5 +53,6 @@ public class CatService implements ICatService {
             e.printStackTrace();
         }
     }
+
 
 }
