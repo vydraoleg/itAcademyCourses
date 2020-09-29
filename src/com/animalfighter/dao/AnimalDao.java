@@ -19,7 +19,7 @@ public class AnimalDao implements IAnimalDao {
 
     public void addAnimal(Animal animal) {
         animals.add(animal);
-        System.out.println( animal.getNametype()+" was added, " + animal.toString());
+        System.out.println(animal.getNametype() + " was added, " + animal.toString());
     }
 
     public Animal getByName(String name) throws AnimalNotFoundException {
@@ -27,7 +27,6 @@ public class AnimalDao implements IAnimalDao {
                 animals.stream()
                         .filter(x -> x.getName().equals(name))
                         .findFirst();
-//        Cat cat = optionalCat.orElse(null);
         Animal animal = optionalAnimal.orElseThrow(() -> new AnimalNotFoundException());
 
         return animal;
@@ -35,7 +34,6 @@ public class AnimalDao implements IAnimalDao {
 
     public void updateAnimalStrength(String name, int strength) {
         Animal animal = new Animal();
-//        cat = this.getByName(name);
         animal.setStrength(strength);
         System.out.println(" Cat was updated, " + animal.toString());
     }

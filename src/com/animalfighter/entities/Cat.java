@@ -1,5 +1,7 @@
 package com.animalfighter.entities;
 
+import com.animalfighter.api.service.IAnimalService;
+
 public class Cat extends Animal {
 
     @Override
@@ -11,26 +13,22 @@ public class Cat extends Animal {
         setNametype("Cat");
     }
 
-    public Cat(String name, int age, int weight, int strenght) {
+    public Cat(IAnimalService animalService, String name, int age, int weight, double strenght) {
         this();
         setName(name);
         setAge(age);
         setWeight(weight);
         setStrength(strenght);
+        animalService.addAnimal(this);
     }
 
-
-    public Cat(String pname, int page) {
-		this();
-        setName(pname);
-        setAge(page);
-		setAge(0);
-		setWeight(0);
-	}
-
-    @Override
-    public String toString() {
-        return "Cat info - name:" + getName() + " age: " + getAge() + " strength: " + getStrength();
+    public Cat(IAnimalService animalService, String name, int age) {
+        this();
+        setName(name);
+        setAge(age);
+        setWeight(1);
+        setStrength(1);
+        animalService.addAnimal(this);
     }
 
 }

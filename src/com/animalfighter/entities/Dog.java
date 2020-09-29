@@ -1,17 +1,20 @@
 package com.animalfighter.entities;
 
+import com.animalfighter.api.service.IAnimalService;
+
 public class Dog extends Animal {
 
     public Dog() {
-        this.nametype = "Dog";
+        setNametype("Dog");
     }
 
-    public Dog(String name, Integer age, int weight, int strenght) {
+    public Dog(IAnimalService animalService, String name, int age, int weight, double strenght) {
         this();
-        this.setName(name);
-        this.setAge(age);
-        this.setWeight(weight);
-        this.setStrength(strenght);
+        setName(name);
+        setAge(age);
+        setWeight(weight);
+        setStrength(strenght);
+        animalService.addAnimal(this);
     }
 
     @Override

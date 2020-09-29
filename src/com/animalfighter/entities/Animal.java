@@ -5,14 +5,14 @@ public class Animal {
     private String name;
     protected int age;
     protected int weight;
-    protected int strength;
+    protected double strength;
     protected String nametype;   // Name of type
 
-    public int getStrength() {
+    public double getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength(double strength) {
         this.strength = strength;
     }
 
@@ -50,5 +50,9 @@ public class Animal {
 
     public void saySmth() {
         System.out.println("say smth");
+    }
+
+    public String toString() {
+        return getNametype()+"info - name:" + getName() + " age: " + getAge() + " strength: " + getStrength();
     }
 }
