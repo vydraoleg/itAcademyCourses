@@ -22,6 +22,7 @@ public class AnimalService implements IAnimalService {
         animalDao.addAnimal(animal);
     }
 
+    @Override
     public Animal getByName(String name) {
         try {
             return animalDao.getByName(name);
@@ -37,7 +38,7 @@ public class AnimalService implements IAnimalService {
     }
 
     @Override
-    public void updateAnimalStrength(String name, int strength) throws AnimalNotFoundException {
+    public void updateAnimalStrength(String name, int strength) {
         try {
             animalDao.updateAnimalStrength(name, strength);
         } catch (AnimalNotFoundException e) {

@@ -49,7 +49,7 @@ public class Animal {
     }
 
     public void saySmth() {
-        System.out.println("say smth");
+        System.out.println("say something");
     }
 
     public String toString() {

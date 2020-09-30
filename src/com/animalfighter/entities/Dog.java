@@ -10,10 +10,10 @@ public class Dog extends Animal {
 
     public Dog(IAnimalService animalService, String name, int age, int weight, double strenght) {
         this();
-        setName(name);
-        setAge(age);
-        setWeight(weight);
-        setStrength(strenght);
+        this.setName(name);
+        this.setAge(age);
+        this.setWeight(weight);
+        this.setStrength(strenght);
         animalService.addAnimal(this);
     }
 

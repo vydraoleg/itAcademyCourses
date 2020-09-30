@@ -32,10 +32,10 @@ public class AnimalDao implements IAnimalDao {
         return animal;
     }
 
-    public void updateAnimalStrength(String name, int strength) {
-        Animal animal = new Animal();
+    public void updateAnimalStrength(String name, int strength) throws AnimalNotFoundException  {
+        Animal animal = this.getByName(name);
         animal.setStrength(strength);
-        System.out.println(" Cat was updated, " + animal.toString());
+        System.out.println(animal.getNametype()+" was updated, " + animal.toString());
     }
 
     public void setAnimal(List<Animal> animals) {

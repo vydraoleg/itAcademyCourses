@@ -15,20 +15,15 @@ public class Cat extends Animal {
 
     public Cat(IAnimalService animalService, String name, int age, int weight, double strenght) {
         this();
-        setName(name);
-        setAge(age);
-        setWeight(weight);
-        setStrength(strenght);
+        this.setName(name);
+        this.setAge(age);
+        this.setWeight(weight);
+        this.setStrength(strenght);
         animalService.addAnimal(this);
     }
 
     public Cat(IAnimalService animalService, String name, int age) {
-        this();
-        setName(name);
-        setAge(age);
-        setWeight(1);
-        setStrength(1);
-        animalService.addAnimal(this);
+        this(animalService, name,age,1,1);
     }
 
 }
