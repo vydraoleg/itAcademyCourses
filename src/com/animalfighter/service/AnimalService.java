@@ -26,8 +26,8 @@ public class AnimalService implements IAnimalService {
     public Animal getByName(String name) {
         try {
             return animalDao.getByName(name);
-        } catch (Exception e) {
-            e.printStackTrace(); // Выкинуть в логи всю цепочку
+        } catch (Exception e) {   /// нужно ловить конкретную ошибку
+            // e.printStackTrace(); // Выкинуть в логи всю цепочку не пишут
             System.out.println("Exception caught!");
             Animal animalTemp = new Animal();
             this.animalDao.addAnimal(animalTemp);
