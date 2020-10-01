@@ -8,10 +8,14 @@ import com.animalfighter.entities.Animal;
 import com.animalfighter.utils.CriticalHitCounter;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AnimalService implements IAnimalService {
     IAnimalDao animalDao = new AnimalDao();
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
 
     public List<Animal> getAnimals() {
         return animalDao.getAnimals();
@@ -26,23 +30,21 @@ public class AnimalService implements IAnimalService {
     public Animal getByName(String name) {
         try {
             return animalDao.getByName(name);
-        } catch (Exception e) {   /// нужно ловить конкретную ошибку
-            // e.printStackTrace(); // Выкинуть в логи всю цепочку не пишут
-            System.out.println("Exception caught!");
-            Animal animalTemp = new Animal();
-            this.animalDao.addAnimal(animalTemp);
-            return animalTemp;
-        } finally {
-            System.out.println("...");
+        } catch (AnimalNotFoundException e) {
+            System.out.println(e.getMessage());
+            System.out.println(LocalDateTime.now().format(format) + " Exception caught, AnimalNotFoundException!");
+            return null;
         }
     }
-
     @Override
     public void updateAnimalStrength(String name, int strength) {
         try {
             animalDao.updateAnimalStrength(name, strength);
         } catch (AnimalNotFoundException e) {
-            e.printStackTrace();
+            Animal an = new Animal();
+            an.setName(name);
+            an.setStrength(strength);
+            this.addAnimal(an);
         }
     }
 
@@ -50,7 +52,8 @@ public class AnimalService implements IAnimalService {
         try {
             CriticalHitCounter.doSmth();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println(LocalDateTime.now().format(format) + " Exception caught, IOException!");
         }
     }
 

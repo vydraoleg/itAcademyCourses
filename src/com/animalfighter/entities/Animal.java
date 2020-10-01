@@ -53,6 +53,6 @@ public class Animal {
     }
 
     public String toString() {
-        return getNametype()+"info - name:" + getName() + " age: " + getAge() + " strength: " + getStrength();
+        return getNametype() + "info - name:" + getName() + " age: " + getAge() + " strength: " + getStrength();
     }
 }

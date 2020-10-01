@@ -2,22 +2,19 @@ package com.animalfighter.utils;
 
 import com.animalfighter.api.service.IAnimalService;
 import com.animalfighter.entities.Animal;
-import com.animalfighter.api.service.IFightAnimal;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Fight implements IFightAnimal {
+public class Fight {
 
-    Map<String,Integer> winners= new HashMap<String,Integer>();
+    Map<String, Integer> winners = new HashMap<>();
 
     public Fight(IAnimalService animalService) {
         this.tournament(animalService);
     }
 
     // Calculate Strength
-    public double calculateStrength(int type, int weight, double strength) {
+    private double calculateStrength(int type, int weight, double strength) {
         double result = 0;
         switch (type) {
             case 1:
@@ -45,7 +42,7 @@ public class Fight implements IFightAnimal {
 
 
     // function of fight
-    public void fightAnimal(Animal animal1, Animal animal2) {
+    private void fightAnimal(Animal animal1, Animal animal2) {
         System.out.print(animal1.getName() + " beats ");
         animal2.setStrength(
                 animal2.getStrength() -
@@ -54,7 +51,8 @@ public class Fight implements IFightAnimal {
                                 animal1.getStrength())
         );
     }
-    public void printWinner(Animal fighter){
+
+    private void printWinner(Animal fighter) {
         int wins = 1;
         String nameFighter = fighter.getName();
         System.out.println(fighter.getNametype() +
@@ -63,24 +61,25 @@ public class Fight implements IFightAnimal {
                 fighter.getStrength());
         if (winners.containsKey(nameFighter))
             wins = winners.get(nameFighter) + 1;
-        winners.put(nameFighter,wins);
+        winners.put(nameFighter, wins);
 
     }
-    public void printWinners(){
+
+    private void printWinners() {
         System.out.println(" ===== List of winners: ===== ");
-        for(Map.Entry<String,Integer>  item : winners.entrySet()){
-            System.out.printf("Name of winner: %s  Wins: %d \n", item.getKey(), item.getValue());
-        }
+        winners.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(x -> System.out.printf("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue()));
     }
-    public void printFighters(Animal fighter1, Animal fighter2){
+
+    private void printFighters(Animal fighter1, Animal fighter2) {
         System.out.println(" ===== " +
-                fighter1.getName() +
-                " vs " +
-                fighter2.getName() +
+                fighter1.getName() + " vs " + fighter2.getName() +
                 " ===== ");
     }
+
     // Main function
-    public void tournament(IAnimalService animalService) {
+    private void tournament(IAnimalService animalService) {
         List<Animal> animalFight = animalService.getAnimals();
         System.out.println(" ========== Fight tournament ==========");
         int sizeAnimals = animalFight.size();
@@ -100,11 +99,11 @@ public class Fight implements IFightAnimal {
 
 // Save Strength for Second fighter
                 animalService.updateAnimalStrength(fighter2.getName(),
-                         (int) fighter2.getStrength());
+                        (int) fighter2.getStrength());
             }
 // Save Strength for First fighter
             animalService.updateAnimalStrength(fighter1.getName(),
-                     (int) fighter1.getStrength());
+                    (int) fighter1.getStrength());
         }
         printWinners();
     }
