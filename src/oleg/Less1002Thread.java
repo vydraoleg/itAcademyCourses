@@ -35,7 +35,7 @@ public class Less1002Thread {
         }
 
      */
-        try (FileReader fileReader = new FileReader("d:\\oleg\\txt.txt")){
+        try (FileReader fileReader = new FileReader("txt.txt")){
 
             StringBuilder builder = new StringBuilder();
                     Integer ageOne = cat.getAge();
@@ -47,7 +47,7 @@ public class Less1002Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("d:\\oleg\\txt.txt"))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("txt.txt"))){
             String name = bufferedReader.readLine();
             System.out.println(name);
             Integer age = Integer.parseInt(bufferedReader.readLine());
@@ -80,7 +80,7 @@ public class Less1002Thread {
         Files.readAllLines(Paths.get("txt.txt"))
                 .stream()
                 .forEach(System.out::println);
-        System.out.println(Files.readAllLines(Paths.get("d:\\oleg\\txt.txt"))
+        System.out.println(Files.readAllLines(Paths.get("txt.txt"))
                 .stream().count());
     } catch (IOException e) {
         e.printStackTrace();
