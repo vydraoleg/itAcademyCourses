@@ -13,19 +13,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFile {
+public class WorkWithFile {
 
     List<Animal> animalList;
 
-    public ReadFromFile() {
-        animalList = new ArrayList<Animal>();
+    public WorkWithFile() {
     }
 
     private String readNameOfFile() {
         String fileName = "";
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Enter file name: ");
-            fileName = reader.readLine();
+            fileName = reader.readLine().trim();
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         } finally {
@@ -35,13 +34,14 @@ public class ReadFromFile {
 
     public List<Animal> AnimalFromFile() {
         String fileName = readNameOfFile();
+        animalList = new ArrayList<Animal>();
         if (fileName.length() > 0) {
             try {
                 List<String> lines =
-                        Files.readAllLines(Paths.get(readNameOfFile()), StandardCharsets.UTF_8);
+                        Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
                 for (String string : lines) {
                     if (string.length() > 3) {
-                        String[] tempString = string.split(",");
+                        String[] tempString = string.replaceAll(" ", "").split(",");
                         switch (tempString[0].trim()) {
                             case "Dog":
                                 animalList.add(new Dog(tempString[1], Integer.parseInt(tempString[2]), Integer.parseInt(tempString[3]),
@@ -58,7 +58,7 @@ public class ReadFromFile {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new IllegalStateException("Unexisting file: " + fileName);
             }
         }
         return animalList;
