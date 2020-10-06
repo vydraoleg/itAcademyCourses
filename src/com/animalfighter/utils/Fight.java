@@ -66,10 +66,16 @@ public class Fight {
     }
 
     private void printWinners() {
-        System.out.println(" ===== List of winners: ===== ");
-        winners.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(x -> System.out.printf("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue()));
+        String myList=" ===== List of winners: ===== \n";
+//        winners.entrySet().stream()
+//                .sorted(Map.Entry.comparingByValue())
+//                .forEach(x -> System.out.print(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue())));
+//                .forEach(x-> myList.concat(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue())));
+        for (Map.Entry<String, Integer> x : winners.entrySet()) {
+            myList = myList.concat(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue()));
+        }
+        System.out.print(myList);
+        new WorkWithFile().saveToFile(myList);
     }
 
     private void printFighters(Animal fighter1, Animal fighter2) {

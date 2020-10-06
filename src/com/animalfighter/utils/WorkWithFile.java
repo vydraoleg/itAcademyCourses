@@ -32,7 +32,7 @@ public class WorkWithFile {
         }
     }
 
-    public List<Animal> AnimalFromFile() {
+    public List<Animal> animalFromFile() {
         String fileName = readNameOfFile();
         animalList = new ArrayList<Animal>();
         if (fileName.length() > 0) {
@@ -62,6 +62,16 @@ public class WorkWithFile {
             }
         }
         return animalList;
+    }
+    public void saveToFile(String list) {
+        String fileName = "winners.txt";
+        if (fileName.length() > 0) {
+            try {
+                Files.writeString(Paths.get(fileName), list);
+            } catch (IOException e) {
+                throw new IllegalStateException("Unexisting file: " + fileName);
+            }
+        }
     }
 
 }

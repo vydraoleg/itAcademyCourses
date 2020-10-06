@@ -15,7 +15,7 @@ public class Main {
 
         // Read Animal Fighter from file and add to animalService
         animalService.getAnimals()
-                .addAll(new WorkWithFile().AnimalFromFile());
+                .addAll(new WorkWithFile().animalFromFile());
 
 
         if(!animalService.getAnimals().isEmpty()){
