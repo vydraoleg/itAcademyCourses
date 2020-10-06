@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class Less1002Thread {
     public static void main(String[] args) throws IOException {
         Cat cat = new Cat();
-    /*      cat.setName("Vaska");
+          cat.setName("Vaska");
         cat.setAge(25);
-      try (FileOutputStream fileOutputStream = new FileOutputStream("d:\\oleg\\txt.txt")){
+      try (FileOutputStream fileOutputStream = new FileOutputStream("txt1.txt")){
             byte[] buffer = cat.getName().getBytes();
             //System.out.println(fileOutputStream.toString());
             fileOutputStream.write(buffer);
@@ -26,7 +26,7 @@ public class Less1002Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (FileWriter fileWriter = new FileWriter("d:\\oleg\\txt.txt")){
+        try (FileWriter fileWriter = new FileWriter("txt1.txt")){
             fileWriter.write(cat.getName()+'\n');
             Integer ageOne = cat.getAge();
             fileWriter.write(ageOne.toString());
@@ -34,7 +34,6 @@ public class Less1002Thread {
             e.printStackTrace();
         }
 
-     */
         try (FileReader fileReader = new FileReader("txt.txt")){
 
             StringBuilder builder = new StringBuilder();
@@ -57,8 +56,9 @@ public class Less1002Thread {
         }
 
 //        Scanner
+
         // implements Closable
-/*        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
             System.out.println("Enter name: ");
             cat.setName(reader.readLine());
             System.out.println("Enter Age: ");
@@ -74,7 +74,7 @@ public class Less1002Thread {
 //            }
         }
 
- */
+
     try{
 //        File file = new File();
         Files.readAllLines(Paths.get("txt.txt"))
