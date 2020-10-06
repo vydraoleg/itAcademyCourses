@@ -59,7 +59,7 @@ public class Less1002Thread {
 
         // implements Closable
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
-            System.out.println("Enter name: ");
+            System.out.println("Enter file name: ");
             cat.setName(reader.readLine());
             System.out.println("Enter Age: ");
             cat.setAge(Integer.parseInt(reader.readLine()));
