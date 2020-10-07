@@ -30,3 +30,4 @@ itAcademyCourses.iml
 .project
 .classpath
 out/production/github/META-INF/github.kotlin_module
+github.iml
