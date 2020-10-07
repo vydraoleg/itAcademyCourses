@@ -63,6 +63,7 @@ public class WorkWithFile {
         }
         return animalList;
     }
+
     public void saveToFile(String list) {
         String fileName = "winners.txt";
         if (fileName.length() > 0) {

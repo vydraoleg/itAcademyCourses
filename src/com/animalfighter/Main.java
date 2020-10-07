@@ -18,7 +18,7 @@ public class Main {
                 .addAll(new WorkWithFile().animalFromFile());
 
 
-        if(!animalService.getAnimals().isEmpty()){
+        if (!animalService.getAnimals().isEmpty()) {
 
             // print list of animalService
             animalService.getAnimals().stream()
