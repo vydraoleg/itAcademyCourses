@@ -5,9 +5,7 @@ import com.animalfighter.api.exception.AnimalNotFoundException;
 import com.animalfighter.api.service.IAnimalService;
 import com.animalfighter.dao.AnimalDao;
 import com.animalfighter.entities.Animal;
-import com.animalfighter.utils.CriticalHitCounter;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -36,6 +34,7 @@ public class AnimalService implements IAnimalService {
             return null;
         }
     }
+
     @Override
     public void updateAnimalStrength(String name, int strength) {
         try {
@@ -47,15 +46,5 @@ public class AnimalService implements IAnimalService {
             this.addAnimal(an);
         }
     }
-
-    public void doSmth() {
-        try {
-            CriticalHitCounter.doSmth();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println(LocalDateTime.now().format(format) + " Exception caught, IOException!");
-        }
-    }
-
 
 }
