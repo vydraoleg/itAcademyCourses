@@ -17,10 +17,9 @@ public class Main {
         animalService.getAnimals()
                 .addAll(new WorkWithFile().animalFromFile());
 
-
         if (!animalService.getAnimals().isEmpty()) {
 
-            // print list of animalService
+            // print list of animals from animalService
             animalService.getAnimals().stream()
                     .peek(an -> System.out.print(an.getNametype() + "'s name is  " + an.getName() + " strength is " + an.getStrength() + " says "))
                     .forEach(Animal::saySmth);

@@ -66,7 +66,7 @@ public class Fight {
     }
 
     private void printWinners() {
-        String myList=" ===== List of winners: ===== \n";
+        String myList = " ===== List of winners: ===== \n";
 //        winners.entrySet().stream()
 //                .sorted(Map.Entry.comparingByValue())
 //                .forEach(x -> System.out.print(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue())));
@@ -95,19 +95,41 @@ public class Fight {
                 Animal fighter2 = animalFight.get(j);
 
                 printFighters(fighter1, fighter2);
+                double strength1 = fighter1.getStrength() / 2; // 50%
+                double strength2 = fighter2.getStrength() / 2; // 50%
+                int flagSaveFighter1 = 0;
+                int flagSaveFighter2 = 0;
 
                 while (fighter1.getStrength() > 0 && fighter2.getStrength() > 0) {
                     this.fightAnimal(fighter1, fighter2);
                     this.fightAnimal(fighter2, fighter1);
+// Serialize
+                    if (flagSaveFighter1==0 && strength1 > fighter1.getStrength() && fighter1.getStrength() > 0) {
+                        flagSaveFighter1 = 1;
+                        new SerializationUtil().serialize(fighter1, "..\\animal1.info");
+                    }
+                    if (flagSaveFighter2==0 && strength2 > fighter2.getStrength() && fighter2.getStrength() >0) {
+                        flagSaveFighter2 = 1;
+                        new SerializationUtil().serialize(fighter2, "..\\animal2.info");
+                    }
+//Deserialize
+                    if (fighter1.getStrength() <= 0 && flagSaveFighter1==1 && Math.random() > 0.5) {
+                        flagSaveFighter1 = 2;
+                        fighter1 = new SerializationUtil().deserialize("..\\animal1.info");
+                    }
+                    if (fighter2.getStrength() <= 0 && flagSaveFighter2==1 && Math.random() > 0.5) {
+                        flagSaveFighter2 = 2;
+                        fighter2 = new SerializationUtil().deserialize("..\\animal2.info");
+                    }
                 }
                 this.printWinner((fighter1.getStrength() > fighter2.getStrength()) ?
                         fighter1 : fighter2);
 
-// Save Strength for Second fighter
+// Save resulting Strength for Second fighter
                 animalService.updateAnimalStrength(fighter2.getName(),
                         (int) fighter2.getStrength());
             }
-// Save Strength for First fighter
+// Save resulting Strength for First fighter
             animalService.updateAnimalStrength(fighter1.getName(),
                     (int) fighter1.getStrength());
         }

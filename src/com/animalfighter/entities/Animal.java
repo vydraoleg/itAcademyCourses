@@ -1,6 +1,8 @@
 package com.animalfighter.entities;
 
-public class Animal {
+import java.io.Serializable;
+
+public class Animal implements Serializable {
 
     private String name;
     protected int age;

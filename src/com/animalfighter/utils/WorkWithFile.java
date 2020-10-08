@@ -65,7 +65,7 @@ public class WorkWithFile {
     }
 
     public void saveToFile(String list) {
-        String fileName = "winners.txt";
+        String fileName = "..\\winners.txt";
         if (fileName.length() > 0) {
             try {
                 Files.writeString(Paths.get(fileName), list);
