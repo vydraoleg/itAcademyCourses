@@ -11,7 +11,7 @@ import java.util.Scanner;
 //import lombok.*;
 
 //@Slf4j2
-public class Less1002Thread {
+public class Less1002Throws {
     public static void main(String[] args) throws IOException {
         Cat cat = new Cat();
           cat.setName("Vaska");
