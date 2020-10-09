@@ -2,7 +2,7 @@ package com.animalfighter.entities;
 
 import java.io.Serializable;
 
-public class Animal implements Serializable {
+public abstract class Animal implements Serializable {
 
     private String name;
     protected int age;

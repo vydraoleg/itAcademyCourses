@@ -11,7 +11,7 @@ public class SerializationUtil {
                      = new ObjectOutputStream(new FileOutputStream(nFile))){
             System.out.println(animal.toString());
             objectOutputStream.writeObject(animal);
-            System.out.println(String.format("animal %s named %s was Serialized",animal.getNametype(),animal.getName()));
+            System.out.println(String.format("animal %s named %s was Serialized with strength %.2f ",animal.getNametype(),animal.getName(),animal.getStrength()));
         } catch (IOException e) {   // FileNotFoundException |
             System.out.println(String.format("Can not write file: file: %s",nFile));
             return false;
@@ -24,7 +24,7 @@ public class SerializationUtil {
         try (ObjectInputStream objectInputStream
                      = new ObjectInputStream(new FileInputStream(nFile))){
             Animal animal = (Animal) objectInputStream.readObject();
-            System.out.println(String.format("animal %s named %s was Deserialized",animal.getNametype(),animal.getName()));
+            System.out.println(String.format("animal %s named %s was Deserialized with strength %.2f ",animal.getNametype(),animal.getName(),animal.getStrength()));
             return  animal;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(String.format("Unexisting file: %s",nFile));

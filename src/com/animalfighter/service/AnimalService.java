@@ -5,6 +5,7 @@ import com.animalfighter.api.exception.AnimalNotFoundException;
 import com.animalfighter.api.service.IAnimalService;
 import com.animalfighter.dao.AnimalDao;
 import com.animalfighter.entities.Animal;
+import com.animalfighter.entities.Cat;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +41,7 @@ public class AnimalService implements IAnimalService {
         try {
             animalDao.updateAnimalStrength(name, strength);
         } catch (AnimalNotFoundException e) {
-            Animal an = new Animal();
+            Animal an = new Cat();
             an.setName(name);
             an.setStrength(strength);
             this.addAnimal(an);

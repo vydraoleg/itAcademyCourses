@@ -44,12 +44,16 @@ public class WorkWithFile {
                         String[] tempString = string.replaceAll(" ", "").split(",");
                         switch (tempString[0].trim()) {
                             case "Dog":
-                                animalList.add(new Dog(tempString[1], Integer.parseInt(tempString[2]), Integer.parseInt(tempString[3]),
-                                        Math.round(Math.random() * Integer.parseInt(tempString[3]))));
+                                animalList.add(new Dog(tempString[1],
+                                        Integer.parseInt(tempString[2]),
+                                        Integer.parseInt(tempString[3]),
+                                        Integer.parseInt(tempString[4])));
                                 break;
                             case "Cat":
-                                animalList.add(new Cat(tempString[1], Integer.parseInt(tempString[2]), Integer.parseInt(tempString[3]),
-                                        Math.round(Math.random() * Integer.parseInt(tempString[3]))));
+                                animalList.add(new Cat(tempString[1],
+                                        Integer.parseInt(tempString[2]),
+                                        Integer.parseInt(tempString[3]),
+                                        Integer.parseInt(tempString[4])));
                                 break;
                             default:
                                 System.out.println(tempString[0]);
@@ -64,8 +68,7 @@ public class WorkWithFile {
         return animalList;
     }
 
-    public void saveToFile(String list) {
-        String fileName = "..\\winners.txt";
+    public void saveToFile(String list, String fileName) {
         if (fileName.length() > 0) {
             try {
                 Files.writeString(Paths.get(fileName), list);

@@ -4,6 +4,8 @@ import com.animalfighter.api.service.IAnimalService;
 import com.animalfighter.entities.Animal;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.Map.Entry;
 
 public class Fight {
 
@@ -67,15 +69,21 @@ public class Fight {
 
     private void printWinners() {
         String myList = " ===== List of winners: ===== \n";
-//        winners.entrySet().stream()
-//                .sorted(Map.Entry.comparingByValue())
-//                .forEach(x -> System.out.print(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue())));
-//                .forEach(x-> myList.concat(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue())));
-        for (Map.Entry<String, Integer> x : winners.entrySet()) {
+
+        List<Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(winners.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+
+        for (Map.Entry<String, Integer> x : list) {
             myList = myList.concat(String.format("Name of winner: %s  Wins: %d \n", x.getKey(), x.getValue()));
         }
+
         System.out.print(myList);
-        new WorkWithFile().saveToFile(myList);
+        new WorkWithFile().saveToFile(myList, "..\\winners.txt");
     }
 
     private void printFighters(Animal fighter1, Animal fighter2) {
@@ -104,20 +112,20 @@ public class Fight {
                     this.fightAnimal(fighter1, fighter2);
                     this.fightAnimal(fighter2, fighter1);
 // Serialize
-                    if (flagSaveFighter1==0 && strength1 > fighter1.getStrength() && fighter1.getStrength() > 0) {
+                    if (flagSaveFighter1 == 0 && strength1 > fighter1.getStrength() && fighter1.getStrength() > 0) {
                         flagSaveFighter1 = 1;
                         new SerializationUtil().serialize(fighter1, "..\\animal1.info");
                     }
-                    if (flagSaveFighter2==0 && strength2 > fighter2.getStrength() && fighter2.getStrength() >0) {
+                    if (flagSaveFighter2 == 0 && strength2 > fighter2.getStrength() && fighter2.getStrength() > 0) {
                         flagSaveFighter2 = 1;
                         new SerializationUtil().serialize(fighter2, "..\\animal2.info");
                     }
 //Deserialize
-                    if (fighter1.getStrength() <= 0 && flagSaveFighter1==1 && Math.random() > 0.5) {
+                    if (fighter1.getStrength() <= 0 && flagSaveFighter1 == 1 && Math.random() > 0.5) {
                         flagSaveFighter1 = 2;
                         fighter1 = new SerializationUtil().deserialize("..\\animal1.info");
                     }
-                    if (fighter2.getStrength() <= 0 && flagSaveFighter2==1 && Math.random() > 0.5) {
+                    if (fighter2.getStrength() <= 0 && flagSaveFighter2 == 1 && Math.random() > 0.5) {
                         flagSaveFighter2 = 2;
                         fighter2 = new SerializationUtil().deserialize("..\\animal2.info");
                     }
