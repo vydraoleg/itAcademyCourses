@@ -26,8 +26,8 @@ public class SerializationUtil {
             Animal animal = (Animal) objectInputStream.readObject();
             System.out.println(String.format("animal %s named %s was Deserialized with strength %.2f ",animal.getNametype(),animal.getName(),animal.getStrength()));
             return  animal;
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(String.format("Unexisting file: %s",nFile));
+        } catch (ClassNotFoundException | IOException e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
