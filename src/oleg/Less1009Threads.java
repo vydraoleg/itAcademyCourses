@@ -9,23 +9,20 @@ public class Less1009Threads {
     static ThreadTest tTest2;
     static RunnableTest rTest1;
     static RunnableTest rTest2;
+
     public static void main(String[] args) throws InterruptedException {
-//        volatile String s;
-        Child child1 = new Child("Ivan", 5, "Car");
-        Child child2 = new Child("Masha", 3, "Doll");
 
         tTest1 = new ThreadTest();
-        tTest1.setName("Thread One");
+//        tTest1.setName("Thread One");
         tTest1.start();
 
         tTest2 = new ThreadTest();
-        tTest2.setName("Thread Second");
+//        tTest2.setName("Thread Second");
         tTest2.start();
 
         rTest1 = new RunnableTest();
         Thread newThread1 = new Thread(rTest1);
         newThread1.start();
-
 
         rTest2 = new RunnableTest();
         Thread newThread2 = new Thread(rTest2);
