@@ -1,6 +1,5 @@
 package oleg;
 
-import com.entity.Child;
 import com.entity.RunnableTest;
 import com.entity.ThreadTest;
 
@@ -9,15 +8,17 @@ public class Less1009Threads {
     static ThreadTest tTest2;
     static RunnableTest rTest1;
     static RunnableTest rTest2;
+    static Double  inter;
 
     public static void main(String[] args) throws InterruptedException {
-
-        tTest1 = new ThreadTest();
-//        tTest1.setName("Thread One");
+        inter = 0.0;
+        tTest1 = new ThreadTest(inter);
+        tTest1.setName("Thread One");
         tTest1.start();
 
-        tTest2 = new ThreadTest();
-//        tTest2.setName("Thread Second");
+        inter = tTest1.getInter();
+        tTest2 = new ThreadTest(inter);
+        tTest2.setName("Thread Second");
         tTest2.start();
 
         rTest1 = new RunnableTest();
