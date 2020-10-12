@@ -10,7 +10,8 @@ import java.util.Map.Entry;
 public class Fight {
 
     Map<String, Integer> winners = new HashMap<>();
-    static FightThread fightThread;
+    Map<Animal, Thread> threadAnimal = new HashMap<>();
+    Map<Thread, FightThread> listThread = new HashMap<>();
 
     public Fight(IAnimalService animalService) {
         this.tournament(animalService);
@@ -37,7 +38,7 @@ public class Fight {
     }
 
 
-    // Main function
+    // Main tournament function
     private void tournament(IAnimalService animalService) {
         List<Animal> animalFight = animalService.getAnimals();
         System.out.println(" ========== Fight tournament ==========");
@@ -50,34 +51,48 @@ public class Fight {
             fighter2 = null;
             // Looking for first fighter
             for (int i = 0; i < sizeAnimals - 1; i++) {
-                if (animalFight.get(i).getStrength() > 0) {
+                if (animalFight.get(i).getStrength() > 0 &&
+                        !threadAnimal.containsKey(animalFight.get(i))) {
                     fighter1 = animalFight.get(i);
                 }
             }
             // Looking for second fighter
-            for (int j = 0; j < sizeAnimals; j++) {
-                if (animalFight.get(j).getStrength() > 0
-                        && !animalFight.get(j).equals(fighter1))
+            for (int j = 1; j < sizeAnimals; j++) {
+                if (animalFight.get(j).getStrength() > 0 &&
+                        !animalFight.get(j).equals(fighter1) &&
+                        !threadAnimal.containsKey(animalFight.get(j))) {
                     fighter2 = animalFight.get(j);
+                }
             }
+            // if not exists fighter with strength > 0 and All thread is not alive exit from forever cycle
+            if ((fighter1 == null || fighter2 == null) && threadAnimal.isEmpty()) break;
 
-            if (fighter1 == null || fighter2 == null) break;
-
-            fightThread = new FightThread(fighter1, fighter2, winners);
-//            Thread newThread1 = new Thread(fightThread);
-//            newThread1.start();
-
-            fightThread.run();
-            fighter1 = fightThread.getFighter1();
-            fighter2 = fightThread.getFighter2();
-            winners = fightThread.getWinners();
-
-// Save resulting Strength for Second fighter
-            animalService.updateAnimalStrength(fighter2.getName(),(int) fighter2.getStrength());
-// Save resulting Strength for First fighter
-            animalService.updateAnimalStrength(fighter1.getName(),(int) fighter1.getStrength());
-
-
+            //Remove all Threads is not Alive
+            Iterator<Map.Entry<Animal, Thread>> thread = threadAnimal.entrySet().iterator();
+            while (thread.hasNext()) {
+                Map.Entry<Animal, Thread> entry = thread.next();
+                if (!entry.getValue().isAlive()) {
+                    // Save resulting Strength for Second fighter
+                    animalService.updateAnimalStrength(entry.getKey().getName(), (int) entry.getKey().getStrength());
+                    if (listThread.containsKey(entry.getValue())) {
+                        winners = listThread.get(entry.getValue()).getWinners();
+                        listThread.remove(entry.getValue());
+                    }
+// Remove current Animal from list of thread
+//                    threadAnimal.remove(entry.getKey());
+                    thread.remove();
+                }
+            }
+// Starting thread of Fight
+            if (fighter1 != null && fighter2 != null) {
+                FightThread fightThread = new FightThread(fighter1, fighter2, winners);
+                Thread newThread1 = new Thread(fightThread);
+                threadAnimal.put(fighter1, newThread1);
+                threadAnimal.put(fighter2, newThread1);
+                listThread.put(newThread1, fightThread);
+                newThread1.start();
+//                fightThread.run();
+            }
         }
         printWinners();
     }
