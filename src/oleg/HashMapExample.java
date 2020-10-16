@@ -30,6 +30,7 @@ public class HashMapExample
             String key = it.next();
             if (key.equals("2")) {
                 map.put(key + "new", "222");
+//                if (!concurrent)   break;
             } else
                 System.out.print("  " + key + "="
                         + map.get(key));
