@@ -1,8 +1,8 @@
 package com.itacademy.java;
 
-import lombok.Data;
+//import lombok.Data;
 
-@Data
+//@Data
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello");
