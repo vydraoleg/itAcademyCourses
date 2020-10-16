@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkWithFile {
+    private List<Animal> animalList;
 
-    List<Animal> animalList;
-
-    public WorkWithFile() {
-    }
-
+    /**
+     * Read file from operation system by path
+     *
+     * @return String file of name with path
+     */
     private String readNameOfFile() {
         String fileName = "";
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
@@ -32,6 +33,11 @@ public class WorkWithFile {
         }
     }
 
+    /**
+     * Read and return list of animal
+     *
+     * @return list of Animal
+     */
     public List<Animal> animalFromFile() {
         String fileName = readNameOfFile();
         animalList = new ArrayList<Animal>();
@@ -68,6 +74,12 @@ public class WorkWithFile {
         return animalList;
     }
 
+    /**
+     * Save string to file
+     *
+     * @param list     - string for saving
+     * @param fileName name of file
+     */
     public void saveToFile(String list, String fileName) {
         if (fileName.length() > 0) {
             try {

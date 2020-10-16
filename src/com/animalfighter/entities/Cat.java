@@ -2,11 +2,6 @@ package com.animalfighter.entities;
 
 public class Cat extends Animal {
 
-    @Override
-    public void saySmth() {
-        System.out.println("Meow");
-    }
-
     public Cat() {
         setNametype("Cat");
     }
@@ -23,4 +18,8 @@ public class Cat extends Animal {
         this(name, age, 1, 1);
     }
 
+    @Override
+    public void saySmth() {
+        System.out.println("Meow");
+    }
 }

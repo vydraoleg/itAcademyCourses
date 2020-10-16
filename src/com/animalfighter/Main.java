@@ -15,12 +15,14 @@ public class Main {
 
         // Read Animal Fighter from file and add to animalService
         animalService.getAnimals()
-                .addAll(new WorkWithFile().animalFromFile());
+                .addAll(new WorkWithFile()
+                        .animalFromFile());
 
         if (!animalService.getAnimals().isEmpty()) {
 
             // print list of animals from animalService
-            animalService.getAnimals().stream()
+            animalService.getAnimals()
+                    .stream()
                     .peek(an -> System.out.print(an.getNametype() + "'s name is  " + an.getName() + " strength is " + an.getStrength() + " says "))
                     .forEach(Animal::saySmth);
 

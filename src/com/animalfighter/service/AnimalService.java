@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AnimalService implements IAnimalService {
+
     IAnimalDao animalDao = new AnimalDao();
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 

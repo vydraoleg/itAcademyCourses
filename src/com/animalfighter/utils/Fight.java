@@ -9,16 +9,19 @@ import java.util.Map.Entry;
 
 public class Fight {
 
-    Map<String, Integer> winners = new HashMap<>();
-    Map<Animal, Thread> threadAnimal = new HashMap<>();
+    Map<String, Integer> winners = new HashMap<>(); // List of winners
+    Map<Animal, Thread> threadAnimal = new HashMap<>(); // List of saving
     Map<Thread, FightThread> listThread = new HashMap<>();
 
     public Fight(IAnimalService animalService) {
         this.tournament(animalService);
     }
 
-
-    private void printWinners() {
+    /**
+     * In end of Tournament print list of winners,
+     * sorting and save into file
+     */
+    private void printWinners(String nameFile) {
         String myList = " ===== List of winners: ===== \n";
 
         List<Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(winners.entrySet());
@@ -34,11 +37,13 @@ public class Fight {
         }
 
         System.out.print(myList);
-        new WorkWithFile().saveToFile(myList, "..\\winners.txt");
+        new WorkWithFile().saveToFile(myList,nameFile);
     }
 
-
-    // Main tournament function
+    /**
+     * Main tournament function
+     * @param animalService  list of animals for tournament
+     */
     private void tournament(IAnimalService animalService) {
         List<Animal> animalFight = animalService.getAnimals();
         System.out.println(" ========== Fight tournament ==========");
@@ -94,7 +99,7 @@ public class Fight {
 //                fightThread.run();
             }
         }
-        printWinners();
+        printWinners( "..\\winners.txt");
     }
 
 }

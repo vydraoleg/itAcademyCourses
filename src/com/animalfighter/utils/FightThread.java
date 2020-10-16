@@ -6,16 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FightThread implements Runnable {
-    Animal fighter1;
-    Animal fighter2;
+    private Animal fighter1;
+    private Animal fighter2;
 
-    Map<String, Integer> winners ;
+    private Map<String, Integer> winners;
 
-    public FightThread (Animal fighter1, Animal fighter2,  Map<String, Integer> winners){
+    public FightThread(Animal fighter1, Animal fighter2, Map<String, Integer> winners) {
         this.setFighter1(fighter1);
-        this.setFighter2(fighter1);
+        this.setFighter2(fighter2);
         this.setWinners(winners);
     }
+
     public Animal getFighter1() {
         return fighter1;
     }
@@ -41,7 +42,9 @@ public class FightThread implements Runnable {
     }
 
 
-    // Calculate Strength
+    /**
+     * Calculate Strength
+     */
     private double calculateStrength(int type, int weight, double strength) {
         double result = 0;
         switch (type) {
@@ -68,10 +71,14 @@ public class FightThread implements Runnable {
         return Math.round(result);
     }
 
-
-    // function of fight
+    /**
+     * function of fight. Calculate strength of hit from animal1 to animal2 and save result into animal2
+     *
+     * @param animal1 First fighter
+     * @param animal2 Second fighter
+     */
     private void fightAnimal(Animal animal1, Animal animal2) {
-        System.out.print(animal1.getName() + " beats ");
+        System.out.print(animal1.getName() + " hits ");
         animal2.setStrength(
                 animal2.getStrength() -
                         this.calculateStrength((int) (Math.random() * 10),
@@ -80,13 +87,23 @@ public class FightThread implements Runnable {
         );
     }
 
-
+    /**
+     * Print fighters in the duel
+     *
+     * @param fighter1
+     * @param fighter2
+     */
     private void printFighters(Animal fighter1, Animal fighter2) {
         System.out.println(" ===== " +
                 fighter1.getName() + " vs " + fighter2.getName() +
                 " ===== ");
     }
 
+    /**
+     * Print winner
+     *
+     * @param fighter
+     */
     private void printWinner(Animal fighter) {
         int wins = 1;
         String nameFighter = fighter.getName();
@@ -100,6 +117,11 @@ public class FightThread implements Runnable {
         winners.put(nameFighter, wins);
 
     }
+
+    /**
+     * Run Fight in thread
+     * {@link #tournament()}.
+     */
     @Override
     public void run() {
         printFighters(fighter1, fighter2);
@@ -107,6 +129,11 @@ public class FightThread implements Runnable {
         double strength2 = fighter2.getStrength() / 2; // 50%
         int flagSaveFighter1 = 0;
         int flagSaveFighter2 = 0;
+
+        System.out.printf("=== Run Thread %s Fight  %s vs %s ===",
+                Thread.currentThread().getName(),
+                fighter1.getName(),
+                fighter2.getName());
 
         while (fighter1.getStrength() > 0 && fighter2.getStrength() > 0) {
             this.fightAnimal(fighter1, fighter2);
@@ -122,7 +149,7 @@ public class FightThread implements Runnable {
             }
 //Deserialize
             if (fighter1.getStrength() <= 0 && flagSaveFighter1 == 1 && Math.random() > 0.5) {
-                flagSaveFighter1 = 2;
+                flagSaveFighter1 = 2;  // Don't use deserialize again
                 fighter1 = new SerializationUtil().deserialize("..\\animal1.info");
             }
             if (fighter2.getStrength() <= 0 && flagSaveFighter2 == 1 && Math.random() > 0.5) {

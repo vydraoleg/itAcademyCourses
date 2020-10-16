@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * This main method returns information about last saved Animals in Main program in *.info files
+ * This main method returns information about last saved Animals in Main program from *.info files
+ * deserialize Animal objects
  */
 public class MainSerialisation {
     public static void main(String[] args) throws IOException {
