@@ -8,8 +8,7 @@ public class Cat {
         return age;
     }
 
-    public Cat(){
-    }
+    public Cat(){    }
     public Cat(int age, String name){
     }
 

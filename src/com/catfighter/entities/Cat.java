@@ -7,8 +7,7 @@ public class Cat extends Animal {
 		System.out.println("Meow");
 	}
 
-	public Cat(){
-	}
+	public Cat(){}
 
 	public Cat(String name, int age, int strength){
 	}
