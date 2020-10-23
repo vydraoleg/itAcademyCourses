@@ -1,7 +1,5 @@
 package com.itacademy.firstgit.animals;
 
-import com.itacademy.firstgit.utils.api.ISaySomething;
-
 public class Cat {
     private  int age;
     private String name ="Murzik";
@@ -10,6 +8,8 @@ public class Cat {
         return age;
     }
 
+    public Cat(){
+    }
     public Cat(int age, String name){
     }
 
@@ -29,6 +29,6 @@ public class Cat {
 
     }
     private void printCat(){
-
+        System.out.println("TEST");
     }
 }
