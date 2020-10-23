@@ -15,15 +15,15 @@ public class Main {
 //		List animals = new ArrayList<>();// смотрит что слево
 
         @SuppressWarnings("unused") // не будет предупреждения
-                Animal murzik = new Cat();
+//                Animal murzik = new Cat(1,"2");
         Animal bobik = new Dog();
         Animal funtik = new Pig();
 
 //		Animal[] animals = {murzik,bobik,funtik};
 
-        Cat vaska = new Cat();
-        vaska.setAge((Integer)5);
-        vaska.setName("Vaska");
+        Cat vaska = new Cat(1,"2");
+//        vaska.setAge((Integer)5);
+//        vaska.setName("Vaska");
 
         Dog sharik = new Dog();
         sharik.setAge((Integer)4);
@@ -34,8 +34,8 @@ public class Main {
         borka.setName("Borka");
 
         List<Animal> cats = new ArrayList<>();// смотрит что слево
-        cats.add(murzik);
-        cats.add(vaska);
+//        cats.add(murzik);
+//        cats.add(vaska);
 
         List<Animal> dogs = new ArrayList<>();// смотрит что слево
         dogs.add(sharik);

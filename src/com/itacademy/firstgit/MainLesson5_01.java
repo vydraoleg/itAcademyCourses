@@ -16,14 +16,14 @@ public class MainLesson5_01 {
     public static void main(String[] args) {
         Animal<Integer> bobik = new Dog();
         bobik.setName("Bobik");
-        Animal<Integer> funtik = new Cat();
+//        Animal<Integer> funtik = new Cat(1,"2");
 
 
 //		Animal[] animals = {murzik,bobik,funtik};
 
-        Cat vaska = new Cat();
-        vaska.setAge((Integer)5);
-        vaska.setName("Vaska");
+        Cat vaska = new Cat(1,"2");
+//        vaska.setAge((Integer)5);
+//        vaska.setName("Vaska");
 
         Dog sharik = new Dog();
         sharik.setAge((Integer)4);
@@ -34,8 +34,8 @@ public class MainLesson5_01 {
         borka.setName("Borka");
 
         List<Animal> cats = new ArrayList<>();// смотрит что слево
-        cats.add(funtik);
-        cats.add(vaska);
+//        cats.add(funtik);
+//        cats.add(vaska);
 
         List<Animal> dogs = new ArrayList<>();// смотрит что слево
         dogs.add(sharik);

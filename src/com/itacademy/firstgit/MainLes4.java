@@ -10,13 +10,13 @@ public class MainLes4 {
     public static void main(String[] args) {
 
         @SuppressWarnings("unused") // не будет предупреждения
-                Animal murzik = new Cat();
+                Animal murzik = new Cat(1,"2");
         Animal bobik = new Dog();
         Animal funtik = new Pig();
 
 //		Animal[] animals = {murzik,bobik,funtik};
 
-        Cat vaska = new Cat();
+        Cat vaska = new Cat(1,"2");
         vaska.setAge((Integer) 5);
         vaska.setName("Vaska");
 
