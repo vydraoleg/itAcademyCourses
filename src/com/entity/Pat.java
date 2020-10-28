@@ -4,7 +4,7 @@ public class Pat {
     private int age;
     private String name;
 
-    public Pat(int age, String name){
+    public Pat(int age, String name) {
         this.age = age;
         this.name = name;
     }
@@ -25,7 +25,7 @@ public class Pat {
         this.name = name;
     }
 
-    private void printPat(){
-        System.out.printf(" Pat has name %s and its age %d\n",this.name,this.age);
+    private void printPat() {
+        System.out.printf(" Pat has name %s and its age %d\n", this.name, this.age);
     }
 }
