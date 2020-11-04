@@ -6,7 +6,10 @@ import java.io.Serializable;
  *
  */
 public abstract class Person implements Serializable {
+//    private String firstName;
+//    private String lastName;
     private String name;
+//    private Address address;
     private int age;
 
     @Override
