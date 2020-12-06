@@ -1,7 +1,7 @@
 package oleg;
-/*
+
 //import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
 public class JacksonExample1 {
 
     public static void main(String[] args) {
