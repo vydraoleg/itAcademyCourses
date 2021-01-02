@@ -14,10 +14,9 @@ public class MainController {
         return "home";
     }
     @GetMapping("/about")
-    //@RequestParam(name="name", required=false, defaultValue="World") String name,
     public String about(Model model) {
-        model.addAttribute("title", "Главная страница");
-        return "home";
+        model.addAttribute("title", "О нас");
+        return "about";
     }
 
 }
