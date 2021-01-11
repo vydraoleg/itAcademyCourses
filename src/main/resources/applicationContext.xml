@@ -9,20 +9,28 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="musicBean"   class="com.it.spring.ClassicalMusic">
+    <bean id="musicBean"
+          class="com.it.spring.PopMusic">
     </bean>
+
+    <bean id="musicPlayer" class="com.it.spring.MusicPlayer" scope="prototype">
+        <property name="music" ref ="musicBean"/>
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean>
+
     <bean id="musicBean1"
-          class="com.it.spring.ClassicalMusic">
+          class="com.it.spring.ClassicalMusic" scope="singleton">
     </bean>
 
     <bean id="musicBean2"
-          class="com.it.spring.RockMusic">
+          class="com.it.spring.RockMusic" scope="singleton">
     </bean>
 
     <bean id="musicBean3"
-          class="com.it.spring.RapMusic">
+          class="com.it.spring.RapMusic" scope="singleton">
     </bean>
-    <bean id="musicPlayer" class="com.it.spring.MusicPlayer">
+    <bean id="musicPlayer1" class="com.it.spring.MusicPlayer">
         <property name="musicList">
             <list>
                 <ref bean="musicBean1"/>
