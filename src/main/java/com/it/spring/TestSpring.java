@@ -20,11 +20,11 @@ public class TestSpring {
         System.out.println(firstMusicPlayer.getVolume());
         System.out.println(secondMusicPlayer.getVolume());
 
-/*
+
         Music music = context.getBean("musicBean", Music.class);
         MusicPlayer musicPlayer = new MusicPlayer(music);
         musicPlayer.playMusic();
-*/
+
 /*
         MusicPlayer musicPlayer1 = context.getBean("musicPlayer1", MusicPlayer.class);
         musicPlayer1.playMusicList();
