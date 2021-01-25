@@ -12,7 +12,8 @@
     <bean id="musicBean"
           class="com.it.spring.ClassicalMusic"
           init-method="doMyInit"
-          destroy-method="doMyDestroy">
+          destroy-method="doMyDestroy"
+          factory-method="getClassicalMusic">
     </bean>
 
     <bean id="musicPlayer" class="com.it.spring.MusicPlayer" scope="prototype">
