@@ -1,9 +1,12 @@
-package com.it.spring;
+package ru.alishev.springcourse;
 
 import org.springframework.stereotype.Component;
 
-@Component("someRockMusic")
-public class RockMusic implements Music{
+/**
+ * @author Neil Alishev
+ */
+@Component
+public class RockMusic implements Music {
     @Override
     public String getSong() {
         return "Wind cries Mary";
