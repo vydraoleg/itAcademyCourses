@@ -20,13 +20,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "user")
+@Table(name = "user_table")
 public class User extends AEntity<Integer> {
 
-    @Column(name = "name")
+    @Column(name = "user_name")
     private String firstName;
-    @Column(name = "salary")
+    @Column(name = "user_salary")
     private int salary;
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "user_table", fetch = FetchType.LAZY)
 //    private List<Pet> pets;
 }
