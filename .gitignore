@@ -25,7 +25,8 @@ hs_err_pid*
 # for Idea IDE
 /.idea
 /.out
-itAcademyCourses.iml
+*.iml
 /bin/
+target
 .project
 .classpath
