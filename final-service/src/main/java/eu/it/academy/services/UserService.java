@@ -13,6 +13,7 @@ public class UserService implements IUserService {
     private IUserDao userDao;
     
     public User findUser(int id) {
+
         return this.userDao.findUser(id);
     }
 }
