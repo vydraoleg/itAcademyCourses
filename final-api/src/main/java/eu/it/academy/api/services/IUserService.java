@@ -7,5 +7,5 @@ import eu.it.academy.entities.User;
 @Service
 public interface IUserService {
 
-    User findUser(int id);
+    User findUser(Long id);
 }

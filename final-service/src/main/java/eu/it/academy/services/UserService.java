@@ -12,8 +12,8 @@ public class UserService implements IUserService {
     @Autowired
     private IUserDao userDao;
     
-    public User findUser(int id) {
+    public User findUser(Long id) {
 
-        return this.userDao.findUser(id);
+        return this.userDao.get(id);
     }
 }
