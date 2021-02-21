@@ -55,7 +55,7 @@ public class UserController {
     }
     
     @PatchMapping()
-    public void assingPetToUser(@RequestBody UserPetIdsDto ids) {
-        this.userService.assingPetToUser(ids);
+    public void assignPetToUser(@RequestBody UserPetIdsDto ids) {
+        this.userService.assignPetToUser(ids);
     }
 }

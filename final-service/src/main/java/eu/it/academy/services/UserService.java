@@ -59,14 +59,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void assingPetToUser(UserPetIdsDto ids) {
+    public void assignPetToUser(UserPetIdsDto ids) {
         User user = this.userJPADao.findById(ids.getUserId()).orElse(null);
         Pet pet = this.petJPADao.findById(ids.getPetId()).orElse(null);
         pet.setUser(user);
         this.petJPADao.save(pet);
     }
 
-    
     
     
     

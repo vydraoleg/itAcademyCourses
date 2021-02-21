@@ -21,5 +21,5 @@ public interface IUserService {
     
     List<UserDto> getUsers();
 
-    void assingPetToUser(UserPetIdsDto ids);
+    void assignPetToUser(UserPetIdsDto ids);
 }

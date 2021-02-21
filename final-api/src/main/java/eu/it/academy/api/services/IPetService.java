@@ -2,6 +2,7 @@ package eu.it.academy.api.services;
 
 import java.util.List;
 
+import eu.it.academy.api.dto.UserPetIdsDto;
 import org.springframework.stereotype.Service;
 
 import eu.it.academy.api.dto.PetDto;
@@ -19,4 +20,6 @@ public interface IPetService {
     void deletePet(int id);
     
     List<PetDto> getPets();
+
+    void assignUserToPet(UserPetIdsDto ids);
 }

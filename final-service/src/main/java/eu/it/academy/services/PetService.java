@@ -1,19 +1,24 @@
 package eu.it.academy.services;
 
-import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import eu.it.academy.api.dao.IPetDao;
 import eu.it.academy.api.dao.IPetJPADao;
+import eu.it.academy.api.dao.IUserJPADao;
 import eu.it.academy.api.dto.PetDto;
+import eu.it.academy.api.dto.UserPetIdsDto;
 import eu.it.academy.api.mappers.PetMapper;
 import eu.it.academy.api.services.IPetService;
 import eu.it.academy.entities.Pet;
+import eu.it.academy.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class PetService implements IPetService {
+
+    @Autowired
+    private IUserJPADao userDao;
 
     @Autowired
     private IPetJPADao petDao;
@@ -50,4 +55,13 @@ public class PetService implements IPetService {
     public List<PetDto> getPets() {
         return PetMapper.mapPetDtos(this.petDao.findAll());
     }
+
+    @Override
+    public void assignUserToPet(UserPetIdsDto ids) {
+        User user = this.userDao.findById(ids.getUserId()).orElse(null);
+        Pet pet = this.petDao.findById(ids.getPetId()).orElse(null);
+        pet.setUser(user);
+        this.petDao.save(pet);
+    }
+
 }
