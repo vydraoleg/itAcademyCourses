@@ -45,7 +45,7 @@ public class UserService implements IUserService {
         User user = this.userJPADao.findById(id).orElse(null);
         if(user != null) {
             user = UserMapper.mapUser(userDto);
-            this.userJPADao.save(user);
+            this.userJPADao.saveAndFlush(user);
         }
     }
 
