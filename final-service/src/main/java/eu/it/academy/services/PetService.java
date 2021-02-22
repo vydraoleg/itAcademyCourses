@@ -41,6 +41,7 @@ public class PetService implements IPetService {
     public void updatePet(int id, PetDto petDto) {
         Pet pet = this.petDao.findById(id).orElse(null);
         if(pet != null) {
+            pet = PetMapper.mapPet(petDto);
             this.petDao.save(pet);
         }
     }

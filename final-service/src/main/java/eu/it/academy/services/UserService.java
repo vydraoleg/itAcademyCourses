@@ -44,6 +44,7 @@ public class UserService implements IUserService {
     public void updateUser(int id, UserDto userDto) {
         User user = this.userJPADao.findById(id).orElse(null);
         if(user != null) {
+            user = UserMapper.mapUser(userDto);
             this.userJPADao.save(user);
         }
     }
