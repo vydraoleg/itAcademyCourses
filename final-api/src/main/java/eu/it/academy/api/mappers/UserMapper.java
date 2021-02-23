@@ -11,18 +11,30 @@ import lombok.experimental.UtilityClass;
 public class UserMapper {
 
     public User mapUser(UserDto source) {
-        return User.builder().id(source.getId()).firstName(source.getFirstName()).salary(source.getSalary()).build();
+        return User.builder()
+                .id(source.getId())
+                .firstName(source.getFirstName())
+                .salary(source.getSalary())
+                .build();
     }
 
     public UserDto mapUserDto(User source) {
-        return UserDto.builder().id(source.getId()).firstName(source.getFirstName()).salary(source.getSalary()).build();
+        return UserDto.builder()
+                .id(source.getId())
+                .firstName(source.getFirstName())
+                .salary(source.getSalary())
+                .build();
     }
 
     public List<User> mapUsers(List<UserDto> source) {
-        return source.stream().map(UserMapper::mapUser).collect(Collectors.toList());
+        return source.stream()
+                .map(UserMapper::mapUser)
+                .collect(Collectors.toList());
     }
-    
+
     public List<UserDto> mapUserDtos(List<User> source) {
-        return source.stream().map(UserMapper::mapUserDto).collect(Collectors.toList());
+        return source.stream()
+                .map(UserMapper::mapUserDto)
+                .collect(Collectors.toList());
     }
 }

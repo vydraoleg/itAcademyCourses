@@ -14,12 +14,13 @@ public interface IUserService {
     UserDto findUserByFirstName(String firstName);
     
     UserDto createUser(UserDto user);
-    
-    void updateUser(int id, UserDto user);
-    
+
+    void updateUser(int id, UserDto userDto);
+
     void deleteUser(int id);
     
     List<UserDto> getUsers();
 
     void assignPetToUser(UserPetIdsDto ids);
-}
+
+    }
