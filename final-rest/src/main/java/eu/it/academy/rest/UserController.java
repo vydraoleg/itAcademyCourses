@@ -15,11 +15,13 @@ public class UserController {
     
     @GetMapping(value = "/{id}")
     public User findUser(@PathVariable int id) {
-        return userService.findUser(id);
+        Integer id1 = id;
+        return userService.findUser(id1.longValue());
     }
 
     @PostMapping
     public User createUser(@PathVariable int id) {
-        return userService.findUser(id);
+        Integer id1 = id;
+        return userService.findUser(id1.longValue());
     }
 }
