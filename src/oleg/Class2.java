@@ -1,12 +1,14 @@
 package oleg;
-/*
+
 public class Class2 extends Class1 {
-    Class2(double d) {              // 1
-        this((int) d);
+    Class2(double d) {
+        super((int) d);
+//        this((int) d);
         System.out.println("Class2(double)");
     }
 
-    Class2(int i) {   // 2
+    Class2(int i) {
+        super(i);   // 2
         System.out.println("Class2(int)");
     }
 
@@ -20,4 +22,3 @@ class Class1 {
         System.out.println("Class1(int)");
     }
 }
-*/
