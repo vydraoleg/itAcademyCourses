@@ -2,6 +2,8 @@ package oleg;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -9,10 +11,11 @@ public class HelloWorld {
     private final static int i = 050;
 
     public enum SmtnConst {i}
-
+//   @Log4j
     public static void main(String[] args) {
+        Logger logger = Logger.getLogger(HelloWorld.class.getName());
         StringBuilder j = new StringBuilder(" Addition");
-        System.out.println(+i);
+        logger.log(Level.WARNING," Пример работы {}",+i);
         System.out.println("I \"like\" Java! " + j);
         boolean rt = true;
         System.out.println("I like Java! " + rt);
