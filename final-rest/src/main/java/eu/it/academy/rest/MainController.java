@@ -21,6 +21,9 @@ public class MainController {
         return "index"; //this.userService.createUser(user);
     }
 
+
+
+
     @GetMapping("/admin")
     public String admin(){
         return "admin";

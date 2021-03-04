@@ -41,6 +41,10 @@ public abstract class AGenericDao<T extends AEntity<Integer>> implements IAGener
         entityManager.remove(entity);
     }
 
+    /**
+     * Use CriteriaBuilder
+     * @return   List<T>
+     */
     public List<T> getAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(getGenericClass());

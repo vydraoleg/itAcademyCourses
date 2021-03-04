@@ -47,6 +47,23 @@ public class UserController {
         return modelAndView;
     }
 
+//================================
+
+    @GetMapping(value = "/add")
+    public ModelAndView createUser() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("usersFormPage");
+        modelAndView.addObject("user", new UserDto());
+        return modelAndView;
+    }
+    @PostMapping(value = "/add")
+    public UserDto createUserSubmit(UserDto user) {
+        return this.userService.createUser(user);
+    }
+
+    //================================
+
+
     @GetMapping(value = "/name/{firstName}")
     public UserDto findUserByFirstName(@PathVariable String firstName) {
         return userService.findUserByFirstName(firstName);
