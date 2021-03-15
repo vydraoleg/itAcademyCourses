@@ -6,15 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-// import eu.it.academy.logger.ServiceLogger;
-
 @Service
 @Aspect
 public class ServiceLogger {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceLogger.class);
 
-    @AfterThrowing(pointcut = "execution(* eu.it.academy.services.*.*(..))", throwing = "exception")
+//    @AfterThrowing(pointcut = "execution(* eu.it.academy.services.*.*(..))", throwing = "exception")
+    @AfterThrowing(pointcut = "execution(* eu.it.academy.*.*(..))", throwing = "exception")
     public void logException(Exception exception) {
         logger.error(exception.getMessage());
     }

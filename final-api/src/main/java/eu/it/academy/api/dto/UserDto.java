@@ -18,4 +18,7 @@ public class UserDto {
     private String firstName;
     private int salary;
     private List<PetDto> pets;
+    @Builder.Default
+    private String roleName = "ROLE_USER";
+
 }
