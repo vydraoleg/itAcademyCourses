@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>by.azot.asutp.sensors</groupId>
+    <artifactId>sensors</artifactId>
+    <packaging>pom</packaging>
+    <name>Sensors project</name>
+    <properties>
+        <project.version>0.0.1</project.version>
+        <project.java.version>11</project.java.version>
+        <java.version>${project.java.version}</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version>${project.version}</version>
+    </properties>
+    <modules>
+        <module>sensors-entity</module>
+        <module>sensors-dao</module>
+        <module>sensors-service</module>
+        <module>sensors-rest</module>
+        <module>sensors-main</module>
+        <module>sensors-api</module>
+        <module>sensors-logger</module>
+    </modules>
+</project>

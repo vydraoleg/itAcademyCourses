@@ -1,0 +1,21 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>My first page</title>
+    <link href="styles/bootstrap.css" rel="stylesheet"/>
+    <link href="styles/custom.min.css" rel="stylesheet"/>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div>
+    <h1>My first page!</h1>
+</div>
+
+<div th:insert="blocks/footer :: footer"></div>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/jquery.min.js"></script>
+
+</body>
+</html>

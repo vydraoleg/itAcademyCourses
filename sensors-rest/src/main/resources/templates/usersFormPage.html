@@ -1,0 +1,22 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Users page</title>
+    <link href="styles/bootstrap.css" rel="stylesheet"/>
+    <link href="styles/styles.css" rel="stylesheet"/>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+<div>
+    <h2>Add user</h2>
+</div>
+<div class="user-wrapper">
+    <form action="#" th:action="@{add}" th:object="${user}" class="form-control" method="post">
+        <input id="firstName" type="text" th:field="*{username}" class="form-control" required/>
+        <input id="salary" type="text" th:field="*{salary}" class="form-control" required/>
+        <input type="submit" value="Submit" class="btn btn-success"/>
+    </form>
+</div>
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
