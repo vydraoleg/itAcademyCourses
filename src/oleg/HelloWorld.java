@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 public class HelloWorld {
     private final static int INT1 = 050;
 
+<<<<<<< HEAD
     public enum SmtnConst {INT1}
 
     public static void main(String[] args) {
@@ -17,6 +18,15 @@ public class HelloWorld {
         StringBuilder j = new StringBuilder(" Addition");
         System.out.println(+INT1);
         System.out.println(j.append(" I \"like\" Java! ").toString());
+=======
+    public enum SmtnConst {i}
+//   @Log4j
+    public static void main(String[] args) {
+        Logger logger = Logger.getLogger(HelloWorld.class.getName());
+        StringBuilder j = new StringBuilder(" Addition");
+        logger.log(Level.WARNING," Пример работы {}",+i);
+        System.out.println("I \"like\" Java! " + j);
+>>>>>>> 747e70655d8ae41f65b8b274d34feeb4643c2fff
         boolean rt = true;
         System.out.println("I like Java! " + rt);
 
