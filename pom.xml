@@ -12,6 +12,7 @@
     <artifactId>sensors</artifactId>
     <packaging>pom</packaging>
     <name>Sensors project</name>
+    <version>0.0.1</version>
     <properties>
         <project.version>0.0.1</project.version>
         <project.java.version>11</project.java.version>
