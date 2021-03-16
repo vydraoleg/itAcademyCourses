@@ -2,18 +2,21 @@ package oleg;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class HelloWorld {
-    private final static int i = 050;
+    private final static int INT1 = 050;
 
-    public enum SmtnConst {i}
+    public enum SmtnConst {INT1}
 
     public static void main(String[] args) {
+        Logger logger = Logger.getLogger(HelloWorld.class.getName());
         StringBuilder j = new StringBuilder(" Addition");
-        System.out.println(+i);
-        System.out.println("I \"like\" Java! " + j);
+        System.out.println(+INT1);
+        System.out.println(j.append(" I \"like\" Java! ").toString());
         boolean rt = true;
         System.out.println("I like Java! " + rt);
 
@@ -24,12 +27,14 @@ public class HelloWorld {
         List<String> list1 = new ArrayList();
         List<? extends Number> list2 = new ArrayList();
 
-        list.add(i);
+        list.add(INT1);
         list.add(34);
 
 
         String str11 = "str";
         str11.chars().forEach(System.out::println);
+        int[] iArray =  new int[] {3121,123,5123,546};
+        logger.log(Level.INFO," End write list of integer! {0}",iArray[2]);
 
         IntStream.of(120, 410, 85, 32, 314, 12)
                 .filter(x -> x < 300)
@@ -38,7 +43,7 @@ public class HelloWorld {
                 .forEach(System.out::println);
 
         String str = Math.random() > 0.3 ? "I'm feeling lucky" : null;
-//        Stream.ofNullable(str).forEach(System.out::println);
+        Stream.ofNullable(str).forEach(System.out::println);
 
         Stream.generate(() -> 6)
                 .limit(6)
