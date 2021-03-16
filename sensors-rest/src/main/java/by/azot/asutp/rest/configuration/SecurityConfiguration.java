@@ -58,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public ActiveDirectoryLdapAuthenticationProvider activeDirectoryLdapAuthenticationProvider(){
         ActiveDirectoryLdapAuthenticationProvider activeDirectoryLdapAuthenticationProvider = new
-                ActiveDirectoryLdapAuthenticationProvider("pizzashop.com.us", "ldap://10.100.100.100:389/");
+                ActiveDirectoryLdapAuthenticationProvider("azot.com.by", "ldap://10.100.100.100:389/");
         return activeDirectoryLdapAuthenticationProvider;
     }
 
