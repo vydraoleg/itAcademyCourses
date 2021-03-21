@@ -15,7 +15,7 @@
     <version>0.0.1</version>
     <properties>
         <project.version>0.0.1</project.version>
-        <project.java.version>11</project.java.version>
+        <project.java.version>1.8</project.java.version>
         <java.version>${project.java.version}</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version>${project.version}</version>
@@ -28,5 +28,6 @@
         <module>sensors-main</module>
         <module>sensors-api</module>
         <module>sensors-logger</module>
+        <module>sensors-web</module>
     </modules>
 </project>

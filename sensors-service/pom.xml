@@ -37,5 +37,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>by.azot.asutp.sensors</groupId>
+            <artifactId>sensors-web</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

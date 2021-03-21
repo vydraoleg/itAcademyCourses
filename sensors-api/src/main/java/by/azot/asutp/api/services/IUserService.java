@@ -23,4 +23,6 @@ public interface IUserService {
     List<UserDto> getUsers();
 
     void assingPetToUser(UserPetIdsDto ids);
+
+    void getBookByIsbn(String isbn);
 }

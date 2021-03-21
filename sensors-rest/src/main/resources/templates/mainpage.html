@@ -1,16 +1,27 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <title>My first page</title>
-    <link href="styles/bootstrap.css" rel="stylesheet" />
+    <link href="styles/styles.css" rel="stylesheet"/>
+    <link href="styles/bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-
-<div>
-    <h1>My first page!</h1>
+<div class="container">
+    <div class="container">
+        <div class="page-header" id="banner">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-6">
+                    <h1>Sensors</h1>
+                    <p class="lead">Work with sensors</p>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6">
+                </div>
+            </div>
+        </div>
+        <div th:insert="blocks/footer :: footer"></div>
+    </div>
 </div>
-
-<div th:insert="blocks/footer :: footer"></div>
-
 </body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </html>

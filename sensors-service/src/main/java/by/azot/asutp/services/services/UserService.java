@@ -2,6 +2,9 @@ package by.azot.asutp.services.services;
 
 import java.io.IOException;
 import java.util.List;
+
+import by.azot.asutp.web.BookDetails;
+import by.azot.asutp.web.WebScraper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,9 @@ public class UserService implements IUserService {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    WebScraper webScraper;
 
     @Override
     public UserDto findUser(int id) {
@@ -87,13 +93,17 @@ public class UserService implements IUserService {
         log.info("Pet assigned to user {}!", user.getUserName());
     }
 
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public void getBookByIsbn(String isbn) {
+        BookDetails details = this.webScraper.getBookDetailsFromWeb(isbn);
+        String stop = "stop";
+    }
+
+
+
+
+
 //    @Autowired
 //    private IUserDao userDao;
 //
