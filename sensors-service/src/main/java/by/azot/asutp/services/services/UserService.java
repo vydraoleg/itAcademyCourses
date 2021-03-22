@@ -2,9 +2,10 @@ package by.azot.asutp.services.services;
 
 import java.io.IOException;
 import java.util.List;
+
+import by.azot.asutp.web.BookDetails;
+import by.azot.asutp.web.WebScraper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,6 @@ import by.azot.asutp.api.dto.UserPetIdsDto;
 import by.azot.asutp.api.mappers.UserMapper;
 import by.azot.asutp.api.services.IUserService;
 import by.azot.asutp.entities.Pet;
-import by.azot.asutp.entities.Role;
 import by.azot.asutp.entities.User;
 import by.azot.asutp.services.utils.LogoFileUploader;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +33,9 @@ public class UserService implements IUserService {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    WebScraper webScraper;
 
     @Override
     public UserDto findUser(int id) {
@@ -90,13 +93,17 @@ public class UserService implements IUserService {
         log.info("Pet assigned to user {}!", user.getUserName());
     }
 
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public void getBookByIsbn(String isbn) {
+        BookDetails details = this.webScraper.getBookDetailsFromWeb(isbn);
+        String stop = "stop";
+    }
+
+
+
+
+
 //    @Autowired
 //    private IUserDao userDao;
 //
