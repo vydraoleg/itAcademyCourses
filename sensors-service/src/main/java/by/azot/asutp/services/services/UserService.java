@@ -34,9 +34,6 @@ public class UserService implements IUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    WebScraper webScraper;
-
     @Override
     public UserDto findUser(int id) {
         User user = this.userJPADao.findById(id).orElse(null);
@@ -92,16 +89,6 @@ public class UserService implements IUserService {
         this.petJPADao.save(pet);
         log.info("Pet assigned to user {}!", user.getUserName());
     }
-
-
-    @Override
-    public void getBookByIsbn(String isbn) {
-        BookDetails details = this.webScraper.getBookDetailsFromWeb(isbn);
-        String stop = "stop";
-    }
-
-
-
 
 
 //    @Autowired

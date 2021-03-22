@@ -92,11 +92,4 @@ public class UserController {
         this.userService.assingPetToUser(ids);
     }
 
-
-    @GetMapping("/book")
-    public ModelAndView search(@RequestParam(value = "isbn", required = false) String isbn) {
-        ModelAndView modelAndView = new ModelAndView();
-        userService.getBookByIsbn(isbn);
-        return modelAndView;
-    }
 }
