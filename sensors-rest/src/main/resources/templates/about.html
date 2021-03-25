@@ -3,14 +3,17 @@
 <head>
     <title th:text="${title}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="../styles/styles.css" rel="stylesheet"/>
+    <link href="../styles/bootstrap.css" rel="stylesheet"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
 <header th:insert="blocks/header :: header"></header>
 
-<div class="container mt-5">
-    <h1 th:text="${title}"/>
+<div class="container">
+    <h1>About this program</h1>
 </div>
 
 <div th:insert="blocks/footer :: footer"></div>

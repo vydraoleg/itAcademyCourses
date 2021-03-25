@@ -15,7 +15,7 @@ import by.azot.asutp.api.services.IPetService;
 
 @RestController
 @RequestMapping("/pets")
-public class PetController {
+public class PetRestController {
 
     @Autowired
     private IPetService petService;

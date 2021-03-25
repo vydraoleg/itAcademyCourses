@@ -26,7 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    
+
+//        http.authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin();
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
@@ -35,13 +36,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-/*
-        http.authorizeRequests()
-                .anyRequest().fullyAuthenticated()
-                .and()
-                .formLogin();
-*/
-
     }
 
     @Autowired

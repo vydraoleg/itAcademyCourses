@@ -1,48 +1,47 @@
 package by.azot.asutp.rest.controllers;
 
-import by.azot.asutp.api.dto.UserDto;
-import by.azot.asutp.api.services.IUserService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import by.azot.asutp.api.dto.UserDto;
+import by.azot.asutp.api.dto.UserPetIdsDto;
+import by.azot.asutp.api.services.IUserService;
 
-@Controller
-@RequestMapping("/users")
-public class UserController {
+@RestController
+@RequestMapping("/rest/users")
+public class UserRestController {
 
     @Autowired
     private IUserService userService;
-
+    
     @GetMapping
-    public ModelAndView findUsers() {
-        List<UserDto> users = userService.getUsers();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("usersPage");
-        modelAndView.addObject("title", "My Users:");
-        modelAndView.addObject("usersList", users);
-        return modelAndView;
+    public List<UserDto> findUsers() {
+        return userService.getUsers();
     }
-
+    
     @GetMapping(value = "/{id}")
-    public ModelAndView findUser(@PathVariable int id) {
-        UserDto user = userService.findUser(id);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userPage");
-        modelAndView.addObject("user", user);
-        return modelAndView;
+    public UserDto findUser(@PathVariable int id) {    return userService.findUser(id);
     }
-
+    
     @GetMapping(value = "/name/{firstName}")
     public UserDto findUserByFirstName(@PathVariable String firstName) {
         return userService.findUserByFirstName(firstName);
     }
-
+    
     //===============create=================
-
+    
     @GetMapping(value = "/add")
     public ModelAndView createUser() {
         ModelAndView modelAndView = new ModelAndView();
@@ -50,14 +49,14 @@ public class UserController {
         modelAndView.addObject("user", new UserDto());
         return modelAndView;
     }
-
+    
     @PostMapping(value = "/add")
     public UserDto createUserSubmit(UserDto user) {
         return this.userService.createUser(user);
     }
-
-    //===============update=================
-
+    
+  //===============update=================
+    
     @GetMapping(value = "/upd")
     public ModelAndView updateUser() {
         ModelAndView modelAndView = new ModelAndView();
@@ -65,9 +64,22 @@ public class UserController {
         modelAndView.addObject("user", new UserDto());
         return modelAndView;
     }
-
+    
     @PostMapping(value = "/upd")
     public void updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file) {
         this.userService.updateUser(user.getUsername(), user, file);
     }
+    
+  //================================
+    
+    @DeleteMapping(value = "/{id}")
+    public void deleteUser(@PathVariable int id) {
+        this.userService.deleteUser(id);
+    }
+    
+    @PatchMapping()
+    public void assingPetToUser(@RequestBody UserPetIdsDto ids) {
+        this.userService.assingPetToUser(ids);
+    }
+
 }
