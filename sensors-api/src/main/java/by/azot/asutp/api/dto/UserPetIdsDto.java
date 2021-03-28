@@ -13,6 +13,6 @@ import lombok.Setter;
 @Builder
 public class UserPetIdsDto {
 
-    private int userId;
-    private int petId;
+    private Long userId;
+    private Long petId;
 }

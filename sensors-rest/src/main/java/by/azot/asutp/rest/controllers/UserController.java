@@ -5,6 +5,7 @@ import by.azot.asutp.api.services.IUserService;
 import by.azot.asutp.utils.mail.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public ModelAndView findUser(@PathVariable int id) {
+    public ModelAndView findUser(@PathVariable Long id) {
         UserDto user = userService.findUser(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("userPage");
@@ -39,8 +40,12 @@ public class UserController {
     }
 
     @GetMapping(value = "/name/{firstName}")
-    public UserDto findUserByFirstName(@PathVariable String firstName) {
-        return userService.findUserByFirstName(firstName);
+    public ModelAndView findUserByFirstName(@PathVariable String firstName) {
+        UserDto user = userService.findUserByFirstName(firstName);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("userPage");
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 
     //===============create=================
@@ -58,6 +63,18 @@ public class UserController {
         return this.userService.createUser(user);
     }
 
+/*    @PostMapping("/blog/{id}/edit")
+    public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) {
+        BlogPost blogPost = blogPostRepository.findById(id).orElseThrow();
+        blogPost.setTitle(title);
+        blogPost.setAnons(anons);
+        blogPost.setFull_text(full_text);
+        blogPostRepository.save(blogPost);
+        return "redirect:/blog";
+    }
+*/
+
+
     //===============update=================
 
     @GetMapping(value = "/upd")
@@ -69,8 +86,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/upd")
-    public void updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file) {
+    public String updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         this.userService.updateUser(user.getUsername(), user, file);
+        return "redirect:/";
     }
 
     @GetMapping(value = "/mail")
@@ -78,4 +96,5 @@ public class UserController {
         EmailSender myMailSender = new EmailSender() ;
         myMailSender.sendEmailToAdmin(user,1);
     }
+
 }

@@ -19,7 +19,7 @@ public class PetService implements IPetService {
     private IPetJPADao petDao;
 
     @Override
-    public PetDto findPet(int id) {
+    public PetDto findPet(Long id) {
         Pet pet = this.petDao.findById(id).orElse(null);
         return (pet != null ) ? PetMapper.mapPetDto(pet) : null;
     }
@@ -33,7 +33,7 @@ public class PetService implements IPetService {
 
     @Override
     @Transactional
-    public void updatePet(int id, PetDto petDto) {
+    public void updatePet(Long id, PetDto petDto) {
         Pet pet = this.petDao.findById(id).orElse(null);
         if(pet != null) {
             this.petDao.save(pet);
@@ -42,7 +42,7 @@ public class PetService implements IPetService {
 
     @Override
     @Transactional
-    public void deletePet(int id) {
+    public void deletePet(Long id) {
         this.petDao.deleteById(id);
     }
 

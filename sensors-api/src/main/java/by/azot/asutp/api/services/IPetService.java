@@ -10,13 +10,13 @@ import by.azot.asutp.api.dto.UserDto;
 @Service
 public interface IPetService {
 
-    PetDto findPet(int id);
+    PetDto findPet(Long id);
     
     PetDto createPet(PetDto user);
     
-    void updatePet(int id, PetDto user);
+    void updatePet(Long id, PetDto user);
     
-    void deletePet(int id);
+    void deletePet(Long id);
     
     List<PetDto> getPets();
 }

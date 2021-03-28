@@ -10,15 +10,17 @@ import by.azot.asutp.api.dto.UserPetIdsDto;
 @Service
 public interface IUserService {
 
-    UserDto findUser(int id);
+    UserDto findUser(Long id);
     
     UserDto findUserByFirstName(String firstName);
     
     UserDto createUser(UserDto user);
     
     void updateUser(String firstName, UserDto user, MultipartFile file);
-    
-    void deleteUser(int id);
+
+    void updateUser(Long id, UserDto user);
+
+    void deleteUser(Long id);
     
     List<UserDto> getUsers();
 

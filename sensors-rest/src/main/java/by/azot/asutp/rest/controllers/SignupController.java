@@ -24,10 +24,10 @@ public class SignupController {
 
     @Autowired
     private IUserService userService;
-    
+
     @Autowired
     AuthenticationManager authenticationManager;
-    
+
     @GetMapping
     public String signupUser(Model model) {
         model.addAttribute("dto", new UserDto());
@@ -46,15 +46,15 @@ public class SignupController {
         }
         return "signupResult";
     }
-    
+
     //TODO
     private void authWithAuthManager(HttpServletRequest request, String username, String password) {
-        
+
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
         authToken.setDetails(new WebAuthenticationDetails(request));
-        
+
         Authentication authentication = authenticationManager.authenticate(authToken);
-        
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

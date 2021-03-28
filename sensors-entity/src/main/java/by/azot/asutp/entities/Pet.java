@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "pet")
-public class Pet extends AEntity<Integer> {
+public class Pet extends AEntity<Long> {
 
     @Column(name = "nickname")
     private String nickName;

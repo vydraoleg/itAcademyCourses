@@ -2,6 +2,7 @@ package by.azot.asutp.services.services;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import by.azot.asutp.web.BookDetails;
 import by.azot.asutp.web.WebScraper;
@@ -35,7 +36,7 @@ public class UserService implements IUserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDto findUser(int id) {
+    public UserDto findUser(Long id) {
         User user = this.userJPADao.findById(id).orElse(null);
         return (user != null) ? UserMapper.mapUserDto(user) : null;
     }
@@ -57,7 +58,6 @@ public class UserService implements IUserService {
 
     @Override
     public void updateUser(String firstName, UserDto userDto, MultipartFile file) {
-//        User user = this.userJPADao.findById(id).orElse(null);
         User user = this.userJPADao.findByUsername(firstName);
         if(user != null) {
             user.setUserName(userDto.getUsername());
@@ -72,7 +72,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void updateUser(Long id, UserDto userDto) {
+        User user = this.userJPADao.findById(id).orElse(null);
+        if(user != null) {
+            user.setUserName(userDto.getUsername());
+            user.setSalary(userDto.getSalary());
+            this.userJPADao.save(user);
+        }
+    }
+
+    @Override
+    public void deleteUser(Long id) {
         this.userJPADao.deleteById(id);
     }
 

@@ -26,7 +26,7 @@ public class PetRestController {
     }
 
     @GetMapping(value = "/{id}")
-    public PetDto findPet(@PathVariable int id) {
+    public PetDto findPet(@PathVariable Long id) {
         return petService.findPet(id);
     }
 
@@ -36,12 +36,12 @@ public class PetRestController {
     }
 
     @PutMapping(value = "/{id}")
-    public void updatePet(@PathVariable int id, @RequestBody PetDto pet) {
+    public void updatePet(@PathVariable Long id, @RequestBody PetDto pet) {
         this.petService.updatePet(id, pet);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deletePet(@PathVariable int id) {
+    public void deletePet(@PathVariable Long id) {
         this.petService.deletePet(id);
     }
 }

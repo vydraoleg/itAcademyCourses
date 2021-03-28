@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import by.azot.asutp.api.dao.IAGenericDao;
 import by.azot.asutp.entities.AEntity;
 
-public abstract class AGenericDao<T extends AEntity<Integer>> implements IAGenericDao<T> {
+public abstract class AGenericDao<T extends AEntity<Long>> implements IAGenericDao<T> {
 
     private Class<T> clazz;
 
@@ -28,7 +28,7 @@ public abstract class AGenericDao<T extends AEntity<Integer>> implements IAGener
         return entity;
     }
 
-    public T get(int id) {
+    public T get(Long id) {
         return entityManager.find(getGenericClass(), id);
     }
     

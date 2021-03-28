@@ -24,7 +24,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "user")
-public class User extends AEntity<Integer> {
+public class User extends AEntity<Long> {
 
     @Column(name = "name")
     private String username;

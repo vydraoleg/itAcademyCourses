@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 public class PetDto {
 
-    private int id;
+    private Long id;
     private String nickName;
     private UserDto user;
 }
