@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>by.azot.asutp.sensors</groupId>
     <artifactId>sensors</artifactId>
@@ -29,5 +29,6 @@
         <module>sensors-api</module>
         <module>sensors-logger</module>
         <module>sensors-web</module>
+        <module>sensors-util</module>
     </modules>
 </project>

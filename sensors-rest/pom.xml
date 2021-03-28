@@ -54,5 +54,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-ldap</artifactId>
         </dependency>
+        <dependency>
+            <groupId>by.azot.asutp.sensors</groupId>
+            <artifactId>sensors-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -2,6 +2,7 @@ package by.azot.asutp.rest.controllers;
 
 import by.azot.asutp.api.dto.UserDto;
 import by.azot.asutp.api.services.IUserService;
+import by.azot.asutp.utils.mail.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
 
     @GetMapping
     public ModelAndView findUsers() {
@@ -69,5 +71,11 @@ public class UserController {
     @PostMapping(value = "/upd")
     public void updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file) {
         this.userService.updateUser(user.getUsername(), user, file);
+    }
+
+    @GetMapping(value = "/mail")
+    public void SendEmailAdmin(UserDto user) throws Exception {
+        EmailSender myMailSender = new EmailSender() ;
+        myMailSender.sendEmailToAdmin(user,1);
     }
 }
