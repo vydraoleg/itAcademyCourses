@@ -21,7 +21,7 @@ create table listrole
 (id number(15),
 role varchar2(250))
 ;
-drop table listuser_role;
+--drop table listuser_role;
 create table listuser_role
 (user_id number(15),
 role_id number(15))
@@ -36,9 +36,10 @@ select * from listrole;
 
 insert into listuser_role (user_id,role_id) values(1,2) ;
 select * from listuser_role;
+--explain plan into plan_table for select * from listuser_role;
 commit ;
 
-SELECT a.sequence_name, a.next_val  FROM hibernate_sequences a;
+SELECT a.*  FROM hibernate_sequences a;
 --select name, password, 1 as enabled from listuser where name = 'oleg';
 --SELECT lu.name as username, lr.role as role FROM listuser lu INNER JOIN listuser_role user_role ON lu.id = user_role.user_id INNER JOIN listrole lr ON user_role.role_id = lr.id WHERE lu.name = 'oleg'
 
