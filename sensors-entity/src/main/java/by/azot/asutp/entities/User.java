@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "user")
+@Table(name = "listuser")
 public class User extends AEntity<Long> {
 
     @Column(name = "name")

@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "role")
+@Table(name = "listrole")
 public class Role extends AEntity<Integer> {
 
     @Column(name = "role")

@@ -59,8 +59,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    public UserDto createUserSubmit(UserDto user) {
-        return this.userService.createUser(user);
+    public String createUserSubmit(UserDto user, Model model) {
+        UserDto userDto = this.userService.createUser(user);
+        return "redirect:/";
     }
 
 /*    @PostMapping("/blog/{id}/edit")
@@ -93,8 +94,8 @@ public class UserController {
 
     @GetMapping(value = "/mail")
     public void SendEmailAdmin(UserDto user) throws Exception {
-        EmailSender myMailSender = new EmailSender() ;
-        myMailSender.sendEmailToAdmin(user,1);
+        EmailSender myMailSender = new EmailSender();
+        myMailSender.sendEmailToAdmin(user, 1);
     }
 
 }

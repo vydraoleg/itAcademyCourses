@@ -30,7 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+/*
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/signup/**", "/js/**", "/styles/**", "/images/**", "/about/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login")
@@ -38,13 +39,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
         ;
+*/
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
         builder.jdbcAuthentication().dataSource(dataSource).authoritiesByUsernameQuery(
-                "SELECT user.name as username, role.role as role FROM user INNER JOIN user_role ON user.id = user_role.user_id INNER JOIN role ON user_role.role_id = role.id WHERE user.name = ?")
-                .usersByUsernameQuery("select name, password, 1 as enabled from user where name = ?");
+                "SELECT lu.name as username, lr.role as role FROM listuser lu INNER JOIN listuser_role user_role ON lu.id = user_role.user_id INNER JOIN listrole lr ON user_role.role_id = lr.id WHERE lu.name = ?")
+                .usersByUsernameQuery("select name, password, 1 as enabled from listuser where name = ?");
     }
 
     /**
