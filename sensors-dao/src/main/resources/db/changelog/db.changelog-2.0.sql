@@ -42,4 +42,18 @@ commit ;
 SELECT a.*  FROM hibernate_sequences a;
 --select name, password, 1 as enabled from listuser where name = 'oleg';
 --SELECT lu.name as username, lr.role as role FROM listuser lu INNER JOIN listuser_role user_role ON lu.id = user_role.user_id INNER JOIN listrole lr ON user_role.role_id = lr.id WHERE lu.name = 'oleg'
-
+/* SELECT a.table_name,
+    a.column_name,
+    a.constraint_name,
+    b.owner,
+    c_pk.table_name ref_table_name,
+    c_pk.constraint_name ref_pk
+  FROM user_cons_columns a
+  JOIN user_constraints b
+  ON a.owner            = b.owner
+  AND a.constraint_name = b.constraint_name
+  JOIN user_constraints c_pk
+  ON b.r_owner            = c_pk.owner
+  AND b.r_constraint_name = c_pk.constraint_name
+  WHERE b.constraint_type = 'R';
+*/
