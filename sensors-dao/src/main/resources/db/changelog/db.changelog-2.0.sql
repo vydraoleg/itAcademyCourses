@@ -6,28 +6,28 @@ create table pet
   
 drop table listuser;
 create table listuser
-(id number(15),
-name varchar2(250),
-email varchar2(250),
-password varchar2(250),
-first_name varchar2(250),
-last_name varchar2(250),
-enabled number(1),
-salary number(15,2)
+(id bigint,
+name varchar(250),
+email varchar(250),
+password varchar(250),
+first_name varchar(250),
+last_name varchar(250),
+enabled int(1),
+salary float(15,2)
 )
 ;   
 
 create table listrole
-(id number(15),
-role varchar2(250))
+(id bigint,
+role varchar(250))
 ;
 --drop table listuser_role;
 create table listuser_role
-(user_id number(15),
-role_id number(15))
+(user_id bigint,
+role_id bigint)
 ;
 
-insert into listuser (id,name,enabled) values(1,'oleg',1) ;
+insert into listuser (id,name,password,enabled) values(1,'oleg','$2a$10$exyJNC3qCSw4HOVtJq3HyOZEDmVQbWmi9Fro7VzG5GWWVS77MTPbu',1) ;
 select * from listuser;  
 
 insert into listrole (id,role) values(1,'ROLE_ADMIN') ;
