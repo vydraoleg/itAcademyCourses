@@ -4,8 +4,8 @@ create table pet
   user_id Number(15))
   ;
   
-drop table listuser;
-create table listuser
+drop table sen_user;
+create table sen_user
 (id bigint,
 name varchar(250),
 email varchar(250),
@@ -17,12 +17,12 @@ salary float(15,2)
 )
 ;   
 
-create table listrole
+create table sen_role
 (id bigint,
 role varchar(250))
 ;
---drop table listuser_role;
-create table listuser_role
+--drop table sen_user_role;
+create table sen_user_role
 (user_id bigint,
 role_id bigint)
 ;
@@ -56,4 +56,14 @@ SELECT a.*  FROM hibernate_sequences a;
   ON b.r_owner            = c_pk.owner
   AND b.r_constraint_name = c_pk.constraint_name
   WHERE b.constraint_type = 'R';
-*/
+
+   <changeSet author="Oleg Vydra" id="changelog-1.0"
+		objectQuotingStrategy="LEGACY">
+		<addColumn schemaName="itacademia" tableName="user">
+			<column name="enabled" type="boolean" />
+		</addColumn>
+	</changeSet>
+
+   */
+
+

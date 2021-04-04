@@ -23,18 +23,28 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "listuser")
+@Table(name = "sen_user")
 public class User extends AEntity<Long> {
 
     @Column(name = "name")
     private String username;
     
-    @Column(name = "salary")
-    private int salary;
 
     @Column(name = "password")
     private String password;
-    
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "salary")
+    private int salary;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Pet> pets;
 
