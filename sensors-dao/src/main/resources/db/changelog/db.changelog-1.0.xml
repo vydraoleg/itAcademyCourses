@@ -5,41 +5,93 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-<!--<changeSet author="Oleg Vydra"  id="changelog-3.0">-->
-<!--<sqlFile dbms="posgresql, oracle, mysql"-->
-<!--		 encoding="UTF-8"-->
-<!--		 endDelimiter="\nGO"-->
-<!--		 path="file.sql"-->
-<!--		 relativeToChangelogFile="true"-->
-<!--		 splitStatements="true"-->
-<!--		 stripComments="true"/>-->
-<!--</changeSet>-->
+	<changeSet  author="Oleg Vydra"  id="changelog-1.0">
+			<insert tableName="sen_user">
+                    <column  name="id"  value="1"/>
+                    <column  name="name"  value="oleg"/>
+                    <column  name="email"  value="oleg@vydra.com"/>
+                    <column  name="password"  value="$2a$10$4jvoy5FFtHe3FqS.F2YhNeelNZWQvGwI8hejVagkfmbul2xWDpHPa"/>
+                    <column  name="first_name"  value="Oleg"/>
+                    <column  name="last_name"  value="Vydra"/>
+                    <column  name="enabled"  value="1"/>
+                </insert>
+                <insert tableName="sen_user">
+                    <column  name="id"  value="2"/>
+                    <column  name="name"  value="dima"/>
+                    <column  name="email"  value="dima@gmail.com"/>
+                    <column  name="password"  value="$2a$10$exyJNC3qCSw4HOVtJq3HyOZEDmVQbWmi9Fro7VzG5GWWVS77MTPbu"/>
+                    <column  name="first_name"  value="Dima"/>
+                    <column  name="last_name"  value="Volkov"/>
+                    <column  name="enabled"  value="1"/>
+                </insert>
+                <insert tableName="sen_role">
+                    <column  name="id"  value="1"/>
+                    <column  name="name"  value="ROLE_ADMIN"/>
+                    <column  name="description"  value="Administrator"/>
+                </insert>
+                <insert tableName="sen_role">
+                    <column  name="id"  value="2"/>
+                    <column  name="name"  value="ROLE_USER"/>
+                    <column  name="description"  value="User"/>
+                </insert>
+                <insert tableName="sen_role">
+                    <column  name="id"  value="3"/>
+                    <column  name="name"  value="ROLE_ADMIN"/>
+                    <column  name="description"  value="Administrator of balances"/>
+                </insert>
+                <insert tableName="sen_sensor">
+                    <column  name="id"  value="1"/>
+                    <column  name="name"  value="QF-1"/>
+                    <column  name="full_name"  value="water from VOC1"/>
+                    <column  name="date_begin" value="01-01-2021"/>
+                    <column  name="date_end"  value="01-01-2030"/>
+                    <column  name="measure"  value="thousand cubic meters"/>
+                    <column  name="modified_by_user"  value="2"/>
+                    <column  name="date_modified" value="12-04-2021"/>
+                </insert>
 
-	<changeSet  author="Oleg Vydra"  id="changelog-2.0">
-		<insert tableName="sen_user">
-			<column  name="id"  value="1"/>
-			<column  name="name"  value="oleg"/>
-			<column  name="password"  value="$2a$10$4jvoy5FFtHe3FqS.F2YhNeelNZWQvGwI8hejVagkfmbul2xWDpHPa"/>
-		</insert>
-		<insert tableName="sen_role">
-			<column  name="id"  value="1"/>
-			<column  name="name"  value="ROLE_ADMIN"/>
-		</insert>
-		<insert tableName="sen_role">
-			<column  name="id"  value="2"/>
-			<column  name="name"  value="ROLE_USER"/>
-		</insert>
-		<insert tableName="sen_user_role">
-			<column  name="user_id"  value="1"/>
-			<column  name="role_id"  value="2"/>
-		</insert>
-		<createTable  tableName="sensor">
-			<column  name="id"  type="INT">
-				<constraints  nullable="false"  primaryKey="true"  unique="true"/>
-			</column>
-			<column  name="name_sensor"  type="TEXT">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-		</createTable>
+                <insert tableName="sen_sensor">
+                    <column  name="id"  value="2"/>
+                    <column  name="name"  value="QF-2"/>
+                    <column  name="full_name"  value="water from VOC2"/>
+                    <column  name="date_begin" value="01-01-2021"/>
+                    <column  name="date_end"  value="01-01-2030"/>
+                    <column  name="measure"  value="thousand cubic meters"/>
+                    <column  name="modified_by_user"  value="2"/>
+                    <column  name="date_modified" value="12-04-2021"/>
+                </insert>
+
+        <insert tableName="sen_sensor">
+            <column  name="id"  value="3"/>
+            <column  name="name"  value="QF-3"/>
+            <column  name="full_name"  value="water from VOC3"/>
+            <column  name="date_begin" value="01-01-2021"/>
+            <column  name="date_end"  value="01-01-2030"/>
+            <column  name="measure"  value="thousand cubic meters"/>
+            <column  name="modified_by_user"  value="2"/>
+            <column  name="date_modified" value="12-04-2021"/>
+        </insert>
+
+        <insert tableName="sen_balance">
+                    <column  name="id"  value="1"/>
+                    <column  name="name"  value="Recycled water balance"/>
+                    <column  name="date_begin" value="01-01-2021"/>
+                    <column  name="date_end"  value="01-01-2030"/>
+                    <column  name="modified_by_user"  value="2"/>
+                    <column  name="date_modified" value="12-04-2021"/>
+                </insert>
+
+                <addForeignKeyConstraint  baseTableName="sen_sensor_show"
+                                          baseColumnNames="sensor_id"
+                                          constraintName="fk_sen_sensor_show"
+                                          deferrable="true"
+                                          initiallyDeferred="true"
+                                          onDelete="CASCADE"
+                                          onUpdate="RESTRICT"
+                                          referencedColumnNames="id"
+                                          referencedTableName="sen_sensor"
+                                          validate="true"/>
+
+
 	</changeSet>
 </databaseChangeLog>

@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>sensors-api</artifactId>
 	<properties>
-		<version>${project.version}</version>
+		<version>0.0.1</version>
 		<java.version>${project.java.version}</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>by.azot.asutp.sensors</groupId>
 			<artifactId>sensors-entity</artifactId>
-			<version>${project.version}</version>
+			<version>0.0.1</version>
 		</dependency>
 		<dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,13 +1,7 @@
 package by.azot.asutp.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.*;
 
-import javax.persistence.Column;
 import java.sql.Date;
 
 @Getter
@@ -15,14 +9,12 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SensorDto {
+public class BalanceDto {
 
     private Long id;
     private String name;
-    private String fullName;
     private Date dateBegin;
     private Date dateEnd;
-    private String measure;
     private Long modifiedByUser;
     private Date dateModified;
 

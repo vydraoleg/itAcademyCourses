@@ -15,9 +15,10 @@ import lombok.Setter;
 public class UserDto {
 
     private Long id;
-    private String username;
-    private String firstname;
-    private String lastname;
+    private String userName;
+    private String email;
+    private String firstName;
+    private String lastName;
     private String password;
     private int salary;
     private List<RoleDto> roles;

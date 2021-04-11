@@ -22,8 +22,17 @@ public class Role extends AEntity<Long> {
     @Column(name = "name")
     private String roleName;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @Column(name = "description")
+    private String description;
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sen_user_role", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<User> users;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sen_balance_role", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "balance_id", referencedColumnName = "id"))
+    private Set<Balance> balances;
+
 
 }

@@ -20,15 +20,15 @@
         <tr>
             <th scope="col">Type</th>
             <th scope="col">Name</th>
-            <th scope="col">Salary</th>
+            <th scope="col">email</th>
             <th scope="col">Link</th>
         </tr>
         </thead>
         <tbody>
             <tr th:each="oneuser : ${usersList}" class="table-secondary">
                 <th scope="row">User name is:</th>
-                <td><p th:text="${oneuser.username}"/></td>
-                <td><p th:text="'User salary is: ' + ${oneuser.salary}"/></td>
+                <td><p th:text="${oneuser.userName}"/></td>
+                <td><p th:text="'User salary is: ' + ${oneuser.email}"/></td>
                 <td><a th:href="@{'users/' + ${oneuser.id}}">More info</a></td>
             </tr>
         </tbody>
@@ -37,8 +37,8 @@
     <div class="user-wrapper">
         <div th:each="oneuser : ${usersList}" class="user-div">
             <!-- <p th:text="'User id is: ' + ${user.id}" /> -->
-            <p th:text="'User name is: ' + ${oneuser.username}"/>
-            <p th:text="'User salary is: ' + ${oneuser.salary}"/>
+            <p th:text="'User name is: ' + ${oneuser.userName}"/>
+            <p th:text="'User email is: ' + ${oneuser.email}"/>
             <a th:href="@{'users/' + ${oneuser.id}}">More info</a>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="modal-body">
                     <div th:each="oneuser : ${usersList}">
-                        <p th:text="'User: ' + ${oneuser.username}"/>
+                        <p th:text="'User: ' + ${oneuser.userName}"/>
                     </div>
                 </div>
                 <div class="modal-footer">

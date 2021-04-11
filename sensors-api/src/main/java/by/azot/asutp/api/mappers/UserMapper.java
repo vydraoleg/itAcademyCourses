@@ -13,8 +13,10 @@ public class UserMapper {
     public User mapUser(UserDto source) {
         return User.builder()
                 .id(source.getId())
-                .username(source.getUsername())
-                .salary(source.getSalary())
+                .userName(source.getUserName())
+                .email(source.getEmail())
+                .firstName(source.getFirstName())
+                .lastName(source.getLastName())
                 .password(source.getPassword())
                 .build();
     }
@@ -22,8 +24,10 @@ public class UserMapper {
     public UserDto mapUserDto(User source) {
         return UserDto.builder()
                 .id(source.getId())
-                .username(source.getUserName())
-                .salary(source.getSalary())
+                .userName(source.getUserName())
+                .email(source.getEmail())
+                .firstName(source.getFirstName())
+                .lastName(source.getLastName())
                 .password(source.getPassword())
                 .build();
     }

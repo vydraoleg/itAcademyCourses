@@ -39,7 +39,7 @@ public class SignupController {
         try {
             model.addAttribute("dto", dto);
             UserDto dtoNew = userService.createUser(dto);
-            authWithAuthManager(request, dto.getUsername(), dtoNew.getPassword());
+            authWithAuthManager(request, dto.getUserName(), dtoNew.getPassword());
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "/error/createEntityError";

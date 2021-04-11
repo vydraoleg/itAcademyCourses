@@ -40,13 +40,13 @@ public class UserService implements IUserService {
     
     @Override
     public UserDto findUserByFirstName(String username) {
-        return UserMapper.mapUserDto(this.userJPADao.findByUsername(username));
+        return UserMapper.mapUserDto(this.userJPADao.findByUserName(username));
     }
         
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = new User();
-        user.setUserName(userDto.getUsername());
+        user.setUserName(userDto.getUserName());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 //        user.getRoles().add(new Role("ROLE_USER"));
         User savedUser = this.userJPADao.save(user);
@@ -55,10 +55,13 @@ public class UserService implements IUserService {
 
     @Override
     public void updateUser(String firstName, UserDto userDto, MultipartFile file) {
-        User user = this.userJPADao.findByUsername(firstName);
+        User user = this.userJPADao.findByUserName(firstName);
         if(user != null) {
-            user.setUserName(userDto.getUsername());
-            user.setSalary(userDto.getSalary());
+            user.setUserName(userDto.getUserName());
+            user.setFirstName(userDto.getFirstName());
+            user.setLastName(userDto.getLastName());
+            user.setEmail(userDto.getLastName());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             this.userJPADao.save(user);
         }
         try {
@@ -72,8 +75,10 @@ public class UserService implements IUserService {
     public void updateUser(Long id, UserDto userDto) {
         User user = this.userJPADao.findById(id).orElse(null);
         if(user != null) {
-            user.setUserName(userDto.getUsername());
-            user.setSalary(userDto.getSalary());
+            user.setUserName(userDto.getUserName());
+            user.setFirstName(userDto.getFirstName());
+            user.setLastName(userDto.getLastName());
+            user.setEmail(userDto.getLastName());
             this.userJPADao.save(user);
         }
     }

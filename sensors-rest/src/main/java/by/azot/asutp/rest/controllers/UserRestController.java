@@ -34,7 +34,7 @@ public class UserRestController {
     
     @PostMapping(value = "/upd")
     public void updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file) {
-        this.userService.updateUser(user.getUsername(), user, file);
+        this.userService.updateUser(user.getUserName(), user, file);
     }
     
   //================================

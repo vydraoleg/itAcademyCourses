@@ -1,3 +1,10 @@
+
+--SET datestyle = dmy;
+
+--drop table hibernate_sequences;
+drop table databasechangelog;
+drop table databasechangeloglock;
+-- ALTER USER postgres WITH PASSWORD 'postgres';
 drop table sen_balance_sensor;
 drop table sen_balance_role;
 drop table sen_sensor_show;
@@ -17,7 +24,7 @@ create table sen_user
     last_name varchar(250),
     enabled int default 1
 );
-comment on table  sen_user is 'Таблица пользователей';
+comment on table  sen_user is 'Table of users';
 
 create table sen_role 
 (   id bigint PRIMARy KEY,
@@ -30,7 +37,7 @@ create table sen_user_role(
     role_id bigint,
     enabled int
 );
-comment on table  sen_user_role is 'Таблица связей пользователя и роли';
+comment on table  sen_user_role is 'Table relations between USER and ROLE';
 
 ALTER TABLE sen_user_role
 ADD CONSTRAINT sen_user_role_pk PRIMARY KEY (user_id, role_id);
@@ -48,6 +55,7 @@ REFERENCES sen_role (id)
 create table sen_sensor
 (   id bigint PRIMARY KEY,
     name varchar(250),
+    full_name varchar(250),
     date_begin date,
     date_end date,
     measure varchar(10),
@@ -55,7 +63,7 @@ create table sen_sensor
     date_modified date
     );
 
-comment on table  sen_sensor is 'Cписок приборов';
+comment on table  sen_sensor is 'Table of sensors';
     
 create table sen_balance
 (   id bigint PRIMARY KEY,
@@ -65,14 +73,14 @@ create table sen_balance
     modified_by_user bigint,
     date_modified date
     );
-comment on table  sen_balance is 'Cписок балансов';
+comment on table  sen_balance is 'Table of balances';
 
 create table sen_balance_role(
     balance_id bigint,
     role_id bigint,
     enabled int
 );
-comment on table  sen_balance_role is 'Таблица связей баланса и роли';
+comment on table  sen_balance_role is 'table of relationships between balances and roles';
     
 ALTER TABLE sen_balance_role
 ADD CONSTRAINT sen_balance_role_pk PRIMARY KEY (balance_id, role_id);
@@ -105,30 +113,29 @@ ADD CONSTRAINT sen_balance_sensor_fk_sensor FOREIGN KEY (sensor_id)
 REFERENCES sen_sensor (id)
 ;
 
-comment on table  sen_balance_sensor is 'Таблица связей баланса и датчика';
+comment on table  sen_balance_sensor is 'table of relationships between balances and sensors';
 
 create table sen_sensor_show(
     sensor_id bigint,
-    date_values date,
+    date_value date,
     value   real
 );
-comment on table  sen_balance_sensor is 'Таблица показаний по датчикам ';
+comment on table  sen_balance_sensor is 'Sensor readings table';
 
 ALTER TABLE sen_sensor_show
-ADD CONSTRAINT sen_sensor_show_pk PRIMARY KEY (sensor_id,date_values);
+ADD CONSTRAINT sen_sensor_show_pk PRIMARY KEY (sensor_id,date_value);
 ;
 ALTER TABLE sen_sensor_show
 ADD CONSTRAINT sen_sensor_show_fk_sensor FOREIGN KEY (sensor_id)
-REFERENCES sen_sensor (id)
-;
+REFERENCES sen_sensor (id);
  
     
-insert into sen_role(id, name,description) values(1,'ROLE_USER','Пользователь'); 
-insert into sen_role(id, name,description) values(2,'ROLE_ADMIN','Администратор');
-insert into sen_role(id, name,description) values(3,'ROLE_ADM_BALANCE','Администратор балансов');
+insert into sen_role(id, name,description) values(1,'ROLE_USER','User'); 
+insert into sen_role(id, name,description) values(2,'ROLE_ADMIN','Administrator');
+insert into sen_role(id, name,description) values(3,'ROLE_ADM_BALANCE','Administrator of balances');
 
-insert into sen_user(id, name,email, password,first_name, last_name) values(1,'oleg','oleg@vydra.com','password','Oleg','Vydra'); 
-insert into sen_user(id, name,email, password,first_name, last_name) values(2,'Dima','dima@gmail.com','passworddima','Dima','Volkov');
+insert into sen_user(id, name,email, password,first_name, last_name) values(1,'oleg','oleg@vydra.com','$2a$10$exyJNC3qCSw4HOVtJq3HyOZEDmVQbWmi9Fro7VzG5GWWVS77MTPbu','Oleg','Vydra'); 
+insert into sen_user(id, name,email, password,first_name, last_name) values(2,'dima','dima@gmail.com','$2a$10$exyJNC3qCSw4HOVtJq3HyOZEDmVQbWmi9Fro7VzG5GWWVS77MTPbu','Dima','Volkov');
 
 insert into sen_user_role(user_id, role_id) values(1,1); 
 insert into sen_user_role(user_id, role_id) values(1,2); 
@@ -136,6 +143,14 @@ insert into sen_user_role(user_id, role_id) values(2,1);
 insert into sen_user_role(user_id, role_id) values(2,3); 
 
 insert into sen_sensor
- (id ,name,date_begin ,date_end ,measure ,modified_by_user,date_modified) 
- values (1,'KF-1 вода с ВОЦ1','01-01-2021','01-01-2030','тыс.куб.',1,'01-01-2021') ;
+ (id ,name,full_name, date_begin ,date_end ,measure ,modified_by_user,date_modified) 
+ values (1,'QF-1','water from VOC1','01-01-2021','01-01-2030','t.cubs',2,'01-01-2021') ;
+
+insert into sen_sensor
+ (id ,name,full_name, date_begin ,date_end ,measure ,modified_by_user,date_modified) 
+ values (2,'QF-2','water from VOC2','01-01-2021','01-01-2030','t.cubs',2,'01-01-2021') ;
+
+insert into sen_balance 
+ (id ,name, date_begin ,date_end,modified_by_user,date_modified) 
+ values (1,'Recycled water balance','01-01-2021','01-01-2030',2,'01-01-2021') ;
 

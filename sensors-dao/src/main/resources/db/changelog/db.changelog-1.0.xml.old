@@ -15,6 +15,12 @@
 <!--		 stripComments="true"/>-->
 <!--</changeSet>-->
 
+                <addPrimaryKey  tableName="sen_sensor_show"
+                                columnNames="sensor_id, date_value"
+                                constraintName="pk_sen_sensor_show"
+                                validate="true"/>
+
+
 	<changeSet  author="Oleg Vydra"  id="changelog-2.0">
 		<createTable  tableName="sen_user">
 			<column  name="id"  type="bigint">

@@ -88,7 +88,7 @@ public class UserController {
 
     @PostMapping(value = "/upd")
     public String updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
-        this.userService.updateUser(user.getUsername(), user, file);
+        this.userService.updateUser(user.getUserName(), user, file);
         return "redirect:/";
     }
 

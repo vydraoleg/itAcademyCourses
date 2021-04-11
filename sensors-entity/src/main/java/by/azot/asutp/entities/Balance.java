@@ -1,7 +1,5 @@
 package by.azot.asutp.entities;
 
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +7,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,14 +18,11 @@ import java.util.Set;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "sen_sensor")
-public class Sensor extends AEntity<Long> {
+@Table(name = "sen_balance")
+public class Balance extends AEntity<Long> {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "full_name")
-    private String fullName;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "date_begin")
@@ -35,9 +32,6 @@ public class Sensor extends AEntity<Long> {
     @Column(name = "date_end")
     private Date dateEnd;
 
-    @Column(name = "measure")
-    private String measure;
-
     @Column(name = "modified_by_user")
     private Long modifiedByUser;
 
@@ -45,9 +39,15 @@ public class Sensor extends AEntity<Long> {
     @Column(name = "date_modified")
     private Date dateModified;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "sen_balance_sensor", joinColumns = @JoinColumn(name = "sensor_id", referencedColumnName = "id")
-                                          , inverseJoinColumns = @JoinColumn(name = "balance_id", referencedColumnName = "id"))
-    private Set<Balance> balances;
+    @JoinTable(name = "sen_balance_sensor", joinColumns = @JoinColumn(name = "balance_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "sensor_id", referencedColumnName = "id"))
+    private List<Sensor> sensors;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sen_balance_role", joinColumns = @JoinColumn(name = "balance_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
 
 }

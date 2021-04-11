@@ -22,7 +22,7 @@ public class LogoFileUploader {
 
     public void updateOrCreateLogo(MultipartFile file, UserDto dto) throws IOException {
         if (file != null && !file.isEmpty()) {
-            String userName = dto.getUsername();
+            String userName = dto.getUserName();
             String filePath = new StringBuilder(LOGOS_FOLDER_PATH).append(userName).append(IMAGE_EXTENSION)
                     .toString();
             File userLogo;
@@ -41,7 +41,7 @@ public class LogoFileUploader {
 
     public void updateLogo(MultipartFile file, UserDto dto) throws IOException {
         if (file != null && !file.isEmpty()) {
-            File existingFile = ResourceUtils.getFile(new StringBuilder(LOGOS_FOLDER_PATH).append(dto.getUsername())
+            File existingFile = ResourceUtils.getFile(new StringBuilder(LOGOS_FOLDER_PATH).append(dto.getUserName())
                     .append(IMAGE_EXTENSION).toString());
             Path path = Paths.get(existingFile.getPath());
             byte[] bytes = file.getBytes();

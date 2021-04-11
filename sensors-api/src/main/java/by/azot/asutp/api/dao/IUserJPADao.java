@@ -5,5 +5,5 @@ import by.azot.asutp.entities.User;
 
 public interface IUserJPADao extends JpaRepository<User, Long> {
 
-    User findByUsername(String username);
+    User findByUserName(String userName);
 }
