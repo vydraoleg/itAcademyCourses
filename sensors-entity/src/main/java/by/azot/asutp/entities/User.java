@@ -45,11 +45,11 @@ public class User extends AEntity<Long> {
     @Column(name = "salary")
     private int salary;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<Pet> pets;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+//    private List<Pet> pets;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @JoinTable(name = "sen_user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
     
     public String getUserName() {
@@ -68,15 +68,7 @@ public class User extends AEntity<Long> {
         this.salary = salary;
     }
 
-    public List<Pet> getPets() {
-        return pets;
-    }
 
-    public void setPets(List<Pet> pets) {
-        this.pets.clear();
-        this.pets.addAll(pets);
-    }
-    
     public Set<Role> getRoles() {
         if (roles == null) {
             roles = new HashSet<>();

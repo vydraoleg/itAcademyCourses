@@ -2,22 +2,19 @@ package by.azot.asutp.services.services;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
-import by.azot.asutp.web.BookDetails;
-import by.azot.asutp.web.WebScraper;
+import by.azot.asutp.api.dao.IRoleJPADao;
+import by.azot.asutp.api.dto.UserRoleIdsDto;
+import by.azot.asutp.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import by.azot.asutp.api.dao.IPetJPADao;
 import by.azot.asutp.api.dao.IUserJPADao;
 import by.azot.asutp.api.dto.UserDto;
-import by.azot.asutp.api.dto.UserPetIdsDto;
 import by.azot.asutp.api.mappers.UserMapper;
 import by.azot.asutp.api.services.IUserService;
-import by.azot.asutp.entities.Pet;
 import by.azot.asutp.entities.User;
 import by.azot.asutp.services.utils.LogoFileUploader;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +27,7 @@ public class UserService implements IUserService {
     private IUserJPADao userJPADao;
 
     @Autowired
-    private IPetJPADao petJPADao;
+    private IRoleJPADao roleJPADao;
     
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -92,11 +89,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void assingPetToUser(UserPetIdsDto ids) {
+    public void assignRoleToUser(UserRoleIdsDto ids) {
         User user = this.userJPADao.findById(ids.getUserId()).orElse(null);
-        Pet pet = this.petJPADao.findById(ids.getPetId()).orElse(null);
-        pet.setUser(user);
-        this.petJPADao.save(pet);
+        Role role = this.roleJPADao.findById(ids.getRoleId()).orElse(null);
+//        role.setUser(user);
+        this.roleJPADao.save(role);
         log.info("Pet assigned to user {}!", user.getUserName());
     }
 

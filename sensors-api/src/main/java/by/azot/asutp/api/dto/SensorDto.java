@@ -11,9 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PetDto {
+public class SensorDto {
 
     private Long id;
-    private String nickName;
-    private UserDto user;
+    private String fullName;
+//    private UserDto user;
 }

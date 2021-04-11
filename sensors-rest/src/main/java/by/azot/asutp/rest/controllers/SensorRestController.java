@@ -10,38 +10,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import by.azot.asutp.api.dto.PetDto;
-import by.azot.asutp.api.services.IPetService;
+import by.azot.asutp.api.dto.SensorDto;
+import by.azot.asutp.api.services.ISensorService;
 
 @RestController
 @RequestMapping("/pets")
-public class PetRestController {
+public class SensorRestController {
 
     @Autowired
-    private IPetService petService;
+    private ISensorService sensorService;
 
     @GetMapping
-    public List<PetDto> findPets() {
-        return petService.getPets();
+    public List<SensorDto> findPets() {
+        return sensorService.getSensors();
     }
 
     @GetMapping(value = "/{id}")
-    public PetDto findPet(@PathVariable Long id) {
-        return petService.findPet(id);
+    public SensorDto findPet(@PathVariable Long id) {
+        return sensorService.findSensor(id);
     }
 
     @PostMapping
-    public PetDto createPet(@RequestBody PetDto pet) {
-        return this.petService.createPet(pet);
+    public SensorDto createPet(@RequestBody SensorDto pet) {
+        return this.sensorService.createSensor(pet);
     }
 
     @PutMapping(value = "/{id}")
-    public void updatePet(@PathVariable Long id, @RequestBody PetDto pet) {
-        this.petService.updatePet(id, pet);
+    public void updatePet(@PathVariable Long id, @RequestBody SensorDto pet) {
+        this.sensorService.updateSensor(id, pet);
     }
 
     @DeleteMapping(value = "/{id}")
     public void deletePet(@PathVariable Long id) {
-        this.petService.deletePet(id);
+        this.sensorService.deleteSensor(id);
     }
 }

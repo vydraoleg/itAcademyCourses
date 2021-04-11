@@ -16,41 +16,11 @@
 <!--</changeSet>-->
 
 	<changeSet  author="Oleg Vydra"  id="changelog-2.0">
-		<createTable  tableName="sen_user">
-			<column  name="id"  type="bigint">
-				<constraints  nullable="false"  primaryKey="true"  unique="true"/>
-			</column>
-			<column  name="name"  type="varchar(255)">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-			<column  name="email"  type="varchar(255)">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-			<column  name="password"  type="varchar(255)" defaultValue="$2a$10$exyJNC3qCSw4HOVtJq3HyOZEDmVQbWmi9Fro7VzG5GWWVS77MTPbu">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-			<column  name="first_name"  type="varchar(255)">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-			<column  name="last_name"  type="varchar(255)">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-			<column  name="enabled"  type="int" defaultValueNumeric="1">
-				<constraints  nullable="true"  primaryKey="false"  unique="false" />
-			</column>
-		</createTable>
 		<insert tableName="sen_user">
 			<column  name="id"  value="1"/>
 			<column  name="name"  value="oleg"/>
+			<column  name="password"  value="$2a$10$4jvoy5FFtHe3FqS.F2YhNeelNZWQvGwI8hejVagkfmbul2xWDpHPa"/>
 		</insert>
-		<createTable  tableName="sen_role">
-			<column  name="id"  type="bigint">
-				<constraints  nullable="false"  primaryKey="true"  unique="true"/>
-			</column>
-			<column  name="name"  type="varchar(255)">
-				<constraints  nullable="true"  primaryKey="false"  unique="false"/>
-			</column>
-		</createTable>
 		<insert tableName="sen_role">
 			<column  name="id"  value="1"/>
 			<column  name="name"  value="ROLE_ADMIN"/>
@@ -59,14 +29,6 @@
 			<column  name="id"  value="2"/>
 			<column  name="name"  value="ROLE_USER"/>
 		</insert>
-		<createTable  tableName="sen_user_role">
-			<column  name="user_id"  type="bigint">
-				<constraints  nullable="false"  primaryKey="false"  unique="false"/>
-			</column>
-			<column  name="role_id"  type="bigint">
-				<constraints  nullable="false"  primaryKey="false"  unique="false"/>
-			</column>
-		</createTable>
 		<insert tableName="sen_user_role">
 			<column  name="user_id"  value="1"/>
 			<column  name="role_id"  value="2"/>

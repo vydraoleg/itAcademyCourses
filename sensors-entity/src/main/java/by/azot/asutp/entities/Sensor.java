@@ -19,13 +19,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "pet")
-public class Pet extends AEntity<Long> {
+@Table(name = "sensor")
+public class Sensor extends AEntity<Long> {
 
-    @Column(name = "nickname")
-    private String nickName;
+    @Column(name = "full_name")
+    private String fullName;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    private User user;
 }

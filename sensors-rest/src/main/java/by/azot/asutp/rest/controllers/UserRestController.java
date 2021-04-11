@@ -2,13 +2,13 @@ package by.azot.asutp.rest.controllers;
 
 import java.util.List;
 
+import by.azot.asutp.api.dto.UserRoleIdsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.azot.asutp.api.dto.UserDto;
-import by.azot.asutp.api.dto.UserPetIdsDto;
 import by.azot.asutp.api.services.IUserService;
 
 @RestController
@@ -55,8 +55,8 @@ public class UserRestController {
     }
     
     @PatchMapping()
-    public void assingPetToUser(@RequestBody UserPetIdsDto ids) {
-        this.userService.assingPetToUser(ids);
+    public void assingRoleToUser(@RequestBody UserRoleIdsDto ids) {
+        this.userService.assignRoleToUser(ids);
     }
 
 }

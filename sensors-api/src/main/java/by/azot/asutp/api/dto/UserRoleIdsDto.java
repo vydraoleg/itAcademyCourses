@@ -11,8 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserPetIdsDto {
+public class UserRoleIdsDto {
 
     private Long userId;
-    private Long petId;
+    private Long roleId;
 }
