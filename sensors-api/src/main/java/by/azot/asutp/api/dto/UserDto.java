@@ -20,6 +20,6 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String password;
-    private int salary;
+    private int enabled;
     private List<RoleDto> roles;
 }

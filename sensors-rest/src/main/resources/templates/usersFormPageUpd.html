@@ -17,8 +17,10 @@
         <div class="card-header">personal page</div>
         <div class="card-body">
             <form action="#" th:action="@{upd}" th:object="${user}" method="post" enctype="multipart/form-data">
-                <p>User name<input id="firstName" type="text" th:field="*{username}" class="form-control" placeholder="Username" required/></p>
-                <input id="salary" type="text" th:field="*{salary}" class="form-control" placeholder="Salary" required/>
+                <p>User name<input id="userName" type="text" th:field="*{userName}" class="form-control" placeholder="Username" required/></p>
+                <p>User name<input id="email" type="text" th:field="*{email}" class="form-control" placeholder="email" required/></p>
+                <p>User name<input id="firstName" type="text" th:field="*{firstName}" class="form-control" placeholder="Username" /></p>
+                <p>User name<input id="lastName" type="text" th:field="*{lastName}" class="form-control" placeholder="Username" required/></p>
                 <input id="my-file-selector" name="file" type="file"/>
                 <input type="submit" value="Submit" class="btn btn-success"/>
             </form>
