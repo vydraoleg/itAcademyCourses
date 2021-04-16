@@ -13,13 +13,13 @@
         <h1 th:text="${user.username} + '\'s personal page'"/>
     </div>
     <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header" th:text="${user.username} + '\'s personal page'"/>
+        <div class="card-header" th:text="${user.userName} + '\'s personal page'"/>
         <div class="card-body">
             <h4 class="card-title"><p th:text="'User id is: ' + ${user.id}"/></h4>
-            <p th:text="'User name is: ' + ${user.username}"/>
-            <p th:text="'User salary is: ' + ${user.salary}"/>
+            <p th:text="'User name is: ' + ${user.userName}"/>
+            <p th:text="'User email is: ' + ${user.email}"/>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <p class="card-text"><img th:src="@{'/images/' + ${user.username} + '.jpg'}"/></p>
+            <p class="card-text"><img th:src="@{'/images/' + ${user.userName} + '.jpg'}"/></p>
         </div>
     </div>
     <div th:insert="blocks/footer :: footer"></div>
