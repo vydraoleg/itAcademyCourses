@@ -30,7 +30,6 @@ public class User extends AEntity<Long> {
     @Column(name = "name")
     private String userName;
 
-
     @Column(name = "email")
     private String email;
 
@@ -45,9 +44,6 @@ public class User extends AEntity<Long> {
 
     @Column(name = "enabled")
     private int enabled;
-
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
-//    private List<Pet> pets;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sen_user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -64,14 +60,14 @@ public class User extends AEntity<Long> {
         return firstName;
     }
     public void setFirstName(String firstName) {
-        this.userName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
     public void setLastName(String lastName) {
-        this.userName = lastName;
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -79,6 +75,13 @@ public class User extends AEntity<Long> {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 
     public List<Role> getRoles() {

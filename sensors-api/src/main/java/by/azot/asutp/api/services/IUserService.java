@@ -19,6 +19,8 @@ public interface IUserService {
     
     void updateUser(String firstName, UserDto user, MultipartFile file);
 
+    void updateUser(Long id, UserDto userDto, MultipartFile file);
+
     void updateUser(Long id, UserDto user);
 
     void deleteUser(Long id);

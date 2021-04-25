@@ -30,23 +30,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
-/*
+//        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/signup/**", "/js/**", "/styles/**", "/images/**", "/about/**").permitAll()
+                .antMatchers("/", "/signup/**", "/js/**", "/styles/**", "/images/**", "/about/**", "/rest/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login")
+                .defaultSuccessUrl("/home", true)
                 .permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
         ;
-*/
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-        builder.jdbcAuthentication().dataSource(dataSource).authoritiesByUsernameQuery(
-                "SELECT lu.name as username, lr.role as role FROM listuser lu INNER JOIN listuser_role user_role ON lu.id = user_role.user_id INNER JOIN listrole lr ON user_role.role_id = lr.id WHERE lu.name = ?")
-                .usersByUsernameQuery("select name, password, 1 as enabled from listuser where name = ?");
+        builder.jdbcAuthentication().dataSource(dataSource)
+                .authoritiesByUsernameQuery(
+                "SELECT u.name as username, r.name as role FROM sen_user u INNER JOIN sen_user_role ur ON u.id = ur.user_id INNER JOIN sen_role r ON ur.role_id = r.id WHERE u.name = ?")
+                .usersByUsernameQuery("select name, password, enabled from sen_user where email = ?");
     }
 
     /**

@@ -150,7 +150,132 @@ insert into sen_sensor
  (id ,name,full_name, date_begin ,date_end ,measure ,modified_by_user,date_modified) 
  values (2,'QF-2','water from VOC2','01-01-2021','01-01-2030','t.cubs',2,'01-01-2021') ;
 
+insert into sen_sensor
+ (id ,name,full_name, date_begin ,date_end ,measure ,modified_by_user,date_modified) 
+ values (8,'QFnew-34236','water from new system VOC4234236','01-01-2021','01-01-2030','t.cubs',2,'01-01-2021') ;
+
 insert into sen_balance 
  (id ,name, date_begin ,date_end,modified_by_user,date_modified) 
  values (1,'Recycled water balance','01-01-2021','01-01-2030',2,'01-01-2021') ;
 
+rollback;
+COMMIT;
+----------------------------------------------------------------------------------------------------
+-- Window functions
+ 
+SELECT  sss.sensor_id , 
+max(sss.value) OVER (PARTITION BY sss.sensor_id) max_val,
+max(sss.value) OVER (PARTITION BY sss.date_value) max_val_date
+, dense_rank() over (order by sum(value) desc) value_dense_rank
+, row_number() over (order by sum(value) desc) value_dense_rank
+, rank() over (order by sum(value) desc) value_dense_rank
+  FROM public.sen_sensor_show sss 
+ group by sss.sensor_id ,sss.value,sss.date_value
+ ;
+  
+ 
+SELECT *,
+       first_value(sensor_id) OVER (PARTITION BY date_value ORDER BY value ASC ) as highest_value,
+       last_value(sss.sensor_id)
+       OVER (
+           PARTITION BY sss.date_value 
+           ORDER BY value DESC
+           ROWS BETWEEN
+               UNBOUNDED PRECEDING
+               AND UNBOUNDED FOLLOWING
+           ) as lowest_sensor 
+          FROM public.sen_sensor_show sss order by sss.date_value ;
+
+commit;         
+----------------------------------------------------------------------------------------------------
+create table logged_actions (
+    schema_name text not null,
+    table_name text not null,
+    user_name text,
+    action_tstamp timestamp with time zone not null default current_timestamp,
+    action text NOT null check (action in ('I','D','U')),
+    original_data text,
+    new_data text,
+    query text
+) with (fillfactor=100);
+
+-- revoke all on audit.logged_actions from public;
+
+-- You may wish to use different permissions; this lets anybody
+-- see the full audit data. In Pg 9.0 and above you can use column
+-- permissions for fine-grained control.
+-- grant select on audit.logged_actions to public;
+
+create index logged_actions_schema_table_idx 
+on logged_actions(((schema_name||'.'||table_name)::TEXT));
+
+create index logged_actions_action_tstamp_idx 
+on logged_actions(action_tstamp);
+
+create index logged_actions_action_idx 
+on logged_actions(action);
+         
+CREATE OR REPLACE FUNCTION if_modified_func() RETURNS trigger AS $body$
+DECLARE
+    v_old_data TEXT;
+    v_new_data TEXT;
+BEGIN
+    /*  If this actually for real auditing (where you need to log EVERY action),
+        then you would need to use something like dblink or plperl that could log outside the transaction,
+        regardless of whether the transaction committed or rolled back.
+    */
+
+    /* This dance with casting the NEW and OLD values to a ROW is not necessary in pg 9.0+ */
+
+    if (TG_OP = 'UPDATE') then
+        v_old_data := ROW(OLD.*);
+        v_new_data := ROW(NEW.*);
+        insert into logged_actions (schema_name,table_name,user_name,action,original_data,new_data,query) 
+        values (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_old_data,v_new_data, current_query());
+        RETURN NEW;
+    elsif (TG_OP = 'DELETE') then
+        v_old_data := ROW(OLD.*);
+        insert into logged_actions (schema_name,table_name,user_name,action,original_data,query)
+        values (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_old_data, current_query());
+        RETURN OLD;
+    elsif (TG_OP = 'INSERT') then
+        v_new_data := ROW(NEW.*);
+        insert into logged_actions (schema_name,table_name,user_name,action,new_data,query)
+        values (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_new_data, current_query());
+        RETURN NEW;
+    else
+        RAISE WARNING '[IF_MODIFIED_FUNC] - Other action occurred: %, at %',TG_OP,now();
+        RETURN NULL;
+    end if;
+
+EXCEPTION
+    WHEN data_exception THEN
+        RAISE WARNING '[IF_MODIFIED_FUNC] - UDF ERROR [DATA EXCEPTION] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+    WHEN unique_violation THEN
+        RAISE WARNING '[IF_MODIFIED_FUNC] - UDF ERROR [UNIQUE] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+    WHEN others THEN
+        RAISE WARNING '[IF_MODIFIED_FUNC] - UDF ERROR [OTHER] - SQLSTATE: %, SQLERRM: % - %',SQLSTATE,sqlerrm,TG_OP;
+        RETURN NULL;
+END;
+$body$
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = pg_catalog, public;         
+
+drop TRIGGER sen_user_if_modified_trg on sen_user ;
+drop TRIGGER sen_role_if_modified_trg on sen_role;
+drop TRIGGER sen_sensor_if_modified_trg on sen_sensor;
+
+CREATE TRIGGER sen_user_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON sen_user
+ FOR EACH ROW EXECUTE PROCEDURE if_modified_func();
+
+CREATE TRIGGER sen_role_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON sen_role
+ FOR EACH ROW EXECUTE PROCEDURE if_modified_func();
+
+CREATE TRIGGER sen_sensor_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON sen_sensor
+ FOR EACH ROW EXECUTE PROCEDURE if_modified_func();

@@ -2,6 +2,7 @@ package by.azot.asutp.services.services;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import by.azot.asutp.api.dao.IRoleJPADao;
 import by.azot.asutp.api.dto.UserRoleIdsDto;
@@ -28,7 +29,7 @@ public class UserService implements IUserService {
 
     @Autowired
     private IRoleJPADao roleJPADao;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -37,44 +38,58 @@ public class UserService implements IUserService {
         User user = this.userJPADao.findById(id).orElse(null);
         return (user != null) ? UserMapper.mapUserDto(user) : null;
     }
-    
+
     @Override
     public UserDto findUserByFirstName(String username) {
         return UserMapper.mapUserDto(this.userJPADao.findByUserName(username));
     }
-        
+
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = new User();
         user.setUserName(userDto.getUserName());
+        user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//        user.getRoles().add(new Role("ROLE_USER"));
+        user.setLastName(userDto.getLastName());
+        user.setFirstName(userDto.getFirstName());
+//        user.setRoles(new Role("ROLE_USER"));
         User savedUser = this.userJPADao.save(user);
         return UserMapper.mapUserDto(savedUser);
     }
 
     @Override
-    public void updateUser(String firstName, UserDto userDto, MultipartFile file) {
-        User user = this.userJPADao.findByUserName(firstName);
-        if(user != null) {
+    public void updateUser(String userName, UserDto userDto, MultipartFile file) {
+        updateUser(this.userJPADao.findByUserName(userName), userDto, file);
+    }
+
+    @Override
+    public void updateUser(Long id, UserDto userDto, MultipartFile file) {
+        updateUser(this.userJPADao.findById(id).get(), userDto, file);
+    }
+
+    private void updateUser(User user, UserDto userDto, MultipartFile file) {
+        if (user != null) {
             user.setUserName(userDto.getUserName());
             user.setFirstName(userDto.getFirstName());
             user.setLastName(userDto.getLastName());
-            user.setEmail(userDto.getLastName());
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setEmail(userDto.getEmail());
+//            if (!userDto.getPassword().isEmpty())
+//                user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             this.userJPADao.save(user);
         }
-        try {
-            LogoFileUploader.updateOrCreateLogo(file, userDto);
-        } catch (IOException e) {
-            log.error("Failed to upload image. Error message: {}", e.getMessage());
+        if (!file.isEmpty()) {
+            try {
+                LogoFileUploader.updateOrCreateLogo(file, userDto);
+            } catch (IOException e) {
+                log.error("Failed to upload image. Error message: {}", e.getMessage());
+            }
         }
     }
 
     @Override
     public void updateUser(Long id, UserDto userDto) {
         User user = this.userJPADao.findById(id).orElse(null);
-        if(user != null) {
+        if (user != null) {
             user.setUserName(userDto.getUserName());
             user.setFirstName(userDto.getFirstName());
             user.setLastName(userDto.getLastName());

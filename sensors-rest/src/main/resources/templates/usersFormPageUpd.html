@@ -8,19 +8,19 @@
 </head>
 <body>
 
-<header th:insert="blocks/header :: header"></header>
 <div class="container">
+    <header th:insert="blocks/header :: header"></header>
     <div>
-        <h1>Update user</h1>
+        <h1 th:text="${title}"/>
     </div>
     <div class="card border-primary mb-3" style="max-width: 20rem;">
         <div class="card-header">personal page</div>
         <div class="card-body">
-            <form action="#" th:action="@{upd}" th:object="${user}" method="post" enctype="multipart/form-data">
+            <form th:object="${user}" method="post" enctype="multipart/form-data">-->
                 <p>User name<input id="userName" type="text" th:field="*{userName}" class="form-control" placeholder="Username" required/></p>
-                <p>User name<input id="email" type="text" th:field="*{email}" class="form-control" placeholder="email" required/></p>
-                <p>User name<input id="firstName" type="text" th:field="*{firstName}" class="form-control" placeholder="firstname" /></p>
-                <p>User name<input id="lastName" type="text" th:field="*{lastName}" class="form-control" placeholder="lastname" required/></p>
+                <p>Email<input id="email" type="text" th:field="*{email}" class="form-control" placeholder="email" required/></p>
+                <p>First name<input id="firstName" type="text" th:field="*{firstName}" class="form-control" placeholder="firstname" /></p>
+                <p>Last name<input id="lastName" type="text" th:field="*{lastName}" class="form-control" placeholder="lastname" required/></p>
                 <input id="my-file-selector" name="file" type="file"/>
                 <input type="submit" value="Submit" class="btn btn-success"/>
             </form>
@@ -29,11 +29,9 @@
     </div>
     <div th:insert="blocks/footer :: footer"></div>
 </div>
-
-<!--
- class="form-control"
-
--->
-
 </body>
 </html>
+
+<!--            <div th:each="el : ${post}">-->
+<!--                <form method="post">-->
+<!--                <form action="#" th:action="@{upd}" th:object="${user}" method="post" enctype="multipart/form-data">-->

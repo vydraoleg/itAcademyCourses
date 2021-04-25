@@ -34,5 +34,7 @@ public class Role extends AEntity<Long> {
             , inverseJoinColumns = @JoinColumn(name = "balance_id", referencedColumnName = "id"))
     private Set<Balance> balances;
 
-
+    public Role(String roleName){
+        this.roleName = roleName;
+    }
 }

@@ -32,19 +32,19 @@ public class UserController {
 
     @GetMapping(value = "/{id}")
     public ModelAndView findUser(@PathVariable Long id) {
-        UserDto user = userService.findUser(id);
+        UserDto userDto = userService.findUser(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("userPage");
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", userDto);
         return modelAndView;
     }
 
     @GetMapping(value = "/name/{firstName}")
     public ModelAndView findUserByFirstName(@PathVariable String firstName) {
-        UserDto user = userService.findUserByFirstName(firstName);
+        UserDto userDto = userService.findUserByFirstName(firstName);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("userPage");
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", userDto);
         return modelAndView;
     }
 
@@ -55,41 +55,44 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("usersFormPage");
         modelAndView.addObject("user", new UserDto());
+        modelAndView.addObject("title", "Add new user");
         return modelAndView;
     }
 
     @PostMapping(value = "/add")
     public String createUserSubmit(UserDto user, Model model) {
         UserDto userDto = this.userService.createUser(user);
-        return "redirect:/";
+        return "redirect:/users";
     }
-
-/*    @PostMapping("/blog/{id}/edit")
-    public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) {
-        BlogPost blogPost = blogPostRepository.findById(id).orElseThrow();
-        blogPost.setTitle(title);
-        blogPost.setAnons(anons);
-        blogPost.setFull_text(full_text);
-        blogPostRepository.save(blogPost);
-        return "redirect:/blog";
-    }
-*/
-
 
     //===============update=================
 
-    @GetMapping(value = "/upd")
-    public ModelAndView updateUser() {
+    @GetMapping(value = "/upd/{id}")
+    public ModelAndView updateUser(@PathVariable(value = "id") long id) {
+        UserDto userDto = userService.findUser(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("usersFormPageUpd");
-        modelAndView.addObject("user", new UserDto());
+        modelAndView.addObject("user", userDto);
+        modelAndView.addObject("title", "Update user:");
         return modelAndView;
     }
 
-    @PostMapping(value = "/upd")
-    public String updateUser(UserDto user, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
-        this.userService.updateUser(user.getUserName(), user, file);
-        return "redirect:/";
+    @PostMapping(value = "/upd/{id}")
+    public String updateUser(@PathVariable(value = "id") long id,UserDto user, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+        this.userService.updateUser(id, user, file);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/remove/{id}")
+    public String deleteUserPost(@PathVariable(value = "id") long id, Model model) {
+        this.userService.deleteUser(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String deleteUser(@PathVariable(value = "id") long id, Model model) {
+        this.userService.deleteUser(id);
+        return "redirect:/users";
     }
 
     @GetMapping(value = "/mail")
@@ -99,3 +102,4 @@ public class UserController {
     }
 
 }
+

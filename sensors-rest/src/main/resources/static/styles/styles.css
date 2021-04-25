@@ -16,6 +16,20 @@
 }
 
 .user-div:hover {
-	transform: scale(1.05);
+	transform: scale(0.90);
 	background-color: lightgray;
 }
+tr {
+	line-height: 25px;
+	min-height: 25px;
+	height: 25px;
+}
+td {
+	line-height: 25px;
+	min-height: 25px;
+	height: 25px;
+}
+p {
+	margin-bottom: 0;
+}
+

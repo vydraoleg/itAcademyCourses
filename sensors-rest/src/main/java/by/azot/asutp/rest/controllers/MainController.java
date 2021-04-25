@@ -23,7 +23,12 @@ public class MainController {
     public String login() {
         return "login";
     }
-    
+
+    @GetMapping("/error")
+    public String errorAll() {
+        return "/error/403";
+    }
+
     @GetMapping("/403")
     public String error403() {
         return "/error/403";

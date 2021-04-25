@@ -1,101 +1,50 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <title>Users page</title>
-    <link href="../../../../styles/styles.css" rel="stylesheet"/>
     <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
     <script src="../../../../js/jquery.min.js"></script>
     <script src="../../../../js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<header th:insert="blocks/header :: header"></header>
 
 <div class="container">
+    <header th:insert="blocks/header :: header"></header>
+
 
     <div>
         <h2 th:text="${title}"/>
     </div>
-
-    <table class="table table-hover">
+    <table class="table table-hover table-sm">
         <thead>
         <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Name</th>
+            <th scope="col">Row</th>
+            <th scope="col">NickName</th>
             <th scope="col">email</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
             <th scope="col">Link</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Remove</th>
         </tr>
         </thead>
         <tbody>
-            <tr th:each="oneuser : ${usersList}" class="table-secondary">
-                <th scope="row">User name is:</th>
-                <td><p th:text="${oneuser.userName}"/></td>
-                <td><p th:text="'User salary is: ' + ${oneuser.email}"/></td>
-                <td><a th:href="@{'users/' + ${oneuser.id}}">More info</a></td>
-            </tr>
+        <tr th:each="oneuser : ${usersList}" class="table-secondary">
+            <th scope="row"></th>
+            <td><p th:text="${oneuser.userName}"/></td>
+            <td><p th:text="${oneuser.email}"/></td>
+            <td><p th:text="${oneuser.firstName}"/></td>
+            <td><p th:text="${oneuser.lastName}"/></td>
+            <td><a th:href="@{'users/'+${oneuser.id}}" type="button" class="btn btn-info btn-sm">More info</a></td>
+            <td><a th:href="@{'users/upd/' + ${oneuser.id}}" class="btn btn-success btn-sm">Edit</a></td>
+            <td>
+                <a th:href="@{'users/remove/' + ${oneuser.id}}" method="post" class="btn btn-danger btn-sm">Remove</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 
-    <div class="user-wrapper">
-        <div th:each="oneuser : ${usersList}" class="user-div">
-            <!-- <p th:text="'User id is: ' + ${user.id}" /> -->
-            <p th:text="'User name is: ' + ${oneuser.userName}"/>
-            <p th:text="'User email is: ' + ${oneuser.email}"/>
-            <a th:href="@{'users/' + ${oneuser.id}}">More info</a>
-        </div>
-    </div>
-
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div th:each="oneuser : ${usersList}">
-                        <p th:text="'User: ' + ${oneuser.userName}"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <button type="button" class="btn btn-info btn-sm"
-            data-toggle="modal" data-target="#activeModal">Show
-        user names
-    </button>
-    <!-- th:attr="data-target='#activeModal' + ${user.id}">Show user names  -->
-
-    <div id="activeModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title">Users names:</h6>
-                </div>
-                <div class="modal-body">
-                    <button type="button" class="btn btn-danger btn-sm"
-                            data-dismiss="modal">Close
-                    </button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div th:insert="blocks/footer :: footer"></div>
+    <a class="btn btn-primary" href="/users/add">Add new user</a>
 </div>
 
 </body>
