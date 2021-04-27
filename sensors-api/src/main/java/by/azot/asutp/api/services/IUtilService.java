@@ -1,10 +1,11 @@
 package by.azot.asutp.api.services;
 
+import by.azot.asutp.web.BookDetails;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface IUtilService {
-    void getBookByIsbn(String isbn);
+    BookDetails getBookByIsbn(String isbn);
 }
 
 

@@ -15,9 +15,10 @@ public class UtilService implements IUtilService {
     WebScraper webScraper;
 
     @Override
-    public void getBookByIsbn(String isbn) {
+    public BookDetails getBookByIsbn(String isbn) {
         BookDetails details = this.webScraper.getBookDetailsFromWeb(isbn);
         String stop = "stop";
+        return details;
     }
 }
 

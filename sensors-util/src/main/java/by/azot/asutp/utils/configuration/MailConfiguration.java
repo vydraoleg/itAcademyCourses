@@ -1,8 +1,5 @@
 package by.azot.asutp.utils.configuration;
 
-import java.util.Properties;
-import java.util.concurrent.Executor;
-
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +11,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.Properties;
+import java.util.concurrent.Executor;
+
 @Configuration
 @ComponentScan("by.azot.asutp.utils")
 @EnableAsync
@@ -21,28 +21,28 @@ public class MailConfiguration {
 
     @Value("${mail.debug}")
     private String mailDebugProperty;
-    
+
     @Value("${mail.smtp.auth}")
     private String mailSmtpAuthProperty;
-    
+
     @Value("${mail.smtp.starttls.enable}")
     private String mailSmtpStarttlsEnableProperty;
-    
+
     @Value("${mail.transport.protocol}")
     private String mailTransportProtocolProperty;
-    
+
     @Value("${input.encoding}")
     private String velocityInputEncodingProperty;
-    
+
     @Value("${output.encoding}")
     private String velocityOutputEncodingProperty;
-    
+
     @Value("${resource.loader}")
     private String velocityResourceLoaderProperty;
-    
+
     @Value("${class.resource.loader.class}")
     private String velocityClassResourceLoaderClassProperty;
-    
+
     @Bean
     public JavaMailSender mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -72,15 +72,16 @@ public class MailConfiguration {
         VelocityEngine velocityEngine = new VelocityEngine(velocityProperties);
         return velocityEngine;
     }
-    
+
     @Bean(name = "threadPoolTaskExecutor")
     public Executor threadPoolTaskExecutor() {
         return new ThreadPoolTaskExecutor();
     }
-    
+
     @Async("threadPoolTaskExecutor")
     public void asyncMethodWithConfiguredExecutor() {
         System.out.println("Execute method with configured executor - "
-          + Thread.currentThread().getName());
+                + Thread.currentThread().getName());
     }
+
 }

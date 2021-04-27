@@ -1,6 +1,7 @@
 package by.azot.asutp.rest.controllers;
 
 import by.azot.asutp.api.services.IUtilService;
+import by.azot.asutp.web.BookDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,15 @@ public class MainController {
     private IUtilService utilService;
 
     @GetMapping("/")
-    public String home() {
+    public String index() {
         return "index";
     }
-    
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -44,13 +50,16 @@ public class MainController {
         return "/error/403";
     }
 
-//    public ModelAndView search(@RequestParam(value = "isbn", required = false) String isbn) {
+    //    public ModelAndView search(@RequestParam(value = "isbn", required = false) String isbn) {
     @GetMapping("/book/{isbn}")
     public ModelAndView searchBook(@PathVariable String isbn) {
         ModelAndView modelAndView = new ModelAndView();
-        utilService.getBookByIsbn(isbn);
+        BookDetails details = utilService.getBookByIsbn(isbn);
+        modelAndView.setViewName("bookPage");
+        modelAndView.addObject("book", details);
         return modelAndView;
     }
+
     @GetMapping("/about")
     public String about() {
         return "about";
