@@ -36,8 +36,8 @@ public class UserController implements IControllerUrl {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(USERSPAGE);
         modelAndView.addObject("title", "Users:");
-        modelAndView.addObject(OBJECTUSERSLIST, users);
-        Pagination<UserDto> userDtoPagination = new Pagination<UserDto>(users, page, maxRecordPerPage, modelAndView);
+
+        Pagination<UserDto> userDtoPagination = new Pagination<UserDto>(users, page, maxRecordPerPage,OBJECTUSERSLIST, modelAndView);
         return userDtoPagination.getModelAndView();
     }
 

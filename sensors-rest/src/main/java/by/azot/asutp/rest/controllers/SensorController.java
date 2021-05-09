@@ -33,9 +33,8 @@ public class SensorController implements IControllerUrl {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(SENSORSPAGE);
         modelAndView.addObject("title", "Sensors:");
-        modelAndView.addObject(OBJECTSENSORSLIST, sensors);
 
-        Pagination<SensorDto> sensorDtoPagination = new Pagination<SensorDto>(sensors, page, maxRecordPerPage, modelAndView);
+        Pagination<SensorDto> sensorDtoPagination = new Pagination<SensorDto>(sensors, page, maxRecordPerPage,OBJECTSENSORSLIST, modelAndView);
         return sensorDtoPagination.getModelAndView();
     }
 

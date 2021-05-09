@@ -13,7 +13,7 @@ public class Pagination<T> {
 
     ModelAndView modelAndView;
 
-    public Pagination(List<T> objectList, int page, int maxRecordPerPage, ModelAndView modelAndView) {
+    public Pagination(List<T> objectList, int page, int maxRecordPerPage, String nameListObject, ModelAndView modelAndView) {
         int lastPage = (int) Math.ceil((double) objectList.size() / (double) maxRecordPerPage);
 
         if (objectList.size() >= maxRecordPerPage) {
@@ -22,6 +22,7 @@ public class Pagination<T> {
             lastRecord = lastRecord > objectList.size() ? objectList.size() : lastRecord;
             objectList = objectList.subList((page - 1) * maxRecordPerPage, lastRecord);
         }
+        modelAndView.addObject(nameListObject, objectList);
 
         modelAndView.addObject("prevPage", page <= 1 ? 1 : page - 1);
         modelAndView.addObject("page", page);
