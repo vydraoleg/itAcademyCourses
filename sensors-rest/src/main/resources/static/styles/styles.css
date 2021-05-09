@@ -29,7 +29,21 @@ td {
 	min-height: 25px;
 	height: 25px;
 }
+th {
+	line-height: 25px;
+	min-height: 25px;
+	height: 25px;
+}
 p {
 	margin-bottom: 0;
 }
-
+.table-secondary td{
+	line-height: 25px;
+	height: 25px;
+}
+.table-secondary.table-sm tr{
+	height: 25px;
+}
+.table-sm th, .table-sm td{
+	height: 25px;
+}

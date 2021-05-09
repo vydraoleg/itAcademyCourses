@@ -1,0 +1,39 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Users page</title>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
+    <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <script src="../../../../js/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header th:insert="blocks/header :: header"></header>
+    <div>
+        <h2>Add user</h2>
+    </div>
+    <div class="user-wrapper">
+        <form action="#" th:action="@{add}" th:object="${user}" method="post">
+            <p>User name<input id="userName" type="text" th:field="*{userName}" class="form-control" required/></p>
+            <p>Email<input id="email" type="text" th:field="*{email}" class="form-control" required/></p>
+            <p>Password<input id="password" type="password" th:field="*{password}" class="form-control" required/></p>
+            <p>First name<input id="firstName" type="text" th:field="*{firstName}" class="form-control" required/></p>
+            <p>Last name<input id="lastName" type="text" th:field="*{lastName}" class="form-control" required/></p>
+            <input type="submit" value="Submit" class="btn btn-success"/>
+        </form>
+
+        <tr><td>Sensor id is:</td>      <td><p class="h4" th:text="${sensor.id}"/>                </td>    </tr>
+        <tr><td>Name:</td>              <td><p class="h4" th:text="${sensor.name}"/></td>                  </tr>
+        <tr><td>Full name:</td>         <td><p class="h4" th:text="${sensor.fullName}"/></td>              </tr>
+        <tr><td>Measure:</td>           <td><p class="h4" th:text="${sensor.measure}"/></td>               </tr>
+        <tr><td>Date begin of use:</td> <td><p class="h4" th:text="${sensor.dateBegin}"/></td>             </tr>
+        <tr><td>Date end: of use:</td>  <td><p class="h4" th:text="${sensor.dateEnd}"/></td>               </tr>
+        <tr><td>Modified by:</td>       <td><p class="h4" th:text="${sensor.modifiedByUser}"/></td>        </tr>
+        <tr><td>Date modified:</td>     <td><p class="h4" th:text="${sensor.dateModified}"/></td>          </tr>
+
+    </div>
+    <div th:insert="blocks/footer :: footer"></div>
+</div>
+</body>
+</html>

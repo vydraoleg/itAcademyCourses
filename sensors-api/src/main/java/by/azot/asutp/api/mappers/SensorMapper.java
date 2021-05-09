@@ -10,11 +10,29 @@ import lombok.experimental.UtilityClass;
 public class SensorMapper {
 
     public Sensor mapSensor(SensorDto source) {
-        return Sensor.builder().id(source.getId()).fullName(source.getFullName()).build();
+        return Sensor.builder()
+                .id(source.getId())
+                .name(source.getName())
+                .fullName(source.getFullName())
+                .measure(source.getMeasure())
+                .dateBegin(source.getDateBegin())
+                .dateEnd(source.getDateEnd())
+                .modifiedByUser(source.getModifiedByUser())
+                .dateModified(source.getDateModified())
+                .build();
     }
 
     public SensorDto mapSensorDto(Sensor source) {
-        return SensorDto.builder().id(source.getId()).fullName(source.getFullName()).build();
+        return SensorDto.builder()
+                .id(source.getId())
+                .name(source.getName())
+                .fullName(source.getFullName())
+                .measure(source.getMeasure())
+                .dateBegin(source.getDateBegin())
+                .dateEnd(source.getDateEnd())
+                .modifiedByUser(source.getModifiedByUser())
+                .dateModified(source.getDateModified())
+                .build();
     }
 
     public List<Sensor> mapPets(List<SensorDto> source) {

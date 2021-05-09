@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${title}"/>
+    <title>Error happened!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="../../../../styles/styles.css" rel="stylesheet"/>
     <link href="../../../../../styles/bootstrap.css" rel="stylesheet"/>
@@ -10,13 +10,13 @@
 </head>
 <body>
 
-
 <div class="container">
-    <header th:insert="blocks/header :: headerfirst"></header>
-    <h1>About this program</h1>
+    <header th:insert="blocks/header :: header"></header>
+
+    <div th:remove="tag" th:utext="${exception}"></div>
+
     <div th:insert="blocks/footer :: footer"></div>
 </div>
-
 
 </body>
 </html>

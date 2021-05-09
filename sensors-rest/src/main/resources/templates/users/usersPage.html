@@ -1,0 +1,78 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
+    <script src="../../../../js/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header th:insert="blocks/header :: header"></header>
+    <div>
+        <h2 th:text="${title}"/>
+    </div>
+    <table class="table table-hover table-sm text-center">
+        <thead>
+        <tr>
+            <th scope="col">Row</th>
+            <th scope="col">NickName</th>
+            <th scope="col">Email</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Link</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="oneuser : ${usersList}" class="table-secondary table-sm">
+            <td scope="row"></td>
+            <td><p th:text="${oneuser.userName}"/></td>
+            <td><p th:text="${oneuser.email}"/></td>
+            <td><p th:text="${oneuser.firstName}"/></td>
+            <td><p th:text="${oneuser.lastName}"/></td>
+            <td><a th:href="@{'/users/'+${oneuser.id}}" type="button" class="btn btn-info btn-sm">More info</a></td>
+            <td><a th:href="@{'/users/upd/' + ${oneuser.id}}" class="btn btn-success btn-sm">Edit</a></td>
+            <td>
+                <form th:action="@{'/users/remove/' + ${oneuser.id}}" method="post" class="m-auto">
+                    <input type="submit" value="Remove" class="btn btn-danger btn-sm">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tr>
+            <td valign="left" width="90%"><a class="btn btn-primary" href="/users/add">Add new user</a></td>
+            <td valign="right">
+                <div>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/users/page=1">&laquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/users/page=' + ${prevPage}}">&lt;</a>
+                        </li>
+                        <li class="page-item active">
+                            <p class="page-link" th:text="${page}"/></p>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/users/page=' + ${nextPage}}">&gt;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/users/page=' + ${lastPage}}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+</body>
+</html>

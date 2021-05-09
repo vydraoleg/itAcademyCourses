@@ -1,9 +1,6 @@
 package by.azot.asutp.entities;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,13 +42,14 @@ public class User extends AEntity<Long> {
     @Column(name = "enabled")
     private int enabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name = "sen_user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
-    
+    private Set<Role> roles;
+
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -59,6 +57,7 @@ public class User extends AEntity<Long> {
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -66,6 +65,7 @@ public class User extends AEntity<Long> {
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -73,6 +73,7 @@ public class User extends AEntity<Long> {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -80,24 +81,31 @@ public class User extends AEntity<Long> {
     public int getEnabled() {
         return enabled;
     }
+
     public void setEnabled(int enabled) {
         this.enabled = enabled;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         if (roles == null) {
-            roles = new ArrayList<>();
+            roles = new HashSet<>();
         }
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    
+
+    public void setRole(Role role) {
+        if (this.roles.isEmpty()) this.roles = new HashSet<Role>();
+        this.roles.add(role);
+    }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }

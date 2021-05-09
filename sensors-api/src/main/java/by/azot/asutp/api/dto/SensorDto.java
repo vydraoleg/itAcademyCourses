@@ -25,6 +25,4 @@ public class SensorDto {
     private String measure;
     private Long modifiedByUser;
     private Date dateModified;
-
-    //    private UserDto user;
 }

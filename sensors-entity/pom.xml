@@ -9,7 +9,7 @@
     </parent>
     <artifactId>sensors-entity</artifactId>
     <properties>
-        <version>${project.version}</version>
+        <version>0.0.1</version>
         <java.version>${project.java.version}</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -29,10 +29,13 @@ public class EmailSender implements IEmailSender {
     @Autowired
     private JavaMailSender mailSender;
 
+    // https://www.google.com/settings/security/lesssecureapps
+
     @Async
     @Override
     public void sendEmailToAdmin(UserDto dto, int status) throws Exception {
-        Integer i = 0;
+        int i=0;
+        i++;
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         String statusValue = (status == 1) ? "activate" : "deactivate";

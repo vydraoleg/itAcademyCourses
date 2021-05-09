@@ -2,6 +2,7 @@ package by.azot.asutp.rest.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import by.azot.asutp.rest.api.IControllerUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +21,7 @@ import by.azot.asutp.api.services.IUserService;
 
 @Controller
 @RequestMapping(value = "/signup")
-public class SignupController {
+public class SignupController implements IControllerUrl {
 
     @Autowired
     private IUserService userService;

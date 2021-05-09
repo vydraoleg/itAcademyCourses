@@ -2,6 +2,8 @@ package by.azot.asutp.services.services;
 
 import java.util.List;
 
+import by.azot.asutp.api.dto.UserDto;
+import by.azot.asutp.api.mappers.UserMapper;
 import by.azot.asutp.api.services.ISensorService;
 import by.azot.asutp.entities.Role;
 import by.azot.asutp.entities.Sensor;
@@ -22,6 +24,11 @@ public class SensorService implements ISensorService {
     public SensorDto findSensor(Long id) {
         Sensor sensor = this.sensorDao.findById(id).orElse(null);
         return (sensor != null ) ? SensorMapper.mapSensorDto(sensor) : null;
+    }
+
+    @Override
+    public SensorDto findSensorByName(String sensorName) {
+        return SensorMapper.mapSensorDto(this.sensorDao.findByName(sensorName));
     }
 
     @Override

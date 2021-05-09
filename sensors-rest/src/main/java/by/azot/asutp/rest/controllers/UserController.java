@@ -1,8 +1,11 @@
 package by.azot.asutp.rest.controllers;
 
+import by.azot.asutp.api.dto.SensorDto;
 import by.azot.asutp.api.dto.UserDto;
 import by.azot.asutp.api.services.IUserService;
-import by.azot.asutp.utils.mail.EmailSender;
+import by.azot.asutp.api.utils.IEmailSender;
+import by.azot.asutp.rest.api.IControllerUrl;
+import by.azot.asutp.rest.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,15 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping(IControllerUrl.USERS)
+public class UserController implements IControllerUrl {
+
 
     @Value("${server.max-records-per-page}")
     private int maxRecordPerPage;
@@ -27,101 +27,88 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IEmailSender emailSender;
 
-    @GetMapping(value = "/page={page}")
-    public ModelAndView findUsers(@PathVariable int page) {
+    @GetMapping(value = PAGE)
+    public ModelAndView showUsers(@PathVariable int page) {
         List<UserDto> users = userService.getUsers();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("usersPage");
-        modelAndView.addObject("title", "My Users:");
-        modelAndView.addObject("page", page);
-        modelAndView.addObject("allPages", users.size());
-        if (users.size() < maxRecordPerPage)
-            modelAndView.addObject("usersList", users);
-        else {
-            if (users.size() < page * maxRecordPerPage && users.size() > maxRecordPerPage)
-                page = users.size() / maxRecordPerPage;
-            List<UserDto> usersList = new ArrayList<UserDto>(users.subList((page - 1) * maxRecordPerPage, page * maxRecordPerPage));
-            modelAndView.addObject("usersList", usersList);
-        }
-        return modelAndView;
+        modelAndView.setViewName(USERSPAGE);
+        modelAndView.addObject("title", "Users:");
+        modelAndView.addObject(OBJECTUSERSLIST, users);
+        Pagination<UserDto> userDtoPagination = new Pagination<UserDto>(users, page, maxRecordPerPage, modelAndView);
+        return userDtoPagination.getModelAndView();
     }
 
     @GetMapping
-    public ModelAndView findUsersFirstPage() {
-        return this.findUsers(1);
+    public ModelAndView showUsersFirstPage() {
+        return this.showUsers(1);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = FINDID)
     public ModelAndView findUser(@PathVariable Long id) {
         UserDto userDto = userService.findUser(id);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userPage");
-        modelAndView.addObject("user", userDto);
+        modelAndView.setViewName(USERPAGE);
+        modelAndView.addObject(OBJECTUSER, userDto);
         return modelAndView;
     }
 
-    @GetMapping(value = "/name/{firstName}")
+    @GetMapping(value = FIRSTNAME)
     public ModelAndView findUserByFirstName(@PathVariable String firstName) {
         UserDto userDto = userService.findUserByFirstName(firstName);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userPage");
-        modelAndView.addObject("user", userDto);
+        modelAndView.setViewName(USERPAGE);
+        modelAndView.addObject(OBJECTUSER, userDto);
         return modelAndView;
     }
 
     //===============create=================
 
-    @GetMapping(value = "/add")
+    @GetMapping(value = ADDPAGE)
     public ModelAndView createUser() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("usersFormPage");
-        modelAndView.addObject("user", new UserDto());
+        modelAndView.setViewName(USERFORMPAGE);
+        modelAndView.addObject(OBJECTUSER, new UserDto());
         modelAndView.addObject("title", "Add new user");
         return modelAndView;
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = ADDPAGE)
     public String createUserSubmit(UserDto user, Model model) {
-//        UserDto userDto = this.userService.createUser(user);
+        UserDto userDto = this.userService.createUser(user);
         this.SendEmailAdmin(user);
-        return "redirect:/users";
+        return REDIRECTUSERS;
     }
 
     //===============update=================
 
-    @GetMapping(value = "/upd/{id}")
+    @GetMapping(value = UPDATEID)
     public ModelAndView updateUser(@PathVariable(value = "id") long id) {
         UserDto userDto = userService.findUser(id);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("usersFormPageUpd");
-        modelAndView.addObject("user", userDto);
+        modelAndView.setViewName(USERPAGEUPDATE);
+        modelAndView.addObject(OBJECTUSER, userDto);
         modelAndView.addObject("title", "Update user:");
         return modelAndView;
     }
 
-    @PostMapping(value = "/upd/{id}")
+    @PostMapping(value = UPDATEID)
     public String updateUser(@PathVariable(value = "id") long id, UserDto user, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         this.userService.updateUser(id, user, file);
-        return "redirect:/users";
+        return REDIRECTUSERS;
     }
 
-    @PostMapping("/remove/{id}")
+    @PostMapping(REMOVEID)
     public String deleteUserPost(@PathVariable(value = "id") long id, Model model) {
         this.userService.deleteUser(id);
-        return "redirect:/users";
-    }
-
-    @GetMapping("/remove/{id}")
-    public String deleteUser(@PathVariable(value = "id") long id, Model model) {
-        this.userService.deleteUser(id);
-        return "redirect:/users";
+        return REDIRECTUSERS;
     }
 
     public void SendEmailAdmin(UserDto user) {
         try {
-            EmailSender myMailSender = new EmailSender();
-            myMailSender.sendEmailToAdmin(user, 1);
+            emailSender.sendEmailToAdmin(user, 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
