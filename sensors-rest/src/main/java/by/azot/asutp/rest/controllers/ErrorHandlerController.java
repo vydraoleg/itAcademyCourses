@@ -19,7 +19,7 @@ public class ErrorHandlerController implements ErrorController {
     @ResponseBody
     public ModelAndView handleError(HttpServletRequest request) {
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");  //<html><body>
+        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", String.format("<h2>Error Page</h2><div>Status code: <b>%s</b></div>"

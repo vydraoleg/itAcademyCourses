@@ -1,5 +1,6 @@
 package by.azot.asutp.rest.utils;
 
+import by.azot.asutp.rest.api.IControllerUrl;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -9,18 +10,19 @@ import java.util.List;
  *
  * @param <T>
  */
-public class Pagination<T> {
+public class Pagination<T> implements IControllerUrl {
 
     ModelAndView modelAndView;
 
-    public Pagination(List<T> objectList, int page, int maxRecordPerPage, String nameListObject, ModelAndView modelAndView) {
-        int lastPage = (int) Math.ceil((double) objectList.size() / (double) maxRecordPerPage);
+    public Pagination(List<T> objectList, int page, String nameListObject, ModelAndView modelAndView) {
 
-        if (objectList.size() >= maxRecordPerPage) {
-            if (objectList.size() < page * maxRecordPerPage) page = lastPage;
-            int lastRecord = page * maxRecordPerPage;
+        int lastPage = (int) Math.ceil((double) objectList.size() / (double) MAXRECORDPERPAGE);
+
+        if (objectList.size() >= MAXRECORDPERPAGE) {
+            if (objectList.size() < page * MAXRECORDPERPAGE) page = lastPage;
+            int lastRecord = page * MAXRECORDPERPAGE;
             lastRecord = lastRecord > objectList.size() ? objectList.size() : lastRecord;
-            objectList = objectList.subList((page - 1) * maxRecordPerPage, lastRecord);
+            objectList = objectList.subList((page - 1) * MAXRECORDPERPAGE, lastRecord);
         }
         modelAndView.addObject(nameListObject, objectList);
 

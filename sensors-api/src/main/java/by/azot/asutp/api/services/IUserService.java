@@ -13,7 +13,7 @@ public interface IUserService {
 
     UserDto findUser(Long id);
     
-    UserDto findUserByFirstName(String firstName);
+    UserDto findUserByUserName(String firstName);
     
     UserDto createUser(UserDto user);
     

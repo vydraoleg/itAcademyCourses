@@ -98,7 +98,7 @@ public class User extends AEntity<Long> {
     }
 
     public void setRole(Role role) {
-        if (this.roles.isEmpty()) this.roles = new HashSet<Role>();
+        if (this.roles == null)  this.roles = new HashSet<Role>();
         this.roles.add(role);
     }
 

@@ -6,23 +6,26 @@
     <script src="../../../../js/jquery.min.js"></script>
     <script src="../../../../js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
 
+<body>
 <div class="container">
     <header th:insert="blocks/header :: header"></header>
     <div>
         <h1 th:text="${title}"/>
     </div>
-    <div class="card border-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">personal page</div>
+    <div class="card border-primary mb-3" style="max-width: 30rem;">
+        <div class="card-header">sensor page</div>
         <div class="card-body">
-            <form th:object="${user}" method="post" enctype="multipart/form-data">
-                <p>User name<input id="userName" type="text" th:field="*{userName}" class="form-control" placeholder="Username" required/></p>
-                <p>Email<input id="email" type="text" th:field="*{email}" class="form-control" placeholder="email" required/></p>
-                <p>First name<input id="firstName" type="text" th:field="*{firstName}" class="form-control" placeholder="firstname" /></p>
-                <p>Last name<input id="lastName" type="text" th:field="*{lastName}" class="form-control" placeholder="lastname" required/></p>
+            <form th:object="${sensor}" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr><td>Name:</td>              <td><input class="form-control h4" type="text" id="name" th:field="*{name}"    required /></td> </tr>
+                    <tr><td>Full name:</td>         <td><input class="form-control h4" type="text" id="fullName"  th:field="*{fullName}"  required/></td> </tr>
+                    <tr><td>Measure:</td>           <td><input class="form-control h4" type="text" id="measure"   th:field="*{measure}"   required/></td> </tr>
+                    <tr><td>Date begin of use:</td> <td><input class="form-control h4" type="text" id="dateBegin" th:field="*{dateBegin}" placeholder="yyyy-mm-dd" required /></td> </tr>
+                    <tr><td>Date end of use:</td>   <td><input class="form-control h4" type="text" id="dateEnd"   th:field="*{dateEnd}"   placeholder="yyyy-mm-dd" required/></td> </tr>
+                </table>
                 <input id="my-file-selector" name="file" type="file"/>
-                <br />
+                <br/>
                 <input type="submit" value="Submit" class="btn btn-success"/>
             </form>
             <br/>
@@ -32,7 +35,3 @@
 </div>
 </body>
 </html>
-
-<!--            <div th:each="el : ${post}">-->
-<!--                <form method="post">-->
-<!--                <form action="#" th:action="@{upd}" th:object="${user}" method="post" enctype="multipart/form-data">-->

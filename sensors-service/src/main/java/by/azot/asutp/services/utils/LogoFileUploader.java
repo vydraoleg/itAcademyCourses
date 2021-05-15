@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import by.azot.asutp.api.dto.UserDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -20,32 +19,35 @@ public class LogoFileUploader {
     private static final String IMAGE_EXTENSION = ".jpg";
     private static final String LOGOS_FOLDER_PATH = "classpath:static/images/";
 
-    public void updateOrCreateLogo(MultipartFile file, UserDto dto) throws IOException {
+    public void updateOrCreateLogo(MultipartFile file, String fileName) throws IOException {
         if (file != null && !file.isEmpty()) {
-            String userName = dto.getUserName();
-            String filePath = new StringBuilder(LOGOS_FOLDER_PATH).append(userName).append(IMAGE_EXTENSION)
+//            String userName = fileName;
+            String filePath = new StringBuilder(LOGOS_FOLDER_PATH).append(fileName).append(IMAGE_EXTENSION)
                     .toString();
-            File userLogo;
+            File fileLogo;
             try {
-                userLogo = ResourceUtils.getFile(filePath);
+                fileLogo = ResourceUtils.getFile(filePath);
             } catch (FileNotFoundException e) {
                 URL fileUrl = ResourceUtils.getURL(LOGOS_FOLDER_PATH);
-                userLogo = new File(
-                        new StringBuilder(fileUrl.getPath()).append(userName).append(IMAGE_EXTENSION).toString());
+                fileLogo = new File(
+                        new StringBuilder(fileUrl.getPath()).append(fileName).append(IMAGE_EXTENSION).toString());
             }
-            Path path = Paths.get(userLogo.getPath());
+            Path path = Paths.get(fileLogo.getPath());
             byte[] bytes = file.getBytes();
             Files.write(path, bytes);
         }
     }
 
-    public void updateLogo(MultipartFile file, UserDto dto) throws IOException {
+    public void updateLogo(MultipartFile file, String fileName) throws IOException {
         if (file != null && !file.isEmpty()) {
-            File existingFile = ResourceUtils.getFile(new StringBuilder(LOGOS_FOLDER_PATH).append(dto.getUserName())
+            File existingFile = ResourceUtils.getFile(new StringBuilder(LOGOS_FOLDER_PATH).append(fileName)
                     .append(IMAGE_EXTENSION).toString());
             Path path = Paths.get(existingFile.getPath());
             byte[] bytes = file.getBytes();
             Files.write(path, bytes);
         }
     }
+
+
+
 }

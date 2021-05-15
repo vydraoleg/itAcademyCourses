@@ -1,13 +1,11 @@
 package by.azot.asutp.rest.controllers;
 
-import by.azot.asutp.api.dto.SensorDto;
 import by.azot.asutp.api.dto.UserDto;
 import by.azot.asutp.api.services.IUserService;
 import by.azot.asutp.api.utils.IEmailSender;
 import by.azot.asutp.rest.api.IControllerUrl;
 import by.azot.asutp.rest.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +17,6 @@ import java.util.List;
 @Controller
 @RequestMapping(IControllerUrl.USERS)
 public class UserController implements IControllerUrl {
-
-
-    @Value("${server.max-records-per-page}")
-    private int maxRecordPerPage;
 
     @Autowired
     private IUserService userService;
@@ -37,7 +31,7 @@ public class UserController implements IControllerUrl {
         modelAndView.setViewName(USERSPAGE);
         modelAndView.addObject("title", "Users:");
 
-        Pagination<UserDto> userDtoPagination = new Pagination<UserDto>(users, page, maxRecordPerPage,OBJECTUSERSLIST, modelAndView);
+        Pagination<UserDto> userDtoPagination = new Pagination<UserDto>(users, page, OBJECTUSERSLIST, modelAndView);
         return userDtoPagination.getModelAndView();
     }
 
@@ -56,15 +50,15 @@ public class UserController implements IControllerUrl {
     }
 
     @GetMapping(value = FIRSTNAME)
-    public ModelAndView findUserByFirstName(@PathVariable String firstName) {
-        UserDto userDto = userService.findUserByFirstName(firstName);
+    public ModelAndView findUserByFirstName(@PathVariable String userName) {
+        UserDto userDto = userService.findUserByUserName(userName);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(USERPAGE);
         modelAndView.addObject(OBJECTUSER, userDto);
         return modelAndView;
     }
 
-    //===============create=================
+    // create user
 
     @GetMapping(value = ADDPAGE)
     public ModelAndView createUser() {

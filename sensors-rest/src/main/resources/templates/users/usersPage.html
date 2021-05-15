@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr th:each="oneuser : ${usersList}" class="table-secondary table-sm">
-            <td scope="row"></td>
+            <td><p th:text="${oneuser.id}"/></td>
             <td><p th:text="${oneuser.userName}"/></td>
             <td><p th:text="${oneuser.email}"/></td>
             <td><p th:text="${oneuser.firstName}"/></td>

@@ -35,7 +35,7 @@ public class SensorMapper {
                 .build();
     }
 
-    public List<Sensor> mapPets(List<SensorDto> source) {
+    public List<Sensor> mapSensors(List<SensorDto> source) {
         return source.stream().map(SensorMapper::mapSensor).collect(Collectors.toList());
     }
     

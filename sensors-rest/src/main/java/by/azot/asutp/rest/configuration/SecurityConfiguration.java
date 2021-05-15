@@ -8,7 +8,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -19,9 +20,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
+
     @Autowired
     private DataSource dataSource;
-    
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -30,9 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+//        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
 
-/*
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/signup/**", "/js/**", "/styles/**", "/images/**", "/about/**", "/rest/**", "/error/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login")
@@ -41,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
         ;
-*/
+
     }
 
     @Autowired
@@ -51,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "SELECT u.name as username, r.name as role FROM sen_user u INNER JOIN sen_user_role ur ON u.id = ur.user_id INNER JOIN sen_role r ON ur.role_id = r.id WHERE u.name = ?")
                 .usersByUsernameQuery("select name, password, enabled from sen_user where email = ?");
     }
+
 
     /**
      * https://medium.com/@viraj.rajaguru/how-to-use-spring-security-to-authenticate-with-microsoft-active-directory-1caff11c57f2
@@ -63,5 +65,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
      */
 
+    @Autowired
+    public String currentUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null)
+            return authentication.getName();
+        else
+            return "";
+    }
 
 }

@@ -42,7 +42,6 @@ comment on table  sen_user_role is 'Table relations between USER and ROLE';
 ALTER TABLE sen_user_role
 ADD CONSTRAINT sen_user_role_pk PRIMARY KEY (user_id, role_id);
 
-
 ALTER TABLE sen_user_role
 ADD CONSTRAINT sen_user_role_fk_user FOREIGN KEY (user_id)
 REFERENCES sen_user (id)
@@ -279,3 +278,67 @@ CREATE TRIGGER sen_role_if_modified_trg
 CREATE TRIGGER sen_sensor_if_modified_trg 
  AFTER INSERT OR UPDATE OR DELETE ON sen_sensor
  FOR EACH ROW EXECUTE PROCEDURE if_modified_func();
+
+
+CREATE TRIGGER sen_user_if_update_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON sen_user
+ FOR EACH ROW EXECUTE PROCEDURE if_modified_table();
+
+CREATE TRIGGER sen_role_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON sen_role
+ FOR EACH ROW EXECUTE PROCEDURE if_modified_table();
+
+CREATE TRIGGER sen_sensor_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON sen_sensor
+ FOR EACH ROW EXECUTE PROCEDURE if_modified_table();
+
+
+
+CREATE OR REPLACE FUNCTION if_modified_table() RETURNS trigger AS $body$
+BEGIN
+    new.date_modified:= NOW();
+    new.date_modified:= user;
+END;
+$body$
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = pg_catalog, public;         
+
+drop view sen_vbal_sen_show;
+
+create or replace view sen_vbal_sen_show as 
+
+select sb.id balance_id, sb.name name_balance, 
+      ss.id id, ss.name name_sensor, 
+      ss.full_name full_name,
+      sss.date_value as date_value,
+      sss.value as value
+from sen_balance_sensor sbs 
+       join sen_balance sb on sb.id = sbs.balance_id 
+       join sen_sensor ss on ss.id =sbs.sensor_id
+       left join ( select * from sen_sensor_show where date_value = '2021-04-12' ) sss 
+       on ss.id = sss.sensor_id 
+    
+    
+select balance_id, name_balance,  id,  name_sensor,  full_name,
+      date_value, value from sen_vbal_sen_show;
+
+select svss.balance_id, svss.name_balance, svss.id, svss.name_sensor, svss.full_name, sss.date_value , sss.value 
+ from sen_vbal_sen_show svss 
+ left join ( select * from sen_sensor_show where date_value = '2021-04-12') sss 
+ on svss.id = sss.sensor_id      
+     
+select * from sen_sensor_show where date_value = '2021-04-12'       
+      
+ 
+select svss.balance_id, svss.name_balance, svss.id, svss.name_sensor, svss.full_name, 
+             sss.date_value , sss.value from sen_vbal_sen_show svss 
+             left join (select * from sen_sensor_show where date_value = '2021-04-12') sss 
+             on svss.id = sss.sensor_id
+
+commit 
+
+
+
+
+

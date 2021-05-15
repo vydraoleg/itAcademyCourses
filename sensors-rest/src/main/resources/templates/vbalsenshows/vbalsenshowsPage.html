@@ -1,0 +1,75 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
+    <script src="../../../../js/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header th:insert="blocks/header :: header"></header>
+    <div>
+        <h2 th:text="${title}"/>
+    </div>
+    <table class="table table-hover table-sm text-center">
+        <thead>
+        <tr>
+            <th scope="col">id Balance</th>
+            <th scope="col">Name Balance</th>
+            <th scope="col">id Sensor</th>
+            <th scope="col">Name Sensor</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Value</th>
+<!--            <th scope="col">More info</th>-->
+<!--            <th scope="col">Remove</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="one : ${vbalsenshowsList}" class="table-secondary table-sm">
+            <td><p th:text="${one.idBalance}"/></td>
+            <td><p th:text="${one.nameBalance}"/></td>
+            <td><p th:text="${one.id}"/></td>
+            <td><p th:text="${one.nameSensor}"/></td>
+            <td><p th:text="${one.fullSensor}"/></td>
+            <td><p th:text="${one.value}"/></td>
+<!--            <td><a th:href="@{'/vbalsenshows/'+${one.id}}" type="button" class="btn btn-info btn-sm">More info</a></td>-->
+<!--            <td> <form th:action="@{'/vbalsenshows/remove/' + ${one.idBalance}+'&'+${one.id}}" method="post" class="m-auto">-->
+<!--                    <input type="submit" value="Remove" class="btn btn-danger btn-sm">-->
+<!--                </form>  </td>-->
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tr>
+            <td valign="right">
+                <div>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/vbalsenshows/page=1">&laquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/vbalsenshows/page=' + ${prevPage}}">&lt;</a>
+                        </li>
+                        <li class="page-item active">
+                            <p class="page-link" th:text="${page}"/></p>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/vbalsenshows/page=' + ${nextPage}}">&gt;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/vbalsenshows/page=' + ${lastPage}}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+</body>
+</html>

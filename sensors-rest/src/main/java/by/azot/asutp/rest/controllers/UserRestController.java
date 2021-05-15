@@ -29,8 +29,8 @@ public class UserRestController  implements IControllerUrl {
     }
     
     @GetMapping(value = FIRSTNAME)
-    public UserDto findUserByFirstName(@PathVariable String firstName) {
-        return userService.findUserByFirstName(firstName);
+    public UserDto findUserByUserName(@PathVariable String userName) {
+        return userService.findUserByUserName(userName);
     }
     
     @PostMapping(value = UPDATEID)

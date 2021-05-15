@@ -6,6 +6,7 @@ import by.azot.asutp.api.dto.UserDto;
 import by.azot.asutp.api.dto.UserRoleIdsDto;
 import by.azot.asutp.api.mappers.UserMapper;
 import by.azot.asutp.api.services.IUserService;
+import by.azot.asutp.dao.UserDao;
 import by.azot.asutp.entities.Role;
 import by.azot.asutp.entities.User;
 import by.azot.asutp.services.utils.LogoFileUploader;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,6 +27,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserJPADao userJPADao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private IRoleJPADao roleJPADao;
@@ -39,11 +44,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDto findUserByFirstName(String username) {
-        return UserMapper.mapUserDto(this.userJPADao.findByUserName(username));
+    public UserDto findUserByUserName(String username) {
+//        return UserMapper.mapUserDto(this.userJPADao.findByUserName(username));
+        return UserMapper.mapUserDto(this.userDao.getByName(username));
     }
 
     @Override
+    @Transactional
     public UserDto createUser(UserDto userDto) {
         User user = new User();
         user.setUserName(userDto.getUserName());
@@ -57,28 +64,28 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void updateUser(String userName, UserDto userDto, MultipartFile file) {
         updateUser(this.userJPADao.findByUserName(userName), userDto, file);
     }
 
     @Override
+    @Transactional
     public void updateUser(Long id, UserDto userDto, MultipartFile file) {
         updateUser(this.userJPADao.findById(id).get(), userDto, file);
     }
 
+    @Transactional
     private void updateUser(User user, UserDto userDto, MultipartFile file) {
         if (user != null) {
-            user.setUserName(userDto.getUserName());
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
-            user.setEmail(userDto.getEmail());
+            user=UserMapper.mapUser(userDto);
             if (userDto.getPassword().trim().length()>0)
                 user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             this.userJPADao.save(user);
         }
         if (!file.isEmpty()) {
             try {
-                LogoFileUploader.updateOrCreateLogo(file, userDto);
+                LogoFileUploader.updateOrCreateLogo(file, userDto.getUserName());
             } catch (IOException e) {
                 log.error("Failed to upload image. Error message: {}", e.getMessage());
             }
@@ -86,18 +93,18 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void updateUser(Long id, UserDto userDto) {
         User user = this.userJPADao.findById(id).orElse(null);
         if (user != null) {
-            user.setUserName(userDto.getUserName());
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
-            user.setEmail(userDto.getLastName());
+            user = UserMapper.mapUser(userDto);
+            user.setId(id);
             this.userJPADao.save(user);
         }
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
         this.userJPADao.deleteById(id);
     }
@@ -108,6 +115,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void assignRoleToUser(UserRoleIdsDto ids) {
         User user = this.userJPADao.findById(ids.getUserId()).orElse(null);
         Role role = this.roleJPADao.findById(ids.getRoleId()).orElse(null);

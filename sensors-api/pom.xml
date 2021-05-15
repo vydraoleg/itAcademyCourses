@@ -9,20 +9,17 @@
 	</parent>
 	<artifactId>sensors-api</artifactId>
 	<properties>
-		<version>0.0.1</version>
 		<java.version>${project.java.version}</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>by.azot.asutp.sensors</groupId>
-			<artifactId>sensors-entity</artifactId>
-			<version>0.0.1</version>
+			<artifactId>sensors-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>by.azot.asutp.sensors</groupId>
-			<artifactId>sensors-web</artifactId>
-			<version>0.0.1</version>
+			<artifactId>sensors-entity</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -36,11 +33,6 @@
         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
 		</dependency>
     </dependencies>
 </project>
