@@ -32,7 +32,7 @@ public class VBalSenShowController implements IControllerUrl {
         List<VBalSenShowDto> vBalSenShow = vBalSenShowService.getVBalSenShow(Date.valueOf(stringDate) );
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(VBALSENSHOWSPAGE);
-        modelAndView.addObject("title", "Balances:");
+        modelAndView.addObject("title", vBalSenShow.get(0).getNameBalance());
 
         Pagination<VBalSenShowDto> vBalSenShowDtoPagination = new Pagination<VBalSenShowDto>(vBalSenShow, page, OBJECTVBALSENSHOWSLIST, modelAndView);
         return vBalSenShowDtoPagination.getModelAndView();

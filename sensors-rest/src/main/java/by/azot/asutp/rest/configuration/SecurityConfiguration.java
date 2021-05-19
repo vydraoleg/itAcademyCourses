@@ -33,9 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
-
+//
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/signup/**", "/js/**", "/styles/**", "/images/**", "/about/**", "/rest/**", "/error/**").permitAll()
+                .antMatchers("/", "/signup/**", "/js/**", "/styles/**", "/images/**", "/rest/**", "/about/**", "/error/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/home", true)
                 .permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)

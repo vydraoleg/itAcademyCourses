@@ -89,8 +89,8 @@ public class UserController implements IControllerUrl {
     }
 
     @PostMapping(value = UPDATEID)
-    public String updateUser(@PathVariable(value = "id") long id, UserDto user, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
-        this.userService.updateUser(id, user, file);
+    public String updateUser(@PathVariable(value = "id") long id, UserDto userDto, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+        this.userService.updateUser(id, userDto, file);
         return REDIRECTUSERS;
     }
 

@@ -1,0 +1,80 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
+    <script src="../../../../js/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header th:insert="blocks/header :: header"></header>
+    <div>
+        <h2 th:text="${title}"/>
+    </div>
+    <table class="table table-hover table-sm text-center">
+        <thead>
+        <tr>
+            <th>Row</th>
+            <th>Name</th>
+            <th>Date begin</th>
+            <th>Date end</th>
+            <th>Modified by</th>
+            <th>Date modified</th>
+            <th>Link</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="oneobj : ${balancesList}" class="table-secondary table-sm">
+            <td><p th:text="${oneobj.id}"/></td>
+            <td><p th:text="${oneobj.name}"/></td>
+            <td><p th:text="${oneobj.dateBegin}"/></td>
+            <td><p th:text="${oneobj.dateEnd}"/></td>
+            <td><p th:text="${oneobj.modifiedByUser}"/></td>
+            <td><p th:text="${oneobj.dateModified}"/></td>
+            <td><a th:href="@{'/balances/'+${oneobj.id}}" type="button" class="btn btn-info btn-sm">More info</a></td>
+            <td><a th:href="@{'/balances/upd/' + ${oneobj.id}}" class="btn btn-success btn-sm">Edit</a></td>
+            <td>
+                <form th:action="@{'/balances/remove/' + ${oneobj.id}}" method="post" class="m-auto">
+                    <input type="submit" value="Remove" class="btn btn-danger btn-sm">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tr>
+            <td valign="left" width="90%"><a class="btn btn-primary" href="/sensors/add">Add new balance</a></td>
+            <td valign="right">
+                <div>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/balances/page=1">&laquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/balances/page=' + ${prevPage}}">&lt;</a>
+                        </li>
+                        <li class="page-item active">
+                            <p class="page-link" th:text="${page}"/></p>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/balances/page=' + ${nextPage}}">&gt;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/balances/page=' + ${lastPage}}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+</body>
+</html>

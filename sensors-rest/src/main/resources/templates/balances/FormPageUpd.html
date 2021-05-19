@@ -1,0 +1,35 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Users page</title>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
+    <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <script src="../../../../js/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <header th:insert="blocks/header :: header"></header>
+    <div>
+        <h1 th:text="${title}"/>
+    </div>
+    <div class="card border-primary mb-3" style="max-width: 30rem;">
+        <div class="card-header">Balance page</div>
+        <div class="card-body">
+            <form th:object="${balance}" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr><td>Name:</td>       <td><input class="form-control h4" type="text" id="name" th:field="*{name}"    required /></td> </tr>
+                    <tr><td>Date begin:</td> <td><input class="form-control h4" type="text" id="dateBegin" th:field="*{dateBegin}" placeholder="yyyy-mm-dd" required /></td> </tr>
+                    <tr><td>Date end:</td>   <td><input class="form-control h4" type="text" id="dateEnd"   th:field="*{dateEnd}"   placeholder="yyyy-mm-dd" required/></td> </tr>
+                </table>
+                <input id="my-file-selector" name="file" type="file"/>
+                <br/>
+                <input type="submit" value="Submit" class="btn btn-success"/>
+            </form>
+            <br/>
+        </div>
+    </div>
+    <div th:insert="blocks/footer :: footer"></div>
+</div>
+</body>
+</html>

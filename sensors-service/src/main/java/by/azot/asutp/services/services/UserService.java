@@ -78,9 +78,12 @@ public class UserService implements IUserService {
     @Transactional
     private void updateUser(User user, UserDto userDto, MultipartFile file) {
         if (user != null) {
+            String pw = user.getPassword();
             user=UserMapper.mapUser(userDto);
-            if (userDto.getPassword().trim().length()>0)
+            if (userDto.getPassword()!=null)
                 user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            else
+                user.setPassword(pw);
             this.userJPADao.save(user);
         }
         if (!file.isEmpty()) {

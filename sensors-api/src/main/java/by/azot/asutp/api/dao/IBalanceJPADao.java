@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IBalanceJPADao extends JpaRepository<Balance, Long> {
 
+    Balance findByName(String balanceName);
 }

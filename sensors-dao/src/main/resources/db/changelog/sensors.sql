@@ -336,7 +336,19 @@ select svss.balance_id, svss.name_balance, svss.id, svss.name_sensor, svss.full_
              left join (select * from sen_sensor_show where date_value = '2021-04-12') sss 
              on svss.id = sss.sensor_id
 
-commit 
+commit; 
+/
+
+
+select sensor_id, date_value, value, 
+lag(value) over(partition by sensor_id order by date_value ) lg,
+lag(date_value) over(partition by sensor_id order by date_value ) ld,
+case date_value-1 
+	when lag(date_value) over(partition by sensor_id order by date_value ) 
+	then lag(value) over(partition by sensor_id order by date_value )
+	else null
+end as prev
+from sen_sensor_show order by date_value desc, sensor_id; 
 
 
 

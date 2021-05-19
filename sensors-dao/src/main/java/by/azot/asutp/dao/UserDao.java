@@ -22,15 +22,9 @@ public class UserDao extends AGenericDao<User> implements IUserDao {
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
             CriteriaQuery<User> query = builder.createQuery(getGenericClass());   //User.class
             Root<User> userRoot = query.from(getGenericClass());
-            query.select(userRoot).where(builder.equal(userRoot.get("name"), userName));
+            query.where(builder.and(builder.equal(userRoot.get("userName"), userName)));
             TypedQuery<User> result = entityManager.createQuery(query);
-
-//            query.where(builder.and(builder.equal(userRoot.get("userName"), userName)));
-//            List<User> userList = result.getResultList();
-//            return koKurList.isEmpty() ? Optional.empty() : Optional.of(koKurList.get(0));
-
             return result.getSingleResult();
-
         } catch (NoResultException e) {
             throw new NoResultException(e.getMessage());
         }

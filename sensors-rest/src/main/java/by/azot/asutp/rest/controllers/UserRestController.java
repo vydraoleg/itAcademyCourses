@@ -33,11 +33,6 @@ public class UserRestController  implements IControllerUrl {
         return userService.findUserByUserName(userName);
     }
     
-    @PostMapping(value = UPDATEID)
-    public void updateUser(@PathVariable(value = "id") long id,UserDto user, @RequestParam(value = "file", required = false) MultipartFile file) {
-        this.userService.updateUser(user.getUserName(), user, file);
-    }
-    
     @PostMapping
     public UserDto createUser(@RequestBody UserDto user) {
         return this.userService.createUser(user);

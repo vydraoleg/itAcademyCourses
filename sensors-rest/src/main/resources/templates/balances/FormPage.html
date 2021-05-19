@@ -1,0 +1,30 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Users page</title>
+    <link href="../../../../styles/styles.css" rel="stylesheet"/>
+    <link href="../../../../styles/bootstrap.css" rel="stylesheet"/>
+    <script src="../../../../js/jquery.min.js"></script>
+    <script src="../../../../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header th:insert="blocks/header :: header"></header>
+    <div>
+        <h2>Add balance</h2>
+    </div>
+    <div class="card border-primary mb-3" style="max-width: 30rem;">
+       <form action="#" th:action="@{add}" th:object="${balance}" method="post">
+            <table>
+                <tr><td>Name:</td>              <td><input class="form-control h4" type="text" id="name"      th:field="*{name}"      required/></td> </tr>
+                <tr><td>Date begin of use:</td> <td><input class="form-control h4" type="text" id="dateBegin" th:field="*{dateBegin}" required/></td> </tr>
+                <tr><td>Date end: of use:</td>  <td><input class="form-control h4" type="text" id="dateEnd"   th:field="*{dateEnd}"   required/></td> </tr>
+            </table>
+            <input type="submit" value="Submit" class="btn btn-success"/>
+        </form>
+
+    </div>
+    <div th:insert="blocks/footer :: footer"></div>
+</div>
+</body>
+</html>

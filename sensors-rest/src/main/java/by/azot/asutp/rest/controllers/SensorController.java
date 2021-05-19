@@ -101,7 +101,7 @@ public class SensorController implements IControllerUrl {
     }
 
     @PostMapping(value = UPDATEID)
-    public String updateUser(@PathVariable(value = "id") long id, SensorDto sensor, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+    public String updateSensor(@PathVariable(value = "id") long id, SensorDto sensor, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         sensor.setDateModified(new Date(System.currentTimeMillis()));
         String username = securityConfiguration.currentUserName();
         UserDto user = userService.findUserByUserName(username);
