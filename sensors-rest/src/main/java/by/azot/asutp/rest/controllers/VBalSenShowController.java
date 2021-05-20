@@ -1,19 +1,16 @@
 package by.azot.asutp.rest.controllers;
 
-import by.azot.asutp.api.dto.SensorDto;
-import by.azot.asutp.api.dto.UserDto;
 import by.azot.asutp.api.dto.VBalSenShowDto;
-import by.azot.asutp.api.services.ISensorService;
-import by.azot.asutp.api.services.IUserService;
 import by.azot.asutp.api.services.IVBalSenShowService;
 import by.azot.asutp.rest.api.IControllerUrl;
-import by.azot.asutp.rest.configuration.SecurityConfiguration;
 import by.azot.asutp.rest.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
@@ -27,19 +24,22 @@ public class VBalSenShowController implements IControllerUrl {
     private IVBalSenShowService vBalSenShowService;
 
     @GetMapping(value = DATEPAGE)
-    public ModelAndView showVBalSenShow(@PathVariable(value = "date") String stringDate,@PathVariable(value = "page")  int page) {
-
-        List<VBalSenShowDto> vBalSenShow = vBalSenShowService.getVBalSenShow(Date.valueOf(stringDate) );
+    public ModelAndView showVBalSenShow(@PathVariable(value = "id") Long id, @PathVariable(value = "date") String stringDate,@PathVariable(value = "page")  int page) {
+        Date curDate = Date.valueOf(stringDate);
+        List<VBalSenShowDto> vBalSenShow = vBalSenShowService.getVBalSenShow(curDate);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(VBALSENSHOWSPAGE);
         modelAndView.addObject("title", vBalSenShow.get(0).getNameBalance());
+        modelAndView.addObject("curDate", curDate);
+        modelAndView.addObject("prevDate", curDate);
+        modelAndView.addObject("nextDate", curDate);
 
         Pagination<VBalSenShowDto> vBalSenShowDtoPagination = new Pagination<VBalSenShowDto>(vBalSenShow, page, OBJECTVBALSENSHOWSLIST, modelAndView);
         return vBalSenShowDtoPagination.getModelAndView();
     }
 
     @GetMapping
-    public ModelAndView showVBalSenShowFirstPage() { return this.showVBalSenShow("2021-04-12",1);  }
+    public ModelAndView showVBalSenShowFirstPage() { return this.showVBalSenShow(1L,"2021-04-12",1);  }
 
     @PostMapping(REMOVEID)
     public String deleteVBalSenShowPost(@PathVariable(value = "idBalance") long idBalance,@PathVariable(value = "id") long id, Model model) {

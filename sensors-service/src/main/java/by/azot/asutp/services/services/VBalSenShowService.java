@@ -6,7 +6,6 @@ import by.azot.asutp.api.mappers.VBalSenShowMapper;
 import by.azot.asutp.api.services.IVBalSenShowService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +27,6 @@ public class VBalSenShowService implements IVBalSenShowService {
 
     @Override
     public List<VBalSenShowDto> getVBalSenShow(Date date) {
-//        return VBalSenShowMapper.mapVBalSenShowDtos(this.vBalSenShowDao.findByDateNative(date));
-        return VBalSenShowMapper.mapVBalSenShowDtos(this.vBalSenShowDao.findAll());
+        return VBalSenShowMapper.mapVBalSenShowDtos(this.vBalSenShowDao.findByDateValue(date));
     }
 }

@@ -45,8 +45,8 @@ public class UserService implements IUserService {
 
     @Override
     public UserDto findUserByUserName(String username) {
-//        return UserMapper.mapUserDto(this.userJPADao.findByUserName(username));
-        return UserMapper.mapUserDto(this.userDao.getByName(username));
+        return UserMapper.mapUserDto(this.userJPADao.findByUserName(username));
+//        return UserMapper.mapUserDto(this.userDao.getByName(username));
     }
 
     @Override

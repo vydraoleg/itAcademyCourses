@@ -18,8 +18,8 @@ public class VBalSenShowRestController implements IControllerUrl {
     @Autowired
     private IVBalSenShowService vBalSenShowService;
 
-    @GetMapping(value = "/{date}")
-    public List<VBalSenShowDto> showVBalSenShow(@PathVariable String date) {
+    @GetMapping(value = "/{id}/{date}")
+    public List<VBalSenShowDto> showVBalSenShow(@PathVariable Long id,@PathVariable String date) {
         return vBalSenShowService.getVBalSenShow(Date.valueOf(date));
     }
 }

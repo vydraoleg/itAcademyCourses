@@ -350,7 +350,11 @@ case date_value-1
 end as prev
 from sen_sensor_show order by date_value desc, sensor_id; 
 
-
+insert into sen_sensor_show values (39,'2021-04-12',121.34);
+insert into sen_sensor_show values (3,'2021-04-12',21.34);
+insert into sen_sensor_show values (34,'2021-04-12',121.34);
+insert into sen_sensor_show values (35,'2021-04-12',34.34);
+insert into sen_sensor_show values (36,'2021-04-12',44.34);
 
 
 

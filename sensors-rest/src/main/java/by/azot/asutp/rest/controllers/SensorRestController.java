@@ -34,6 +34,10 @@ public class SensorRestController implements IControllerUrl {
     public void updateSensor(@PathVariable Long id, @RequestBody SensorDto sensorDto) {
         this.sensorService.updateSensor(id, sensorDto);
     }
+    @PatchMapping(value = FINDID)
+    public void updateSensor(@PathVariable Long id, @RequestBody List<SensorDto> sensorDto) {
+        this.sensorService.updateSensor(id, sensorDto.get(0));
+    }
 
     @DeleteMapping(value = FINDID)
     public void deleteSensor(@PathVariable Long id) {
