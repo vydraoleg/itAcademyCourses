@@ -20,6 +20,7 @@ public class VBalSenShowDto {
     private String nameSensor;
     private String fullSensor;
     private Date dateValue;
+    private Double previousValue;
     private Double value;
 
 }

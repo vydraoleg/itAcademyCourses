@@ -17,16 +17,4 @@ public class UserDao extends AGenericDao<User> implements IUserDao {
         super(User.class);
     }
     
-    public User getByName(String userName) throws NoResultException {
-        try {
-            CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<User> query = builder.createQuery(getGenericClass());   //User.class
-            Root<User> userRoot = query.from(getGenericClass());
-            query.where(builder.and(builder.equal(userRoot.get("userName"), userName)));
-            TypedQuery<User> result = entityManager.createQuery(query);
-            return result.getSingleResult();
-        } catch (NoResultException e) {
-            throw new NoResultException(e.getMessage());
-        }
-    }
 }

@@ -9,8 +9,8 @@ import java.util.List;
 @Service
 public interface IVBalSenShowService {
 
-    void deleteVBalSenShow(Long idBalance,Long id);
+    void deleteVBalSenShow(Long idBalance, Long idSensor);
 
-    List<VBalSenShowDto> getVBalSenShow(Date date);
+    List<VBalSenShowDto> getVBalSenShow(Long idBalance, Date date);
 
 }

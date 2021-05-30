@@ -21,6 +21,7 @@ public interface IControllerUrl {
     public final static String UPDATEID="/upd/{id}";
     public final static String FINDID="/{id}";
     public final static String DATEPAGE="/date={date}&page={page}";
+    public final static String IDDATEPAGE="/bal={id}&date={date}&page={page}";
 
     public final static String FIRSTNAME="/name/{firstName}";
 
@@ -43,6 +44,13 @@ public interface IControllerUrl {
     public final static String SENSORFORMPAGE="sensors/FormPage";
 
 
+    public final static String OBJECTROLE="role";
+    public final static String OBJECTROLESLIST="rolesList";
+
+    public final static String ROLES="/roles";
+    public final static String RESTROLES="/rest"+ROLES;
+
+
 
     public final static String BALANCES="/balances";
     public final static String RESTBALANCES="/rest"+BALANCES;
@@ -55,6 +63,8 @@ public interface IControllerUrl {
     public final static String VBALSENSHOWS="/vbalsenshows";
     public final static String RESTVBALSENSHOWS="/rest"+VBALSENSHOWS;
 
+    public final static String BALSENID="/balanceid/sensorid";
+    public final static String REMOVEBALSEN="/remove/{balid}/{senid}";
     public final static String REDIRECTVBALSENSHOWS="redirect:"+VBALSENSHOWS;
 
 

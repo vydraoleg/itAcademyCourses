@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.util.List;
@@ -19,13 +20,13 @@ public class VBalSenShowDao extends AGenericDao<VBalSenShow> implements IVBalSen
         super(VBalSenShow.class);
     }
 
-    public List<VBalSenShow> findByDateValue(Date date) throws NoResultException {
+    public List<VBalSenShow> findByIdDateValue(Long id, Date date) throws NoResultException {
         try {
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
             CriteriaQuery<VBalSenShow> query = builder.createQuery(getGenericClass());   //User.class
             Root<VBalSenShow> curRoot = query.from(getGenericClass());
-            query.where(builder.and(builder.equal(curRoot.get("dateValue"), date)));
-//                    ,builder.and(builder.equal(curRoot.get("idBalance"), 1))
+            query.where(builder.and(builder.equal(curRoot.get("idBalance"), id)
+                                  , builder.equal(curRoot.get("dateValue"), date))) ;
             TypedQuery<VBalSenShow> result = entityManager.createQuery(query);
             return result.getResultList();
         } catch (NoResultException e) {

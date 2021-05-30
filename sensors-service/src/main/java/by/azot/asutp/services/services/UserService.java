@@ -29,9 +29,6 @@ public class UserService implements IUserService {
     private IUserJPADao userJPADao;
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private IRoleJPADao roleJPADao;
 
     @Autowired
@@ -58,7 +55,8 @@ public class UserService implements IUserService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setLastName(userDto.getLastName());
         user.setFirstName(userDto.getFirstName());
-        user.setRole(this.roleJPADao.findById(2L).get());
+        Role role = this.roleJPADao.findById(2L).orElse(null);
+        user.setRole(role);
         User savedUser = this.userJPADao.save(user);
         return UserMapper.mapUserDto(savedUser);
     }
@@ -101,7 +99,7 @@ public class UserService implements IUserService {
         User user = this.userJPADao.findById(id).orElse(null);
         if (user != null) {
             user = UserMapper.mapUser(userDto);
-            user.setId(id);
+            user.setId(id); // чтобы не переписывать все свойства из предыдущего свойства
             this.userJPADao.save(user);
         }
     }

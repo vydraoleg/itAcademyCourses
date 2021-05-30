@@ -1,6 +1,7 @@
 package by.azot.asutp.dao;
 
 import by.azot.asutp.entities.Sensor;
+import liquibase.pro.packaged.T;
 import org.springframework.stereotype.Repository;
 import by.azot.asutp.api.dao.ISensorDao;
 

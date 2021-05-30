@@ -1,3 +1,10 @@
+insert into sen_sensor_show values (39,'2021-04-12',121.34);
+insert into sen_sensor_show values (3,'2021-04-12',21.34);
+insert into sen_sensor_show values (34,'2021-04-12',121.34);
+insert into sen_sensor_show values (35,'2021-04-12',34.34);
+insert into sen_sensor_show values (36,'2021-04-12',44.34);
+
+
 
 --SET datestyle = dmy;
 
@@ -127,10 +134,9 @@ ADD CONSTRAINT sen_sensor_show_pk PRIMARY KEY (sensor_id,date_value);
 ALTER TABLE sen_sensor_show
 ADD CONSTRAINT sen_sensor_show_fk_sensor FOREIGN KEY (sensor_id)
 REFERENCES sen_sensor (id);
- 
-    
-insert into sen_role(id, name,description) values(1,'ROLE_USER','User'); 
-insert into sen_role(id, name,description) values(2,'ROLE_ADMIN','Administrator');
+
+insert into sen_role(id, name,description) values(2,'ROLE_USER','User'); 
+insert into sen_role(id, name,description) values(1,'ROLE_ADMIN','Administrator');
 insert into sen_role(id, name,description) values(3,'ROLE_ADM_BALANCE','Administrator of balances');
 
 insert into sen_user(id, name,email, password,first_name, last_name) values(1,'oleg','oleg@vydra.com','$2a$10$exyJNC3qCSw4HOVtJq3HyOZEDmVQbWmi9Fro7VzG5GWWVS77MTPbu','Oleg','Vydra'); 
@@ -307,7 +313,6 @@ SET search_path = pg_catalog, public;
 drop view sen_vbal_sen_show;
 
 create or replace view sen_vbal_sen_show as 
-
 select sb.id balance_id, sb.name name_balance, 
       ss.id id, ss.name name_sensor, 
       ss.full_name full_name,
@@ -316,7 +321,7 @@ select sb.id balance_id, sb.name name_balance,
 from sen_balance_sensor sbs 
        join sen_balance sb on sb.id = sbs.balance_id 
        join sen_sensor ss on ss.id =sbs.sensor_id
-       left join ( select * from sen_sensor_show where date_value = '2021-04-12' ) sss 
+       left join sen_sensor_show sss 
        on ss.id = sss.sensor_id 
     
     
@@ -330,7 +335,6 @@ select svss.balance_id, svss.name_balance, svss.id, svss.name_sensor, svss.full_
      
 select * from sen_sensor_show where date_value = '2021-04-12'       
       
- 
 select svss.balance_id, svss.name_balance, svss.id, svss.name_sensor, svss.full_name, 
              sss.date_value , sss.value from sen_vbal_sen_show svss 
              left join (select * from sen_sensor_show where date_value = '2021-04-12') sss 
@@ -339,6 +343,7 @@ select svss.balance_id, svss.name_balance, svss.id, svss.name_sensor, svss.full_
 commit; 
 /
 
+select * from sen_vbal_sen_show;
 
 select sensor_id, date_value, value, 
 lag(value) over(partition by sensor_id order by date_value ) lg,
@@ -350,11 +355,12 @@ case date_value-1
 end as prev
 from sen_sensor_show order by date_value desc, sensor_id; 
 
-insert into sen_sensor_show values (39,'2021-04-12',121.34);
-insert into sen_sensor_show values (3,'2021-04-12',21.34);
-insert into sen_sensor_show values (34,'2021-04-12',121.34);
-insert into sen_sensor_show values (35,'2021-04-12',34.34);
-insert into sen_sensor_show values (36,'2021-04-12',44.34);
+
+select * from pg_catalog.pg_locks ;
+
+select * from pg_catalog.pg_stat_all_tables psat
+where psat.schemaname not in ('pg_catalog','pg_toast')
+order by psat.schemaname  
 
 
 

@@ -1,12 +1,10 @@
 package by.azot.asutp.api.services;
 
-import java.util.List;
-
-import by.azot.asutp.api.dto.UserDto;
-import org.springframework.stereotype.Service;
-
 import by.azot.asutp.api.dto.SensorDto;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 public interface ISensorService {

@@ -20,6 +20,11 @@ public class VBalSenShowRestController implements IControllerUrl {
 
     @GetMapping(value = "/{id}/{date}")
     public List<VBalSenShowDto> showVBalSenShow(@PathVariable Long id,@PathVariable String date) {
-        return vBalSenShowService.getVBalSenShow(Date.valueOf(date));
+        return vBalSenShowService.getVBalSenShow(id, Date.valueOf(date));
+    }
+
+    @DeleteMapping(value = BALSENID)
+    public void deleteBalanceSensor(@PathVariable Long idBalance,@PathVariable Long idSensor) {
+        this.vBalSenShowService.deleteVBalSenShow(idBalance,idSensor);
     }
 }

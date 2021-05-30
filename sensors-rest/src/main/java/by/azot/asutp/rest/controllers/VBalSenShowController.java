@@ -23,17 +23,17 @@ public class VBalSenShowController implements IControllerUrl {
     @Autowired
     private IVBalSenShowService vBalSenShowService;
 
-    @GetMapping(value = DATEPAGE)
+    @GetMapping(value = IDDATEPAGE)
     public ModelAndView showVBalSenShow(@PathVariable(value = "id") Long id, @PathVariable(value = "date") String stringDate,@PathVariable(value = "page")  int page) {
+        Long day = 24 * 3600 * 1000l;
         Date curDate = Date.valueOf(stringDate);
-        List<VBalSenShowDto> vBalSenShow = vBalSenShowService.getVBalSenShow(curDate);
+        List<VBalSenShowDto> vBalSenShow = vBalSenShowService.getVBalSenShow(id, curDate);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(VBALSENSHOWSPAGE);
         modelAndView.addObject("title", vBalSenShow.get(0).getNameBalance());
+        modelAndView.addObject("prevDate", new Date(curDate.getTime() - 1 * day)   );
         modelAndView.addObject("curDate", curDate);
-        modelAndView.addObject("prevDate", curDate);
-        modelAndView.addObject("nextDate", curDate);
-
+        modelAndView.addObject("nextDate",new Date(curDate.getTime() + 1 * day) );
         Pagination<VBalSenShowDto> vBalSenShowDtoPagination = new Pagination<VBalSenShowDto>(vBalSenShow, page, OBJECTVBALSENSHOWSLIST, modelAndView);
         return vBalSenShowDtoPagination.getModelAndView();
     }
@@ -41,9 +41,9 @@ public class VBalSenShowController implements IControllerUrl {
     @GetMapping
     public ModelAndView showVBalSenShowFirstPage() { return this.showVBalSenShow(1L,"2021-04-12",1);  }
 
-    @PostMapping(REMOVEID)
-    public String deleteVBalSenShowPost(@PathVariable(value = "idBalance") long idBalance,@PathVariable(value = "id") long id, Model model) {
-        this.vBalSenShowService.deleteVBalSenShow(idBalance,id);
+    @PostMapping(REMOVEBALSEN)
+    public String deleteVBalSenShowPost(@PathVariable(value = "balid") long idBalance,@PathVariable(value = "senid") long idSensor, Model model) {
+        this.vBalSenShowService.deleteVBalSenShow(idBalance,idSensor);
         return REDIRECTVBALSENSHOWS;
     }
 }

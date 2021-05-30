@@ -1,12 +1,11 @@
 package by.azot.asutp.api.services;
 
-import java.util.List;
-
+import by.azot.asutp.api.dto.UserDto;
 import by.azot.asutp.api.dto.UserRoleIdsDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import by.azot.asutp.api.dto.UserDto;
-import by.azot.asutp.api.dto.UserRoleIdsDto;
+
+import java.util.List;
 
 @Service
 public interface IUserService {

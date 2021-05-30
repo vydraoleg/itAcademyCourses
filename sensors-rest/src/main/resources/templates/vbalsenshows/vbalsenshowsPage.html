@@ -18,7 +18,7 @@
         <h3>Current Date :</h3>
         <ul class="pagination">
             <li class="page-item">
-                <a class="page-link" th:href="@{'/vbalsenshows/' + ${prevDate}}">&lt;</a>
+                <a class="page-link" th:href="@{'/vbalsenshows/id=1&date=' + ${prevDate}}+'&page='+${page}">&lt;</a>
             </li>
             <li class="page-item active">
                 <div class="form-group">
@@ -29,7 +29,7 @@
             </li>
 
             <li class="page-item">
-                <a class="page-link" th:href="@{'/vbalsenshows/' + ${nextDate}}">&gt;</a>
+                <a class="page-link" th:href="@{'/vbalsenshows/id=1&date=' + ${nextDate}}+'&page='+${page}">&gt;</a>
             </li>
         </ul>
     </div>

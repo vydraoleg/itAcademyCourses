@@ -14,6 +14,7 @@ public class RoleMapper {
         return Role.builder()
                 .id(source.getId())
                 .roleName(source.getRoleName())
+                .description(source.getDescription())
                 .build();
     }
 
@@ -21,10 +22,11 @@ public class RoleMapper {
         return RoleDto.builder()
                 .id(source.getId())
                 .roleName(source.getRoleName())
+                .description(source.getDescription())
                 .build();
     }
 
-    public List<Role> mapUsers(List<RoleDto> source) {
+    public List<Role> mapRoles(List<RoleDto> source) {
         return source.stream().map(RoleMapper::mapRole).collect(Collectors.toList());
     }
     

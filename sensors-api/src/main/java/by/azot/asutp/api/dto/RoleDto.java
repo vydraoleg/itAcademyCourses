@@ -13,10 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class RoleDto {
 
     private Long id;
     private String roleName;
-    private List<UserDto> users;
+    private String description;
+    private List<UserDto> userDtos;
+    private List<BalanceDto> balanceDtos;
 }
