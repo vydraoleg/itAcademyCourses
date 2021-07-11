@@ -30,12 +30,17 @@ public class VBalSenShowController implements IControllerUrl {
         List<VBalSenShowDto> vBalSenShow = vBalSenShowService.getVBalSenShow(id, curDate);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(VBALSENSHOWSPAGE);
-        modelAndView.addObject("title", vBalSenShow.get(0).getNameBalance());
+        modelAndView.addObject("title", vBalSenShow.size()>0 ? vBalSenShow.get(0).getNameBalance() : "Empty balance");
         modelAndView.addObject("prevDate", new Date(curDate.getTime() - 1 * day)   );
         modelAndView.addObject("curDate", curDate);
         modelAndView.addObject("nextDate",new Date(curDate.getTime() + 1 * day) );
         Pagination<VBalSenShowDto> vBalSenShowDtoPagination = new Pagination<VBalSenShowDto>(vBalSenShow, page, OBJECTVBALSENSHOWSLIST, modelAndView);
         return vBalSenShowDtoPagination.getModelAndView();
+    }
+
+    @GetMapping(value = "/date={date}&page={page}")
+    public ModelAndView showVBalSenShowFirstPage(@PathVariable(value = "date") String stringDate,@PathVariable(value = "page")  int page) {
+        return this.showVBalSenShow(1L,stringDate,page);
     }
 
     @GetMapping
