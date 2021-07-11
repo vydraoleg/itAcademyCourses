@@ -49,7 +49,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
         builder.jdbcAuthentication().dataSource(dataSource)
                 .authoritiesByUsernameQuery(
-                "SELECT u.name as username, r.name as role FROM sen_user u INNER JOIN sen_user_role ur ON u.id = ur.user_id INNER JOIN sen_role r ON ur.role_id = r.id WHERE u.name = ?")
+                "SELECT u.name as username, r.name as role FROM sen_user u " +
+                        "INNER JOIN sen_user_role ur ON u.id = ur.user_id " +
+                        "INNER JOIN sen_role r ON ur.role_id = r.id WHERE u.name = ?")
                 .usersByUsernameQuery("select name, password, enabled from sen_user where email = ?");
     }
 

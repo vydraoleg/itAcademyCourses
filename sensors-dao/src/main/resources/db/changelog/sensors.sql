@@ -324,7 +324,7 @@ from sen_balance_sensor sbs
        left join sen_sensor_show sss 
        on ss.id = sss.sensor_id 
     
-    
+select * from  sen_vbal_sen_show    
 select balance_id, name_balance,  id,  name_sensor,  full_name,
       date_value, value from sen_vbal_sen_show;
 
