@@ -68,7 +68,6 @@ public class BlogController {
         blogPost.setAnons(anons);
         blogPost.setFull_text(full_text);
         blogPostRepository.save(blogPost);
-
         return "redirect:/blog";
     }
     @PostMapping("/blog/{id}/remove")
